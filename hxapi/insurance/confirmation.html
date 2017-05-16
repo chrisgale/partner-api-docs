@@ -187,57 +187,58 @@ Address[]=1 Test St&amp;Address[]=Testchester&amp;Address[]=Testshire&amp;CardHo
 
 <h4 id="intermediary-2">Intermediary</h4>
 
-<p><code xml=""><API_Reply>
-    <Itinerary>
-    <Destination>EUROPE</Destination>
-    <DestNum>2</DestNum>
-    <StartDate>2009-02-22</StartDate>
-    <EndDate>2009-03-01</EndDate>
-    </Itinerary>
-    <Booking>
-    <RefNum>DPR080000012077</RefNum>
-    <SchemeCode>DPR08</SchemeCode>
-    </Booking>
-    <PartyNames p="1">
-    <PartyTitle>MR</PartyTitle>
-    <PartyInit>T</PartyInit>
-    <PartySurname>TEST</PartySurname>
-    <PartyDOB>1972-07-27</PartyDOB>
-    </PartyNames>
-    <ClientDetails>
-    <Title>MR</Title>
-    <Initial>T</Initial>
-    <Surname>TEST</Surname>
-    &lt;Address a="1"&gt;1 TEST ST&lt;/Address&gt;
-    &lt;Address a="2"&gt;TESTCHESTER&lt;/Address&gt;
-    &lt;Address a="3"&gt;TESTSHIRE&lt;/Address&gt;
-    <Postcode>T1 1TT</Postcode>
-    <Email>TEST@TEST.COM</Email>
-    </ClientDetails>
-    <API_Header>
-    <Request>
-      &lt;Address&gt;1 Test St&lt;/Address&gt;
-      &lt;Address&gt;Testchester&lt;/Address&gt;
-      &lt;Address&gt;Testshire&lt;/Address&gt;
-      <CardHolder>Mr T Test</CardHolder>
-      <CardNumber>4111 1111 1111 1111</CardNumber>
-      <DateOfBirth>1972-07-27</DateOfBirth>
-      <Email>test@test.com</Email>
-      <EndDate>2009-03-01</EndDate>
-      <ExpiryDate>2009-07-10</ExpiryDate>
-      <Initial>T</Initial>
-      <PostCode>T1 1TT</PostCode>
-      <SchemeCode>DPR08</SchemeCode>
-      <SchemePrice>33.01</SchemePrice>
-      <StartDate>2009-02-22</StartDate>
-      <Surname>Test</Surname>
-      <Title>Mr</Title>
-      <key>foo</key>
-      <token>000015778</token>
-    </Request>
-    </API_Header>
-</API_Reply></code></p>
-
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;API_Reply&gt;</span>
+    <span class="nt">&lt;Itinerary&gt;</span>
+    <span class="nt">&lt;Destination&gt;</span>EUROPE<span class="nt">&lt;/Destination&gt;</span>
+    <span class="nt">&lt;DestNum&gt;</span>2<span class="nt">&lt;/DestNum&gt;</span>
+    <span class="nt">&lt;StartDate&gt;</span>2009-02-22<span class="nt">&lt;/StartDate&gt;</span>
+    <span class="nt">&lt;EndDate&gt;</span>2009-03-01<span class="nt">&lt;/EndDate&gt;</span>
+    <span class="nt">&lt;/Itinerary&gt;</span>
+    <span class="nt">&lt;Booking&gt;</span>
+    <span class="nt">&lt;RefNum&gt;</span>DPR080000012077<span class="nt">&lt;/RefNum&gt;</span>
+    <span class="nt">&lt;SchemeCode&gt;</span>DPR08<span class="nt">&lt;/SchemeCode&gt;</span>
+    <span class="nt">&lt;/Booking&gt;</span>
+    <span class="nt">&lt;PartyNames</span> <span class="na">p=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;PartyTitle&gt;</span>MR<span class="nt">&lt;/PartyTitle&gt;</span>
+    <span class="nt">&lt;PartyInit&gt;</span>T<span class="nt">&lt;/PartyInit&gt;</span>
+    <span class="nt">&lt;PartySurname&gt;</span>TEST<span class="nt">&lt;/PartySurname&gt;</span>
+    <span class="nt">&lt;PartyDOB&gt;</span>1972-07-27<span class="nt">&lt;/PartyDOB&gt;</span>
+    <span class="nt">&lt;/PartyNames&gt;</span>
+    <span class="nt">&lt;ClientDetails&gt;</span>
+    <span class="nt">&lt;Title&gt;</span>MR<span class="nt">&lt;/Title&gt;</span>
+    <span class="nt">&lt;Initial&gt;</span>T<span class="nt">&lt;/Initial&gt;</span>
+    <span class="nt">&lt;Surname&gt;</span>TEST<span class="nt">&lt;/Surname&gt;</span>
+    <span class="nt">&lt;Address</span> <span class="na">a=</span><span class="s">"1"</span><span class="nt">&gt;</span>1 TEST ST<span class="nt">&lt;/Address&gt;</span>
+    <span class="nt">&lt;Address</span> <span class="na">a=</span><span class="s">"2"</span><span class="nt">&gt;</span>TESTCHESTER<span class="nt">&lt;/Address&gt;</span>
+    <span class="nt">&lt;Address</span> <span class="na">a=</span><span class="s">"3"</span><span class="nt">&gt;</span>TESTSHIRE<span class="nt">&lt;/Address&gt;</span>
+    <span class="nt">&lt;Postcode&gt;</span>T1 1TT<span class="nt">&lt;/Postcode&gt;</span>
+    <span class="nt">&lt;Email&gt;</span>TEST@TEST.COM<span class="nt">&lt;/Email&gt;</span>
+    <span class="nt">&lt;/ClientDetails&gt;</span>
+    <span class="nt">&lt;API_Header&gt;</span>
+    <span class="nt">&lt;Request&gt;</span>
+      <span class="nt">&lt;Address&gt;</span>1 Test St<span class="nt">&lt;/Address&gt;</span>
+      <span class="nt">&lt;Address&gt;</span>Testchester<span class="nt">&lt;/Address&gt;</span>
+      <span class="nt">&lt;Address&gt;</span>Testshire<span class="nt">&lt;/Address&gt;</span>
+      <span class="nt">&lt;CardHolder&gt;</span>Mr T Test<span class="nt">&lt;/CardHolder&gt;</span>
+      <span class="nt">&lt;CardNumber&gt;</span>4111 1111 1111 1111<span class="nt">&lt;/CardNumber&gt;</span>
+      <span class="nt">&lt;DateOfBirth&gt;</span>1972-07-27<span class="nt">&lt;/DateOfBirth&gt;</span>
+      <span class="nt">&lt;Email&gt;</span>test@test.com<span class="nt">&lt;/Email&gt;</span>
+      <span class="nt">&lt;EndDate&gt;</span>2009-03-01<span class="nt">&lt;/EndDate&gt;</span>
+      <span class="nt">&lt;ExpiryDate&gt;</span>2009-07-10<span class="nt">&lt;/ExpiryDate&gt;</span>
+      <span class="nt">&lt;Initial&gt;</span>T<span class="nt">&lt;/Initial&gt;</span>
+      <span class="nt">&lt;PostCode&gt;</span>T1 1TT<span class="nt">&lt;/PostCode&gt;</span>
+      <span class="nt">&lt;SchemeCode&gt;</span>DPR08<span class="nt">&lt;/SchemeCode&gt;</span>
+      <span class="nt">&lt;SchemePrice&gt;</span>33.01<span class="nt">&lt;/SchemePrice&gt;</span>
+      <span class="nt">&lt;StartDate&gt;</span>2009-02-22<span class="nt">&lt;/StartDate&gt;</span>
+      <span class="nt">&lt;Surname&gt;</span>Test<span class="nt">&lt;/Surname&gt;</span>
+      <span class="nt">&lt;Title&gt;</span>Mr<span class="nt">&lt;/Title&gt;</span>
+      <span class="nt">&lt;key&gt;</span>foo<span class="nt">&lt;/key&gt;</span>
+      <span class="nt">&lt;token&gt;</span>000015778<span class="nt">&lt;/token&gt;</span>
+    <span class="nt">&lt;/Request&gt;</span>
+    <span class="nt">&lt;/API_Header&gt;</span>
+<span class="nt">&lt;/API_Reply&gt;</span>
+</code></pre>
+</div>
 
 </div>
 

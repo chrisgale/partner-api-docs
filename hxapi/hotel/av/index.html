@@ -35,11 +35,11 @@
 
 <p>where foo is the location (airport) code</p>
 
-<p>e.g. http://api.holidayextras.co.uk/v1/hotel/LHR</p>
+<p>e.g. https://api.holidayextras.co.uk/v1/hotel/LHR</p>
 
 <p>or the hotel code</p>
 
-<p>e.g. http://api.holidayextras.co.uk/v1/hotel/LHRHIL</p>
+<p>e.g. https://api.holidayextras.co.uk/v1/hotel/LHRHIL</p>
 
 <h3 id="method">Method</h3>
 
@@ -168,7 +168,7 @@
 
 <h3 id="request-one-room">Request (one room)</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>http://api.holidayextras.co.uk/hotel/LGW?ABTANumber=FOO&amp;Initials=BJT&amp;key=mytestkey&amp;token=999999999&amp;ArrivalDate=2011-10-15&amp;Nights=1&amp;ParkingDays=8&amp;RoomType=T20
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/hotel/LGW?ABTANumber=FOO&amp;Initials=BJT&amp;key=mytestkey&amp;token=999999999&amp;ArrivalDate=2011-10-15&amp;Nights=1&amp;ParkingDays=8&amp;RoomType=T20
 </code></pre>
 </div>
 
@@ -261,7 +261,7 @@
 
 <p>only for UK</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>http://api.holidayextras.co.uk/hotel/LGW?ABTANumber=FOO<span class="err">&amp;</span>Initials=BJT<span class="err">&amp;</span>key=mytestkey<span class="err">&amp;</span>token=999999999<span class="err">&amp;</span>ArrivalDate=2011-10-15<span class="err">&amp;</span>Nights=1<span class="err">&amp;</span>ParkingDays=8<span class="err">&amp;</span>RoomType=T20<span class="err">&amp;</span>SecondRoomType=D20
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/hotel/LGW?ABTANumber=FOO<span class="err">&amp;</span>Initials=BJT<span class="err">&amp;</span>key=mytestkey<span class="err">&amp;</span>token=999999999<span class="err">&amp;</span>ArrivalDate=2011-10-15<span class="err">&amp;</span>Nights=1<span class="err">&amp;</span>ParkingDays=8<span class="err">&amp;</span>RoomType=T20<span class="err">&amp;</span>SecondRoomType=D20
 </code></pre>
 </div>
 
@@ -460,7 +460,7 @@
 
 <p>Pseudo code</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>x = ((TotalPrice + CanxWaiver) / 100 ) * CCardSurchargePercent
-if( x &lt; CCardSurchargeMin) 
+if( x &lt; CCardSurchargeMin)
   x = CCardSurchargeMin
 else if x &gt; CCardSurchargeMax
   x = CCardSurchargeMax

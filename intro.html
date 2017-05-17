@@ -48,7 +48,7 @@
 
 <p><strong>HXAPI</strong> accepts <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> requests. Every request is made over <strong>HTTP</strong> using the standard methods. For data retrieval, you always use the GET method. For making a booking (thus creating a new resource), the POST method must be used.</p>
 
-<p>http://api.holidayextras.co.uk/sandbox/v1/carpark/LGW2</p>
+<p>https://api.holidayextras.co.uk/sandbox/v1/carpark/LGW2</p>
 
 <p>One URL can have different functions depending on the method used to access it. Taking the URL above as an example - As a GET it returns availability and pricing information for that car park for the given time period. When posted to with the correct parameters, it makes a booking at the car park, and returns a link to where you can view the booking.</p>
 
@@ -58,9 +58,9 @@
 
 <p>The process for moving from development to live is outlined <a href="/golive">here</a>.</p>
 
-<p>Development URL: http://api.holidayextras.co.uk/sandbox/</p>
+<p>Development URL: https://api.holidayextras.co.uk/sandbox/</p>
 
-<p>Live URL: http://api.holidayextras.co.uk/</p>
+<p>Live URL: https://api.holidayextras.co.uk/</p>
 
 <p>To access European products please add System=ABG.
 To access UK products by default System=ABC is taken.</p>
@@ -71,23 +71,23 @@ To access UK products by default System=ABC is taken.</p>
 
 <p>First a request for parking availability:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl "http://api.holidayextras.co.uk/sandbox/v1/carpark/LGW?ArrivalDate=20Jan09&amp;ArrivalTime=1200&amp;DepartDate=27Jan09&amp;DepartTime=1600&amp;token=000015778&amp;key=mytestkey"
+<div class="highlighter-rouge"><pre class="highlight"><code>curl "https://api.holidayextras.co.uk/sandbox/v1/carpark/LGW?ArrivalDate=20Jan09&amp;ArrivalTime=1200&amp;DepartDate=27Jan09&amp;DepartTime=1600&amp;token=000015778&amp;key=mytestkey"
 </code></pre>
 </div>
 
 <p>Example for a European product:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl "http://api.holidayextras.co.uk/sandbox/v1/carpark/dus?ArrivalDate=20OCT15&amp;ArrivalTime=1200&amp;DepartDate=27OCT15&amp;DepartTime=1600&amp;token=000015778&amp;key=mytestkey&amp;System=ABG"
+<div class="highlighter-rouge"><pre class="highlight"><code>curl "https://api.holidayextras.co.uk/sandbox/v1/carpark/dus?ArrivalDate=20OCT15&amp;ArrivalTime=1200&amp;DepartDate=27OCT15&amp;DepartTime=1600&amp;token=000015778&amp;key=mytestkey&amp;System=ABG"
 </code></pre>
 </div>
 
 <p>Another example - this one queries the product library about one of the car parks returned.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>curl "http://api.holidayextras.co.uk/sandbox/v1/prodlib/LGW2/lite?token=000015778&amp;key=mytestkey"
+<div class="highlighter-rouge"><pre class="highlight"><code>curl "https://api.holidayextras.co.uk/sandbox/v1/prodlib/LGW2/lite?token=000015778&amp;key=mytestkey"
 </code></pre>
 </div>
 <p>The examples so far have returned XML - this is the default format. You can also ask for the output as a javascript object by setting the file extension to ‘.js’.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>curl "http://api.holidayextras.co.uk/sandbox/v1/carpark/LGW.js?ArrivalDate=20Jan09&amp;ArrivalTime=1200&amp;DepartDate=27Jan09&amp;DepartTime=1600&amp;token=000015778&amp;key=mytestkey"
-curl "http://api.holidayextras.co.uk/sandbox/v1/product/LGW4/lite.js?token=000015778&amp;key=mytestkey"
+<div class="highlighter-rouge"><pre class="highlight"><code>curl "https://api.holidayextras.co.uk/sandbox/v1/carpark/LGW.js?ArrivalDate=20Jan09&amp;ArrivalTime=1200&amp;DepartDate=27Jan09&amp;DepartTime=1600&amp;token=000015778&amp;key=mytestkey"
+curl "https://api.holidayextras.co.uk/sandbox/v1/product/LGW4/lite.js?token=000015778&amp;key=mytestkey"
 </code></pre>
 </div>
 
@@ -110,15 +110,15 @@ curl "http://api.holidayextras.co.uk/sandbox/v1/product/LGW4/lite.js?token=00001
   </li>
 </ul>
 
-<p>http://api.holidayextras.co.uk/sandbox/v1/prodlib/LGW2/lite?key=mytestkey</p>
+<p>https://api.holidayextras.co.uk/sandbox/v1/prodlib/LGW2/lite?key=mytestkey</p>
 
 <p>is the same as</p>
 
-<p>http://api.holidayextras.co.uk/sandbox/v1/prodlib/LGW2/lite.xml?key=mytestkey</p>
+<p>https://api.holidayextras.co.uk/sandbox/v1/prodlib/LGW2/lite.xml?key=mytestkey</p>
 
 <p>The same query, with results in javascript</p>
 
-<p>http://api.holidayextras.co.uk/sandbox/v1/prodlib/LGW2/lite.js?key=mytestkey</p>
+<p>https://api.holidayextras.co.uk/sandbox/v1/prodlib/LGW2/lite.js?key=mytestkey</p>
 
 <h1 id="application-key">Application Key</h1>
 

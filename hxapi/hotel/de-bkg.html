@@ -35,7 +35,7 @@
 
 <p>Where foo is the hotel code to book</p>
 
-<p>eg http://api.holidayextras.co.uk/de-start/v1/sandbox/hotel/FRAAST</p>
+<p>eg https://api.holidayextras.co.uk/de-start/v1/sandbox/hotel/FRAAST</p>
 
 <p>NB - With this we can book multiple rooms of the same type. If different types have to be booked, we have to decide hwo to do this. Have started by adding the num rooms param.</p>
 
@@ -171,43 +171,43 @@
 <p>(POST)</p>
 
 <p>znt -&gt; api</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>http://api.holidayextras.co.uk/de-start/v1/sandbox/hotel/FRAACH?Adults=2&amp;ArrivalDate=15OCT10&amp;BoardBasis=U&amp;BusinessUnit=222&amp;Children=0&amp;Infants=0&amp;Initial=T&amp;Nights=1&amp;NonSmoking=Y&amp;Operator=BJT&amp;ParkingDays=8&amp;ParkingSpaces=1&amp;Registration=CP54JOV&amp;Remarks=Ben%20testing%205&amp;RoomCode=DZ&amp;Rooms=1&amp;StartCustomer=111111&amp;Surname=Test&amp;Title=Mr&amp;key=foo&amp;token=123456789
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/de-start/v1/sandbox/hotel/FRAACH?Adults=2&amp;ArrivalDate=15OCT10&amp;BoardBasis=U&amp;BusinessUnit=222&amp;Children=0&amp;Infants=0&amp;Initial=T&amp;Nights=1&amp;NonSmoking=Y&amp;Operator=BJT&amp;ParkingDays=8&amp;ParkingSpaces=1&amp;Registration=CP54JOV&amp;Remarks=Ben%20testing%205&amp;RoomCode=DZ&amp;Rooms=1&amp;StartCustomer=111111&amp;Surname=Test&amp;Title=Mr&amp;key=foo&amp;token=123456789
 </code></pre>
 </div>
 
 <p>api -&gt; chauntry</p>
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;API_Request</span> <span class="na">System=</span><span class="s">"ABG"</span> <span class="na">Version=</span><span class="s">"1.0"</span> <span class="na">Product=</span><span class="s">"HotelWithParking"</span> <span class="na">Customer=</span><span class="s">"A"</span> <span class="na">Session=</span><span class="s">"000000015"</span> <span class="na">RequestCode=</span><span class="s">"5"</span><span class="nt">&gt;</span>                                            
-<span class="nt">&lt;Agent&gt;</span>                                                                         
-        <span class="nt">&lt;StartCustomer&gt;</span>111111<span class="nt">&lt;/StartCustomer&gt;</span>                                   
-        <span class="nt">&lt;BusinessUnit&gt;</span>222<span class="nt">&lt;/BusinessUnit&gt;</span>                                        
-        <span class="nt">&lt;Operator&gt;</span>JMB<span class="nt">&lt;/Operator&gt;</span>                                                
-<span class="nt">&lt;/Agent&gt;</span>                                                                        
-<span class="nt">&lt;Itinerary&gt;</span>                                                                     
-	<span class="nt">&lt;ArrivalDate&gt;</span>15Mar10<span class="nt">&lt;/ArrivalDate&gt;</span>                                              
-	<span class="nt">&lt;Nights&gt;</span>1<span class="nt">&lt;/Nights&gt;</span>                                                              
-	<span class="nt">&lt;HotelCode&gt;</span>FRAAST<span class="nt">&lt;/HotelCode&gt;</span>                                                   
-	<span class="nt">&lt;BoardBasis&gt;</span>U<span class="nt">&lt;/BoardBasis&gt;</span>                                                      
-	<span class="nt">&lt;NonSmoking&gt;</span>Y<span class="nt">&lt;/NonSmoking&gt;</span>                                                      
-	<span class="nt">&lt;ParkingDays&gt;</span>8<span class="nt">&lt;/ParkingDays&gt;</span>                                                    
-	<span class="nt">&lt;ParkingSpaces&gt;</span>1<span class="nt">&lt;/ParkingSpaces&gt;</span>                                                
-<span class="nt">&lt;/Itinerary&gt;</span>                                                                    
-<span class="nt">&lt;Room</span> <span class="na">r=</span><span class="s">"1"</span><span class="nt">&gt;</span>                                                                    
-	<span class="nt">&lt;RoomCode&gt;</span>DZ<span class="nt">&lt;/RoomCode&gt;</span>                                                         
-	<span class="nt">&lt;Rooms&gt;</span>1<span class="nt">&lt;/Rooms&gt;</span>                                                                
-	<span class="nt">&lt;Adults&gt;</span>2<span class="nt">&lt;/Adults&gt;</span>                                                              
-	<span class="nt">&lt;Children&gt;</span>0<span class="nt">&lt;/Children&gt;</span>                                                          
-	<span class="nt">&lt;Infants&gt;</span>0<span class="nt">&lt;/Infants&gt;</span>                                                            
-<span class="nt">&lt;/Room&gt;</span>                                                                         
-<span class="nt">&lt;CarDetails&gt;</span>                                                                    
-	<span class="nt">&lt;Registration&gt;</span>AB03CDE<span class="nt">&lt;/Registration&gt;</span>                                            
-<span class="nt">&lt;/CarDetails&gt;</span>                                                                   
-<span class="nt">&lt;ClientDetails&gt;</span>                                                                 
-	<span class="nt">&lt;Title&gt;</span>Mr<span class="nt">&lt;/Title&gt;</span>                                                               
-	<span class="nt">&lt;Initial&gt;</span>T<span class="nt">&lt;/Initial&gt;</span>                                                            
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;API_Request</span> <span class="na">System=</span><span class="s">"ABG"</span> <span class="na">Version=</span><span class="s">"1.0"</span> <span class="na">Product=</span><span class="s">"HotelWithParking"</span> <span class="na">Customer=</span><span class="s">"A"</span> <span class="na">Session=</span><span class="s">"000000015"</span> <span class="na">RequestCode=</span><span class="s">"5"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;Agent&gt;</span>
+        <span class="nt">&lt;StartCustomer&gt;</span>111111<span class="nt">&lt;/StartCustomer&gt;</span>
+        <span class="nt">&lt;BusinessUnit&gt;</span>222<span class="nt">&lt;/BusinessUnit&gt;</span>
+        <span class="nt">&lt;Operator&gt;</span>JMB<span class="nt">&lt;/Operator&gt;</span>
+<span class="nt">&lt;/Agent&gt;</span>
+<span class="nt">&lt;Itinerary&gt;</span>
+	<span class="nt">&lt;ArrivalDate&gt;</span>15Mar10<span class="nt">&lt;/ArrivalDate&gt;</span>
+	<span class="nt">&lt;Nights&gt;</span>1<span class="nt">&lt;/Nights&gt;</span>
+	<span class="nt">&lt;HotelCode&gt;</span>FRAAST<span class="nt">&lt;/HotelCode&gt;</span>
+	<span class="nt">&lt;BoardBasis&gt;</span>U<span class="nt">&lt;/BoardBasis&gt;</span>
+	<span class="nt">&lt;NonSmoking&gt;</span>Y<span class="nt">&lt;/NonSmoking&gt;</span>
+	<span class="nt">&lt;ParkingDays&gt;</span>8<span class="nt">&lt;/ParkingDays&gt;</span>
+	<span class="nt">&lt;ParkingSpaces&gt;</span>1<span class="nt">&lt;/ParkingSpaces&gt;</span>
+<span class="nt">&lt;/Itinerary&gt;</span>
+<span class="nt">&lt;Room</span> <span class="na">r=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;RoomCode&gt;</span>DZ<span class="nt">&lt;/RoomCode&gt;</span>
+	<span class="nt">&lt;Rooms&gt;</span>1<span class="nt">&lt;/Rooms&gt;</span>
+	<span class="nt">&lt;Adults&gt;</span>2<span class="nt">&lt;/Adults&gt;</span>
+	<span class="nt">&lt;Children&gt;</span>0<span class="nt">&lt;/Children&gt;</span>
+	<span class="nt">&lt;Infants&gt;</span>0<span class="nt">&lt;/Infants&gt;</span>
+<span class="nt">&lt;/Room&gt;</span>
+<span class="nt">&lt;CarDetails&gt;</span>
+	<span class="nt">&lt;Registration&gt;</span>AB03CDE<span class="nt">&lt;/Registration&gt;</span>
+<span class="nt">&lt;/CarDetails&gt;</span>
+<span class="nt">&lt;ClientDetails&gt;</span>
+	<span class="nt">&lt;Title&gt;</span>Mr<span class="nt">&lt;/Title&gt;</span>
+	<span class="nt">&lt;Initial&gt;</span>T<span class="nt">&lt;/Initial&gt;</span>
 	<span class="nt">&lt;Surname&gt;</span>TEST<span class="nt">&lt;/Surname&gt;</span>
 	<span class="nt">&lt;Remarks&gt;</span>Ben testing 1<span class="nt">&lt;/Remarks&gt;</span>
-<span class="nt">&lt;/ClientDetails&gt;</span>                                                                
-<span class="nt">&lt;/API_Request&gt;</span>  
+<span class="nt">&lt;/ClientDetails&gt;</span>
+<span class="nt">&lt;/API_Request&gt;</span>
 </code></pre>
 </div>
 

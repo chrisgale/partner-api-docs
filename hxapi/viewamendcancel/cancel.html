@@ -35,7 +35,7 @@
 
 <p>where foo is the booking reference</p>
 
-<p>e.g. http://api.holidayextras.co.uk/v1/booking/ABCDE</p>
+<p>e.g. https://api.holidayextras.co.uk/v1/booking/ABCDE</p>
 
 <p>Cancelling a booking is a two step process. You must first request the details of the booking via a GET, present them to the customer to confirm. You can then cancel the booking via POST.</p>
 
@@ -76,7 +76,7 @@
 
 <h3 id="request">Request</h3>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>http://api.holidayextras.co.uk/v1/booking/ABCDE?CreditCardLast4=1111<span class="err">&amp;</span>key=mytestkey
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/booking/ABCDE?CreditCardLast4=1111<span class="err">&amp;</span>key=mytestkey
 </code></pre>
 </div>
 
@@ -157,13 +157,13 @@
 
 <h3 id="request-1">Request</h3>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>http://api.holidayextras.co.uk/v1/booking/ABCDE?ABTANumber=youragentcode<span class="err">&amp;</span>Password=yourpassword<span class="err">&amp;</span>ConfirmCancel=N<span class="err">&amp;</span>CancelRef=voucher/initial<span class="err">&amp;</span>key=foo
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/booking/ABCDE?ABTANumber=youragentcode<span class="err">&amp;</span>Password=yourpassword<span class="err">&amp;</span>ConfirmCancel=N<span class="err">&amp;</span>CancelRef=voucher/initial<span class="err">&amp;</span>key=foo
 </code></pre>
 </div>
 
 <p>For European products please add System=ABG</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>http://api.holidayextras.co.uk/v1/booking/ABCDE?ABTANumber=youragentcode<span class="err">&amp;</span>Password=yourpassword<span class="err">&amp;</span>ConfirmCancel=N<span class="err">&amp;</span>key=foo<span class="err">&amp;</span>System=ABG
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/booking/ABCDE?ABTANumber=youragentcode<span class="err">&amp;</span>Password=yourpassword<span class="err">&amp;</span>ConfirmCancel=N<span class="err">&amp;</span>key=foo<span class="err">&amp;</span>System=ABG
 </code></pre>
 </div>
 
@@ -236,7 +236,7 @@
 
 <h3 id="request-2">Request</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>http://api.holidayextras.co.uk/booking/ABCDE
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/booking/ABCDE
 
 POST /booking/ABCDE HTTP/1.1
 Host: api.holidayextras.co.uk
@@ -331,7 +331,7 @@ CreditCardLast4=5383&amp;key=mytestkey&amp;ConfirmCancel=Y
 
 <h3 id="request-3">Request</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>http://api.holidayextras.co.uk/booking/ABCDE
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/booking/ABCDE
 
 POST /booking/ABCDE HTTP/1.1
 Host: api.holidayextras.co.uk

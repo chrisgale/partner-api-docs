@@ -37,7 +37,7 @@
 
 <p>where foo is the Start booking reference</p>
 
-<p>e.g. http://api.holidayextras.co.uk/de-start/v1/sandbox/booking/10051848</p>
+<p>e.g. https://api.holidayextras.co.uk/de-start/v1/sandbox/booking/10051848</p>
 
 <h2 id="the-paymentoutstanding-element">The PaymentOutstanding Element</h2>
 
@@ -128,7 +128,7 @@
 
 <h3 id="request">Request</h3>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>http://api.holidayextras.co.uk/de-start/v1/sandbox/booking/10213905?StartCustomer=111111<span class="err">&amp;</span>BusinessUnit=222<span class="err">&amp;</span>Operator=BJT<span class="err">&amp;</span>key=mytestkey
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/de-start/v1/sandbox/booking/10213905?StartCustomer=111111<span class="err">&amp;</span>BusinessUnit=222<span class="err">&amp;</span>Operator=BJT<span class="err">&amp;</span>key=mytestkey
 </code></pre>
 </div>
 
@@ -189,7 +189,7 @@
 
 <h3 id="request-1">Request</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>http://api.holidayextras.co.uk/de-start/v1/sandbox/booking/?StartCustomer=111111&amp;BusinessUnit=222&amp;Operator=BJT&amp;key=mytestkey
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/de-start/v1/sandbox/booking/?StartCustomer=111111&amp;BusinessUnit=222&amp;Operator=BJT&amp;key=mytestkey
 </code></pre>
 </div>
 
@@ -250,21 +250,21 @@
 <h3 id="date-range">Date range</h3>
 
 <p>ZNT -&gt; API</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>http://api.holidayextras.co.uk/de-start/v1/sandbox/booking/?StartCustomer=111111&amp;BusinessUnit=222&amp;Operator=BJT&amp;StartDate=01Jun09&amp;EndDate=01Mar10&amp;key=mytestkey
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/de-start/v1/sandbox/booking/?StartCustomer=111111&amp;BusinessUnit=222&amp;Operator=BJT&amp;StartDate=01Jun09&amp;EndDate=01Mar10&amp;key=mytestkey
 </code></pre>
 </div>
 
 <p>API -&gt; Chauntry</p>
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;API_Request</span> <span class="na">System=</span><span class="s">"ABG"</span> <span class="na">Version=</span><span class="s">"1.0"</span> <span class="na">Product=</span><span class="s">"HotelWithParking"</span> <span class="na">Customer=</span><span class="s">"A"</span> <span class="na">RequestCode=</span><span class="s">"11"</span> <span class="na">Session=</span><span class="s">"111222333"</span><span class="nt">&gt;</span>                                                                                                  <span class="nt">&lt;Agent&gt;</span>                                                                         
-	<span class="nt">&lt;StartCustomer&gt;</span>111111<span class="nt">&lt;/StartCustomer&gt;</span>                                           
-	<span class="nt">&lt;BusinessUnit&gt;</span>222<span class="nt">&lt;/BusinessUnit&gt;</span>                                                
-	<span class="nt">&lt;Operator&gt;</span>JMB<span class="nt">&lt;/Operator&gt;</span>                                                        
-<span class="nt">&lt;/Agent&gt;</span>                                                                        
-<span class="nt">&lt;Itinerary&gt;</span>                                                                     
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;API_Request</span> <span class="na">System=</span><span class="s">"ABG"</span> <span class="na">Version=</span><span class="s">"1.0"</span> <span class="na">Product=</span><span class="s">"HotelWithParking"</span> <span class="na">Customer=</span><span class="s">"A"</span> <span class="na">RequestCode=</span><span class="s">"11"</span> <span class="na">Session=</span><span class="s">"111222333"</span><span class="nt">&gt;</span>                                                                                                  <span class="nt">&lt;Agent&gt;</span>
+	<span class="nt">&lt;StartCustomer&gt;</span>111111<span class="nt">&lt;/StartCustomer&gt;</span>
+	<span class="nt">&lt;BusinessUnit&gt;</span>222<span class="nt">&lt;/BusinessUnit&gt;</span>
+	<span class="nt">&lt;Operator&gt;</span>JMB<span class="nt">&lt;/Operator&gt;</span>
+<span class="nt">&lt;/Agent&gt;</span>
+<span class="nt">&lt;Itinerary&gt;</span>
 	<span class="nt">&lt;StartRef&gt;&lt;/StartRef&gt;</span>
         <span class="nt">&lt;StartDate&gt;</span>01JUN09<span class="nt">&lt;/StartDate&gt;</span>
         <span class="nt">&lt;EndDate&gt;</span>01APR10<span class="nt">&lt;/EndDate&gt;</span>
-<span class="nt">&lt;/Itinerary&gt;</span>                                                                    
+<span class="nt">&lt;/Itinerary&gt;</span>
 <span class="nt">&lt;/API_Request&gt;</span>
 </code></pre>
 </div>
@@ -334,7 +334,7 @@
 <p>This search will return up to 100 results, in the order of booking eg oldest first. If more recent bookings are required please adjust the date range.</p>
 
 <p>znt -&gt; api</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>http://api.holidayextras.co.uk/de-start/sandbox/v1/booking/?StartCustomer=111111&amp;BusinessUnit=222&amp;Operator=BJT&amp;StartDate=23JUN09&amp;EndDate=23MAR10&amp;PartyName=TEST&amp;Product=HotelWithParking&amp;Location=DUS6&amp;key=mytestkey
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/de-start/sandbox/v1/booking/?StartCustomer=111111&amp;BusinessUnit=222&amp;Operator=BJT&amp;StartDate=23JUN09&amp;EndDate=23MAR10&amp;PartyName=TEST&amp;Product=HotelWithParking&amp;Location=DUS6&amp;key=mytestkey
 </code></pre>
 </div>
 
@@ -346,7 +346,7 @@
 	<span class="nt">&lt;Operator&gt;</span>JMB<span class="nt">&lt;/Operator&gt;</span>
 <span class="nt">&lt;/Agent&gt;</span>
 <span class="nt">&lt;Itinerary&gt;</span>
-	<span class="nt">&lt;StartRef&gt;&lt;/StartRef&gt;</span>                                                           
+	<span class="nt">&lt;StartRef&gt;&lt;/StartRef&gt;</span>
 	<span class="nt">&lt;StartDate&gt;</span>23Dec09<span class="nt">&lt;/StartDate&gt;</span>
 	<span class="nt">&lt;EndDate&gt;</span>23Mar10<span class="nt">&lt;/EndDate&gt;</span>
 	<span class="nt">&lt;PartyName&gt;</span>Test<span class="nt">&lt;/PartyName&gt;</span>

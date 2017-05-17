@@ -48,7 +48,7 @@
 
 <p><strong>HXAPI</strong> akzeptiert <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> Anfragen. Jede Anfrage wird über <strong>HTTP</strong> unter Verwendung der Standardverfahren gemacht. Für den Datenabruf benutzen Sie immer das GET Verfahren. Um eine Buchung zu machen (und demzufolge eine neue Quelle zu erstellen), muss das POST Verfahren verwendet werden.</p>
 
-<p>http://api.holidayextras.co.uk/sandbox/v1/carpark/LGW2</p>
+<p>https://api.holidayextras.co.uk/sandbox/v1/carpark/LGW2</p>
 
 <p>Eine URL kann, je nach Zugangsverfahren, unterschiedliche Funktionen haben. Die obige URL als Beispiel, liefert als GET Informationen über Verfügbarkeiten und Preise für den Parkplatz im gewählten Zeitraum. Wenn mit den korrekten Parametern “posted to”, wird eine Buchung bei eben diesem Parkplatz gemacht und ein Link geliefert, unter dem Sie die Buchung einsehen können.</p>
 
@@ -58,9 +58,9 @@
 
 <p>Der nötige Ablauf, um von Development zu Live zu gelangen, ist <a href="golive">hier</a> verdeutlicht.</p>
 
-<p>Development URL: http://api.holidayextras.co.uk/sandbox/</p>
+<p>Development URL: https://api.holidayextras.co.uk/sandbox/</p>
 
-<p>Live URL: http://api.holidayextras.co.uk/</p>
+<p>Live URL: https://api.holidayextras.co.uk/</p>
 
 <h1 id="die-ersten-schritte">Die ersten Schritte</h1>
 
@@ -68,16 +68,16 @@
 
 <p>Zunächst eine Anfrage nach Parkverfügbarkeiten:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>curl "http://api.holidayextras.co.uk/sandbox/v1/carpark/LGW?ArrivalDate=20Jan09&amp;ArrivalTime=1200&amp;DepartDate=27Jan09&amp;DepartTime=1600&amp;token=000015778&amp;key=mytestkey"
+<div class="highlighter-rouge"><pre class="highlight"><code>curl "https://api.holidayextras.co.uk/sandbox/v1/carpark/LGW?ArrivalDate=20Jan09&amp;ArrivalTime=1200&amp;DepartDate=27Jan09&amp;DepartTime=1600&amp;token=000015778&amp;key=mytestkey"
 </code></pre>
 </div>
 <p>Ein weiteres Beispiel - dieses fragt die Productbibliothek nach einem der in der Suche erhaltenen Parkplätze.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>curl "http://api.holidayextras.co.uk/sandbox/v1/prodlib/LGW2/lite?token=000015778&amp;key=mytestkey"
+<div class="highlighter-rouge"><pre class="highlight"><code>curl "https://api.holidayextras.co.uk/sandbox/v1/prodlib/LGW2/lite?token=000015778&amp;key=mytestkey"
 </code></pre>
 </div>
 <p>Die bisherigen Beispiele haben XML geliefert - dies ist das Default Format. Sie können auch nach dem Output als Javascript Objekt fragen, indem Sie die Dateikennung auf “.js” stellen.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>curl "http://api.holidayextras.co.uk/sandbox/v1/carpark/LGW.js?ArrivalDate=20Jan09&amp;ArrivalTime=1200&amp;DepartDate=27Jan09&amp;DepartTime=1600&amp;token=000015778&amp;key=mytestkey"
-curl "http://api.holidayextras.co.uk/sandbox/v1/product/LGW4/lite.js?token=000015778&amp;key=mytestkey"
+<div class="highlighter-rouge"><pre class="highlight"><code>curl "https://api.holidayextras.co.uk/sandbox/v1/carpark/LGW.js?ArrivalDate=20Jan09&amp;ArrivalTime=1200&amp;DepartDate=27Jan09&amp;DepartTime=1600&amp;token=000015778&amp;key=mytestkey"
+curl "https://api.holidayextras.co.uk/sandbox/v1/product/LGW4/lite.js?token=000015778&amp;key=mytestkey"
 </code></pre>
 </div>
 
@@ -100,15 +100,15 @@ curl "http://api.holidayextras.co.uk/sandbox/v1/product/LGW4/lite.js?token=00001
   </li>
 </ul>
 
-<p>http://api.holidayextras.co.uk/sandbox/v1/prodlib/LGW2/lite?key=mytestkey</p>
+<p>https://api.holidayextras.co.uk/sandbox/v1/prodlib/LGW2/lite?key=mytestkey</p>
 
 <p>ist das gleiche wie</p>
 
-<p>http://api.holidayextras.co.uk/sandbox/v1/prodlib/LGW2/lite.xml?key=mytestkey</p>
+<p>https://api.holidayextras.co.uk/sandbox/v1/prodlib/LGW2/lite.xml?key=mytestkey</p>
 
 <p>Dieselbe Anfrage mit Ergebnissen in Javascript</p>
 
-<p>http://api.holidayextras.co.uk/sandbox/v1/prodlib/LGW2/lite.js?key=mytestkey</p>
+<p>https://api.holidayextras.co.uk/sandbox/v1/prodlib/LGW2/lite.js?key=mytestkey</p>
 
 <h1 id="anwendungsschlüssel">Anwendungsschlüssel</h1>
 

@@ -85,7 +85,21 @@ else if x &gt; CCardSurchargeMax
 
 <p>Markup already added.</p>
 
-<h2 id="do-holiday-extras-need-my-ip-address">Do Holiday Extras need my IP address?</h2>
+<p>##How is the “Total Price” for Parking calculated?</p>
+
+<p>The cost of the Credit Card surcharge applies to the price of parking + cancellation waiver (if taken).</p>
+
+<p>So in the reply for a booking request you may see something like this:</p>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;AmountPaid&gt;</span>43.56<span class="nt">&lt;/AmountPaid&gt;</span>
+<span class="nt">&lt;TotalPrice&gt;</span>42.06<span class="nt">&lt;/TotalPrice&gt;</span>
+<span class="nt">&lt;CCSurchargeAmount&gt;</span>1.50<span class="nt">&lt;/CCSurchargeAmount&gt;</span>
+<span class="nt">&lt;CanxWaiver&gt;</span>0.50<span class="nt">&lt;/CanxWaiver&gt;</span>
+</code></pre>
+</div>
+
+<p>You may expect <code class="highlighter-rouge">&lt;AmountPaid&gt;</code> to total £44.06 (because 42.06 + 1.50 + 0.50 = 44.06). This is not an error, the <code class="highlighter-rouge">&lt;CanxWaiver&gt;</code> amount has already been added to the parking price of £41.56 to create <code class="highlighter-rouge">&lt;TotalPrice&gt;</code>, and the credit card surcharge is then applied to that value, giving <code class="highlighter-rouge">&lt;AmountPaid&gt;</code>.</p>
+
+<h2 id="does-holiday-extras-need-my-ip-address">Does Holiday Extras need my IP address?</h2>
 
 <p>No. We use a blacklist for unwelcome traffic, otherwise anyone can make requests to <strong>HXAPI</strong> as long as they use a valid key.</p>
 
@@ -114,7 +128,6 @@ else if x &gt; CCardSurchargeMax
 <p>Error messages - we can provide you a list of error messages. It is planned to provide them in different languages.</p>
 
 <p>Booking number/ABTA number - the combination of both is always unique</p>
-
 
 </div>
 

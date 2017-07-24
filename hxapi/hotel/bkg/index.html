@@ -29,746 +29,648 @@
         <div class="panel panel-primary">
           <div class="panel-heading"><div class="h1">Holiday Extras API</div></div>
             <div class="panel-body">
-  <h1 id="hotel-booking">Hotel Booking</h1>
+  <h1 id="hotel-booking-request">Hotel Booking Request</h1>
 
-<p>As with all bookings, this must be a POST and it must be made over HTTPS. Intermediaries will be sending credit card information, Agents will send their login details so HTTPS is required in both instances.</p>
-
-<p>If you do not send the ABTANumber field then your booking will not be tracked to your agent code. For agent bookings, the Password field is also required, intermediaries do not have a password.</p>
-
-<p>To retrieve all details about the booking, perform a <a href="/hxapi/viewamendcancel">GET request to view the booking</a> at the location specified in <code class="highlighter-rouge">&lt;MoreInfoURL&gt;</code>.</p>
-
-<p>Currently, we can only accept 2 rooms per booking. If the customer needs more, you will need to make multiple requests. If an intermediary account, this would lead to multiple transactions on the credit card, and multiple charges, therefore we advise against it. Agents accounts do not suffer from this, they can make multiple requests as they process the payment themselves.</p>
-
-<h2 id="hotelfoo">/hotel/foo</h2>
-
-<p>where foo is the selected hotel code</p>
-
-<p>e.g. /hotel/LHRSOF</p>
-
-<h3 id="method">Method</h3>
+<h2 id="method">Method</h2>
 
 <p>POST</p>
 
-<h3 id="parameters">Parameters</h3>
+<h2 id="endpoint">Endpoint</h2>
+
+<p>The endpoint to use is:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/hotel/locationCode
+</code></pre>
+</div>
+
+<p>For example, for <em>Mercure at London Heathrow</em> the endpoint is:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/hotel/LHRMEA
+</code></pre>
+</div>
+
+<h2 id="request-parameters">Request Parameters</h2>
+
+<p>The parameters <em>must</em> be sent in the body of the request, as <code class="highlighter-rouge">x-www-form-urlencoded</code> data.</p>
+
+<p>NB: All parameter names are case sensitive.</p>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
-      <th>Type</th>
+      <th>Data Type</th>
       <th>Format</th>
-      <th>Required (Agents)</th>
-      <th>Required (Intermediaries)</th>
-      <th>Notes</th>
+      <th>Mandatory?</th>
+      <th>Additional Information</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>key</td>
-      <td>String</td>
-      <td> </td>
-      <td>Y</td>
-      <td>Y</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>token</td>
-      <td>Integer</td>
-      <td>[0-9]{9}</td>
-      <td>Y</td>
-      <td>Y</td>
-      <td> </td>
-    </tr>
-    <tr>
       <td>ABTANumber</td>
       <td>String</td>
-      <td>[A-Z0-9]{5}</td>
+      <td>[A-Z0-9] 5 chars</td>
       <td>Y</td>
-      <td>Y</td>
-      <td> </td>
+      <td>This is also known as an ‘agent code’. <br />This will be confirmed to you by your Account Manager during set up.</td>
     </tr>
     <tr>
       <td>Password</td>
       <td>String</td>
-      <td>[A-Z0-9]{5}</td>
-      <td>Y</td>
-      <td>N</td>
-      <td> </td>
+      <td>[A-Z0-9] 5 chars</td>
+      <td>N*</td>
+      <td>Password required for retail agent requests - intermediaries do not require a password.<br />This will be confirmed to you by your Account Manager during set up.</td>
     </tr>
     <tr>
       <td>Initials</td>
       <td>String</td>
-      <td>[A-Z]{3}</td>
-      <td>Y</td>
+      <td>[A-Z] 3 chars</td>
       <td>N</td>
-      <td>Initials of the agent</td>
+      <td>The initials of the Operator / Agent.</td>
+    </tr>
+    <tr>
+      <td>key</td>
+      <td>String</td>
+      <td>[A-Z]</td>
+      <td>Y</td>
+      <td>This will be assigned to you by your Account Manager during set up.</td>
+    </tr>
+    <tr>
+      <td>token</td>
+      <td>String</td>
+      <td>[0-9] 9 chars</td>
+      <td>Y</td>
+      <td>This is the same token used in the availability request.</td>
     </tr>
     <tr>
       <td>ArrivalDate</td>
       <td>Date</td>
-      <td>DDMMMYY</td>
+      <td>YYYY-MM-DD</td>
       <td>Y</td>
-      <td>Y</td>
-      <td> </td>
+      <td>Date customer arrives at hotel.</td>
     </tr>
     <tr>
       <td>Nights</td>
       <td>Integer</td>
-      <td>1</td>
+      <td>1, 2, 3, etc</td>
       <td>Y</td>
-      <td>Y</td>
-      <td> </td>
+      <td>Number of nights the customer wants to stay in the hotel.</td>
     </tr>
     <tr>
-      <td>BoardBasis</td>
+      <td>RoomType</td>
       <td>String</td>
-      <td>[RO,BB]</td>
+      <td>[A-Z0-9] 2 chars</td>
       <td>Y</td>
-      <td>Y</td>
-      <td>for European products F or U</td>
-    </tr>
-    <tr>
-      <td>RoomCode</td>
-      <td>String</td>
-      <td><a href="/hxapi/types/roomcode">roomcode</a></td>
-      <td>Y</td>
-      <td>Y</td>
-      <td> </td>
+      <td>See <a href="/hxapi/types/roomcode">RoomCodes</a> for a list of valid codes.</td>
     </tr>
     <tr>
       <td>Adults</td>
       <td>Integer</td>
-      <td>[1-5]</td>
+      <td>[1-5] 1 char</td>
       <td>Y</td>
-      <td>Y</td>
-      <td> </td>
+      <td>The number of adults occupying the room.</td>
     </tr>
     <tr>
       <td>Children</td>
       <td>Integer</td>
-      <td>[0-4]</td>
+      <td>[0-4] 1 char</td>
       <td>Y</td>
-      <td>Y</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Infants</td>
-      <td>Integer</td>
-      <td>[0,1,2]</td>
-      <td>N</td>
-      <td>N</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>SecondRoomCode</td>
-      <td>String</td>
-      <td><a href="/hxapi/types/roomcode">roomcode</a></td>
-      <td>N</td>
-      <td>N</td>
-      <td>not possible for European products</td>
-    </tr>
-    <tr>
-      <td>SecondRoomAdults</td>
-      <td>Integer</td>
-      <td>[1-5]</td>
-      <td>N</td>
-      <td>N</td>
-      <td>not possible for European products</td>
-    </tr>
-    <tr>
-      <td>SecondRoomChildren</td>
-      <td>Integer</td>
-      <td>[0-4]</td>
-      <td>N</td>
-      <td>N</td>
-      <td>not possible for European products</td>
-    </tr>
-    <tr>
-      <td>SecondRoomInfants</td>
-      <td>Integer</td>
-      <td>[0,1,2]</td>
-      <td>N</td>
-      <td>N</td>
-      <td>not possible for European products</td>
+      <td>The number of children occupying the room.</td>
     </tr>
     <tr>
       <td>ParkingDays</td>
       <td>Integer</td>
-      <td>[0,8,15]</td>
+      <td>[0-9] 2 chars</td>
       <td>Y</td>
-      <td>Y</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>CarDropoffTime</td>
-      <td>Time</td>
-      <td>HHMM</td>
-      <td>Y*</td>
-      <td>N</td>
-      <td>*ONLY required if ParkingDays &gt; 0, UK only</td>
-    </tr>
-    <tr>
-      <td>CarPickupDate</td>
-      <td>Date</td>
-      <td>DDMMMYY</td>
-      <td>Y*</td>
-      <td>N</td>
-      <td>*ONLY required if ParkingDays &gt; 0 UK only</td>
-    </tr>
-    <tr>
-      <td>CarPickupTime</td>
-      <td>Time</td>
-      <td>HHMM</td>
-      <td>Y*</td>
-      <td>N</td>
-      <td>*ONLY required if ParkingDays &gt; 0 UK only</td>
-    </tr>
-    <tr>
-      <td>ReturnFlight</td>
-      <td>String</td>
-      <td> </td>
-      <td>N</td>
-      <td>N</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>TerminalCode</td>
-      <td>String</td>
-      <td> </td>
-      <td>N</td>
-      <td>N</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Registration</td>
-      <td>String</td>
-      <td> </td>
-      <td>N</td>
-      <td>N</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>CarMake</td>
-      <td>String</td>
-      <td> </td>
-      <td>N</td>
-      <td>N</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>CarModel</td>
-      <td>String</td>
-      <td> </td>
-      <td>N</td>
-      <td>N</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>CarColour</td>
-      <td>String</td>
-      <td> </td>
-      <td>N</td>
-      <td>N</td>
-      <td> </td>
+      <td>NB: The maximum duration accepted for ParkingDays is 30.</td>
     </tr>
     <tr>
       <td>Title</td>
       <td>String</td>
-      <td> </td>
+      <td>[0-9] 4 chars</td>
       <td>Y</td>
-      <td>Y</td>
-      <td>titles are: Mr,Mrs,Miss,Ms,Mstr,Mr/s,Dr,Rev,Prof,Sir, Mevr,Dhr</td>
+      <td>Title of lead passenger</td>
     </tr>
     <tr>
       <td>Initial</td>
       <td>String</td>
-      <td>[A-Z]</td>
+      <td>[A-Z] 1 chars</td>
       <td>Y</td>
-      <td>Y</td>
-      <td>Initial of the customer’s name</td>
+      <td>Initial of lead passenger</td>
     </tr>
     <tr>
       <td>Surname</td>
       <td>String</td>
-      <td> </td>
+      <td>[0-9] 20 chars</td>
       <td>Y</td>
-      <td>Y</td>
-      <td> </td>
+      <td>Surname of lead passenger</td>
     </tr>
     <tr>
       <td>Address[]</td>
       <td>String</td>
-      <td> </td>
+      <td>[0-9] 20 chars</td>
       <td>Y</td>
-      <td>Y</td>
-      <td>Address[0] for first line, [1] for second line, [2] for third line</td>
+      <td>First line of address (house name / number and road) of lead passenger. If you require more than 1 address line, then you can replicate this field and increment the number in square brackets, i.e. “Address[1]” for address line 2, and so on. NB: This field can be set to NA</td>
     </tr>
     <tr>
       <td>Town</td>
       <td>String</td>
-      <td> </td>
+      <td>[0-9] 4 chars</td>
       <td>Y</td>
-      <td>Y</td>
-      <td> </td>
+      <td>Town of address. NB: This field can be set to NA</td>
     </tr>
     <tr>
       <td>County</td>
       <td>String</td>
-      <td> </td>
+      <td>[0-9] 4 chars</td>
       <td>Y</td>
-      <td>Y</td>
-      <td> </td>
+      <td>County of address. NB: This field can be set to NA</td>
     </tr>
     <tr>
-      <td>Country</td>
+      <td>PostCode</td>
       <td>String</td>
-      <td> </td>
+      <td>[0-9] 4 chars</td>
       <td>Y</td>
-      <td>Y</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Postcode</td>
-      <td>String</td>
-      <td>UK Postcode</td>
-      <td>Y</td>
-      <td>Y</td>
-      <td> </td>
+      <td>Post code of address. NB: This field can be set to NA</td>
     </tr>
     <tr>
       <td>DayPhone</td>
-      <td>Phone Number</td>
-      <td> </td>
+      <td>Integer</td>
+      <td>[0-9] 15 chars max</td>
       <td>N</td>
-      <td>N</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>EvePhone</td>
-      <td>Phone Number</td>
-      <td> </td>
-      <td>N</td>
-      <td>Y</td>
-      <td> </td>
+      <td>The customer’s telephone number.</td>
     </tr>
     <tr>
       <td>Email</td>
-      <td>Email</td>
-      <td>Valid email address</td>
+      <td>String</td>
+      <td>[0-9] 4 chars</td>
       <td>Y</td>
-      <td>Y</td>
-      <td> </td>
+      <td>The email address of customer.</td>
     </tr>
     <tr>
       <td>CustomerRef</td>
       <td>String</td>
-      <td> </td>
+      <td>[0-9A-Z]</td>
       <td>N</td>
-      <td>N</td>
-      <td> </td>
+      <td>Enter your Customer Reference to help match bookings for accounting purposes.</td>
     </tr>
     <tr>
       <td>Remarks</td>
       <td>String</td>
-      <td> </td>
-      <td>N</td>
+      <td>[0-9A-Z]</td>
       <td>N</td>
       <td>Pass in Remarks for notification such as COT REQUESTED in ROOM</td>
     </tr>
     <tr>
       <td>Waiver</td>
       <td>Boolean</td>
-      <td>[1,0]</td>
+      <td>[0,1]</td>
       <td>Y</td>
-      <td>Y</td>
-      <td>Assumed 0 if not supplied</td>
+      <td>Defaults to 0 if not supplied.</td>
     </tr>
     <tr>
       <td>DataProtection</td>
       <td>String</td>
       <td>[Y,N]</td>
       <td>N</td>
-      <td>N</td>
-      <td>Does the customer consent to receiving offers from Holiday Extras. Y = Yes, will receive offers, N = Customer data is protected. Not required, default is N</td>
-    </tr>
-    <tr>
-      <td>PriceCheckPrice</td>
-      <td>Int</td>
-      <td>(00)0.00</td>
-      <td>Y</td>
-      <td>Y</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>CardHolder</td>
-      <td>String</td>
-      <td> </td>
-      <td>N</td>
-      <td>Y</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>CardNumber</td>
-      <td>String</td>
-      <td>[0-9]{14-19}</td>
-      <td>N</td>
-      <td>Y</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>CV2</td>
-      <td>Integer</td>
-      <td>[0-9]{3}</td>
-      <td>N</td>
-      <td>Y</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>ExpiryDate</td>
-      <td>Date</td>
-      <td>DDMM</td>
-      <td>N</td>
-      <td>Y</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>StartDate</td>
-      <td>Date</td>
-      <td>DDMM</td>
-      <td>N</td>
-      <td>N</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>IssueNumber</td>
-      <td>Integer</td>
-      <td> </td>
-      <td>N</td>
-      <td>N</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Supplements[]</td>
-      <td>String Array</td>
-      <td> </td>
-      <td>N</td>
-      <td>N</td>
-      <td>See Supplements below</td>
-    </tr>
-    <tr>
-      <td>SupplementsAdults[]</td>
-      <td>Integer Array</td>
-      <td> </td>
-      <td>N</td>
-      <td>N</td>
-      <td>See Supplements below</td>
-    </tr>
-    <tr>
-      <td>SupplementsChildren[]</td>
-      <td>Integer Array</td>
-      <td> </td>
-      <td>N</td>
-      <td>N</td>
-      <td>See Supplements below</td>
-    </tr>
-    <tr>
-      <td>SupplementsCount[]</td>
-      <td>Integer Array</td>
-      <td> </td>
-      <td>N</td>
-      <td>N</td>
-      <td>See Supplements below</td>
-    </tr>
-    <tr>
-      <td>System</td>
-      <td>String</td>
-      <td>ABC/ABG</td>
-      <td>N</td>
-      <td> </td>
-      <td> </td>
+      <td>Does the customer consent to receiving offers from Holiday Extras? Y = Yes, will receive offers, N = No, customer data is protected. Defaults to No if not supplied.</td>
     </tr>
     <tr>
       <td>PriceCheckFlag</td>
       <td>String</td>
+      <td>[Y]</td>
       <td>Y</td>
-      <td>Y</td>
-      <td> </td>
-      <td> </td>
+      <td>Indicates a price check will be carried out prior to booking. If the price is lower in the system the booking will be made as the customer will benefit from a saving.  If the price has changed and is higher than the price stated on availability, an error will return to explain that the price has increased, the booking can still be made but the customer must confirm that they will pay the higher amount.  You should then resubmit the request changing the PriceCheckPrice with the new price.</td>
     </tr>
     <tr>
       <td>PriceCheckPrice</td>
-      <td>Value</td>
-      <td>12.34</td>
+      <td>Float</td>
+      <td>[0-9]</td>
       <td>Y</td>
-      <td> </td>
-      <td> </td>
+      <td>Price of the product, received from the availability request or price check.</td>
+    </tr>
+    <tr>
+      <td>System</td>
+      <td>String</td>
+      <td>[A-Z] 3 chars</td>
+      <td>Y*</td>
+      <td>For European products, you need to pass in the value of <code class="highlighter-rouge">System=ABG</code> (the default is <code class="highlighter-rouge">System=ABC</code>, which is UK products only).</td>
+    </tr>
+    <tr>
+      <td>lang</td>
+      <td>String</td>
+      <td>[A-Z] 2 chars</td>
+      <td>Y*</td>
+      <td>Required for requests for European products. (Values available are <code class="highlighter-rouge">en</code>, <code class="highlighter-rouge">de</code>, <code class="highlighter-rouge">it</code>, <code class="highlighter-rouge">es</code>, <code class="highlighter-rouge">pt</code> and <code class="highlighter-rouge">nl</code>.)</td>
     </tr>
   </tbody>
 </table>
 
-<ul>
-  <li>DataProtection field - Does the customer consent to receiving offers from Holiday Extras. Y = Yes, will receive offers, N = Customer data is protected.</li>
-</ul>
+<h2 id="multiple-rooms-on-same-booking-uk-only">Multiple rooms on same booking (UK only)</h2>
 
-<p>System is required to be set to ABG if you are processing bookings for European products and taking payment in Euros.
-Default is ABC for UK/GBP - it is not mandatory to send if you are processing bookings for UK based products or products being processed in GBP.</p>
+<p>Currently, we can only accept a maximum of 2 rooms per booking. If the customer needs more, you will need to make multiple requests. If an intermediary account, you should note that this would lead to multiple transactions on the credit card, and multiple charges, and therefore we advise against it.</p>
 
-<h4 id="terms-and-conditions-holiday-extras-gmbh-munich">Terms and conditions Holiday Extras GmbH, Munich</h4>
-
-<p>Please us the following link to display terms and conditions to the end consumer or agent. http://www.holidayextras.de/images/de-hx/pdf/agb.pdf
-For further languages please change /de-hx/ into nl-hx, it-hex, en-hx, pt-hx, fr-hx, es-hx.</p>
-
-<p>PriceCheckFlag and PriceCheckPrice are used to ensure that the price you have displayed to the customer at the availability stage will be booked at that price.  When you submit the request the price posted here will be compared to the live price in the system.  If the price is lower in the system the booking will be made as the customer will benefit from a saving.  If the price has changed and is higher than the price stated on availability, an error will return to explain that the price has increased, the booking can still be made but the customer must confirm that they will pay the higher amount.  You should then resubmit the request changing the PriceCheckPrice with the new price.  At this time the system will also update any availability cache so subsequent availability requests will then have the updated price.</p>
-
-<h4 id="supplements">Supplements</h4>
+<p>The additional parameters for including a second room are:</p>
 
 <table>
   <thead>
     <tr>
-      <th>Param</th>
-      <th>Explanation</th>
+      <th>Name</th>
+      <th>Data Type</th>
+      <th>Format</th>
+      <th>Mandatory?</th>
+      <th>Additional Information</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Supplements[]</td>
-      <td>An array of codes that identify the add-ons that supplement a hotel booking</td>
+      <td>SecondRoomType</td>
+      <td>String</td>
+      <td>[A-Z0-9] 2 chars</td>
+      <td>N*</td>
+      <td>This parameter is mandatory if the customer wishes to book two rooms at the same time. The room codes are as per <a href="/hxapi/types/roomcode">Room Codes</a>.</td>
     </tr>
     <tr>
-      <td>SupplementsAdults[]</td>
-      <td>An array containing the number of adults for each supplement that is sold on a Per Person basis</td>
+      <td>SecondRoomCode</td>
+      <td>String</td>
+      <td><a href="/hxapi/types/roomcode">Room Codes</a></td>
+      <td>N</td>
+      <td>NB: Please note that the room codes differ between availability and booking requests.</td>
     </tr>
     <tr>
-      <td>SupplementsChildren[]</td>
-      <td>An array containing the number of children for each supplement that is sold on a Per Person basis</td>
+      <td>SecondRoomAdults</td>
+      <td>Integer</td>
+      <td>[1-5] 1 char</td>
+      <td>N</td>
+      <td>The number of adults occupying the second room.</td>
     </tr>
     <tr>
-      <td>SupplementsCount[]</td>
-      <td>An array containing the quantity of each supplement that is sold on a Per Booking or Per Room basis</td>
+      <td>SecondRoomChildren</td>
+      <td>Integer</td>
+      <td>[0-4] 1 char</td>
+      <td>N</td>
+      <td>The number of children occupying the second room.</td>
     </tr>
   </tbody>
 </table>
 
-<h5 id="supplement-parameter-examples">Supplement Parameter examples</h5>
+<h2 id="uk-hotels-with-parking">UK Hotels with parking</h2>
+
+<p>The additional parameters for hotel with parking (where parking &gt; 0 days) are:</p>
 
 <table>
   <thead>
     <tr>
-      <th>Supplements[]</th>
-      <th>SupplementsAdults[SupplementCode]</th>
-      <th>SupplementsChildren[SupplementCode]</th>
-      <th>SupplementsCount[SupplementCode]</th>
-      <th>Supplement Basis</th>
-      <th>Explantation</th>
+      <th>Name</th>
+      <th>Data Type</th>
+      <th>Format</th>
+      <th>Mandatory?</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>SUPPLEMENT_CODE1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>PER PERSON</td>
-      <td>Booking Basis is PP so Adults and Children params are used, Count param is ignored</td>
+      <td>CarDropoffTime</td>
+      <td>Time</td>
+      <td>HHMM</td>
+      <td>Y</td>
     </tr>
     <tr>
-      <td>SUPPLEMENT_CODE2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>PER PERSON</td>
-      <td>Booking Basis is PP so Adults and Children params are used, Count param is ignored</td>
+      <td>CarPickupDate</td>
+      <td>Date</td>
+      <td>DDMMMYY</td>
+      <td>Y</td>
     </tr>
     <tr>
-      <td>SUPPLEMENT_CODE3</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>PER BOOKING</td>
-      <td>Booking Basis is PB so Adults and Children params are used, Count param is ignored</td>
+      <td>CarPickupTime</td>
+      <td>Time</td>
+      <td>HHMM</td>
+      <td>Y</td>
     </tr>
     <tr>
-      <td>SUPPLEMENT_CODE4</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>PER ROOM</td>
-      <td>Booking Basis is PP so Count param is used and the Adults and Children params are ignored</td>
+      <td>ReturnFlight</td>
+      <td>String</td>
+      <td>[0-9A-Z] 10 chars</td>
+      <td>N</td>
     </tr>
     <tr>
-      <td>SUPPLEMENT_CODE5</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2</td>
-      <td>PER ROOM</td>
-      <td>Booking Basis is PP so Count param is used and the Adults and Children params are ignored</td>
+      <td>TerminalCode</td>
+      <td>String</td>
+      <td>[0-9A-Z] 3 chars</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>Registration</td>
+      <td>String</td>
+      <td>[0-9A-Z] 10 chars</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>CarMake</td>
+      <td>String</td>
+      <td>[0-9A-Z] 15 chars</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>CarModel</td>
+      <td>String</td>
+      <td>[0-9A-Z] 15 chars</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>CarColour</td>
+      <td>String</td>
+      <td>[A-Z] 15 chars</td>
+      <td>N</td>
     </tr>
   </tbody>
 </table>
 
-<h5 id="the-same-data-as-above-expressed-in-the-way-that-it-should-be-submitted">The same data as above expressed in the way that it should be submitted</h5>
+<h2 id="payment">Payment</h2>
+
+<p>In the UK, we are PCI DSS compliant and so we do not accept customers’ payment details being passed to us via the API.</p>
+
+<p>Please contact your Account Manager if you have any questions concerning payment.</p>
+
+<h2 id="booking-terms-and-conditions">Booking Terms and Conditions</h2>
+
+<p>It is important that the customer has access to the Terms and Conditions at the time of placing their booking and after. We highly recommend that these are made clear to the customer <em>before</em> booking.</p>
+
+<p>For European products, please use the following link:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>http://www.holidayextras.de/images/de-hx/pdf/agb.pdf
+</code></pre>
+</div>
+
+<p>If you require translations of Terms and Conditions into other languages, you can simply change <code class="highlighter-rouge">/de-hx/</code> (German) into <code class="highlighter-rouge">nl-hx</code> (Dutch), <code class="highlighter-rouge">it-hex</code> (Italian), <code class="highlighter-rouge">pt-hx</code> (Portuguese), <code class="highlighter-rouge">fr-hx</code> (French), <code class="highlighter-rouge">es-hx</code> (Spanish) or <code class="highlighter-rouge">en-hx</code> (English).</p>
+
+<h1 id="hotel-booking-response">Hotel Booking Response</h1>
+
+<p>The hotel booking response will confirm that a booking has been placed in our system.</p>
+
+<p>For a detailed explanation of the fields returned, please see below:</p>
 
 <table>
   <thead>
     <tr>
       <th>Field</th>
-      <th>Value</th>
+      <th>Additional Information</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Supplements[]</td>
-      <td>‘SUPPLEMENT_CODE1’</td>
+      <td>Booking/BookingRef</td>
+      <td>This is the reference for this booking. It must be referred to in all communication with us concerning this booking. NB: Our booking references are 5 char alphanumeric (including 1/I and 0/O/Q).</td>
     </tr>
     <tr>
-      <td>Supplements[]</td>
-      <td>‘SUPPLEMENT_CODE2’</td>
+      <td>Booking/AgentComm</td>
+      <td>Commission you have earned from this booking.</td>
     </tr>
     <tr>
-      <td>Supplements[]</td>
-      <td>‘SUPPLEMENT_CODE3’</td>
+      <td>Itinerary</td>
+      <td>This section confirms details of the hotel on the booking.</td>
     </tr>
     <tr>
-      <td>Supplements[]</td>
-      <td>‘SUPPLEMENT_CODE4’</td>
+      <td>Room</td>
+      <td>This section confirms details of the room booked at the hotel.</td>
     </tr>
     <tr>
-      <td>Supplements[]</td>
-      <td>‘SUPPLEMENT_CODE5’</td>
+      <td>ClientDetails</td>
+      <td>Confirmation of the customer’s details that were sent in the booking request.</td>
     </tr>
     <tr>
-      <td>Field</td>
-      <td>Value</td>
+      <td>Pricing</td>
+      <td>Confirmation of the price paid by the customer for the hotel room.</td>
     </tr>
     <tr>
-      <td>SupplementsAdults[‘SUPPLEMENT_CODE1’]</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>SupplementsAdults[‘SUPPLEMENT_CODE2’]</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>SupplementsAdults[‘SUPPLEMENT_CODE3’]</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>SupplementsAdults[‘SUPPLEMENT_CODE4’]</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>SupplementsAdults[‘SUPPLEMENT_CODE5’]</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>Field</td>
-      <td>Value</td>
-    </tr>
-    <tr>
-      <td>SupplementsChildren[‘SUPPLEMENT_CODE1’]</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>SupplementsChildren[‘SUPPLEMENT_CODE2’]</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>SupplementsChildren[‘SUPPLEMENT_CODE3’]</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>SupplementsChildren[‘SUPPLEMENT_CODE4’]</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>SupplementsChildren[‘SUPPLEMENT_CODE5’]</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>Field</td>
-      <td>Value</td>
-    </tr>
-    <tr>
-      <td>SupplementsCount[‘SUPPLEMENT_CODE1’]</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>SupplementsCount[‘SUPPLEMENT_CODE2’]</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <td>SupplementsCount[‘SUPPLEMENT_CODE3’]</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>SupplementsCount[‘SUPPLEMENT_CODE4’]</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>SupplementsCount[‘SUPPLEMENT_CODE5’]</td>
-      <td>2</td>
+      <td>API_Header/Request</td>
+      <td>A list of parameters that were sent in the booking request.</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="reply">Reply</h3>
+<h1 id="worked-examples">Worked Examples</h1>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code>
-<span class="nt">&lt;API_Reply</span> <span class="na">Product=</span><span class="s">"HotelWithParking"</span> <span class="na">RequestCode=</span><span class="s">"5"</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;Booking&gt;</span>
-		<span class="nt">&lt;BookingRef&gt;</span>A8PBN<span class="nt">&lt;/BookingRef&gt;</span>
-		<span class="nt">&lt;MoreInfoURL&gt;</span>/sandbox/v1/booking/A8PBN<span class="nt">&lt;/MoreInfoURL&gt;</span>
-                <span class="nt">&lt;AgentComm&gt;</span>7.35-<span class="nt">&lt;/AgentComm&gt;</span>
-                <span class="nt">&lt;VATonComm&gt;</span>0.96-<span class="nt">&lt;/VATonComm&gt;</span>
-	<span class="nt">&lt;/Booking&gt;</span>
-	<span class="nt">&lt;Itinerary&gt;</span>
-		<span class="nt">&lt;ArrivalDate&gt;</span>2009-10-15<span class="nt">&lt;/ArrivalDate&gt;</span>
-		<span class="nt">&lt;Nights&gt;</span>1<span class="nt">&lt;/Nights&gt;</span>
-		<span class="nt">&lt;BoardBasis&gt;</span>RO<span class="nt">&lt;/BoardBasis&gt;</span>
-		<span class="nt">&lt;NonSmoking&gt;</span>N<span class="nt">&lt;/NonSmoking&gt;</span>
-		<span class="nt">&lt;CarPickupDate&gt;</span>2009-10-22<span class="nt">&lt;/CarPickupDate&gt;</span>
-		<span class="nt">&lt;CarDropoffTime&gt;</span>1100<span class="nt">&lt;/CarDropoffTime&gt;</span>
-		<span class="nt">&lt;CarPickupTime&gt;</span>1200<span class="nt">&lt;/CarPickupTime&gt;</span>
-		<span class="nt">&lt;ParkingDays&gt;</span>15<span class="nt">&lt;/ParkingDays&gt;</span>
-		<span class="nt">&lt;ParkingSpaces&gt;</span>1<span class="nt">&lt;/ParkingSpaces&gt;</span>
-		<span class="nt">&lt;ReturnFlight&gt;</span>AB123<span class="nt">&lt;/ReturnFlight&gt;</span>
-		<span class="nt">&lt;TerminalCode&gt;</span>1<span class="nt">&lt;/TerminalCode&gt;</span>
-		<span class="nt">&lt;Code&gt;</span>LHRNOV<span class="nt">&lt;/Code&gt;</span>
-	<span class="nt">&lt;/Itinerary&gt;</span>
-	<span class="nt">&lt;Room&gt;</span>
-		<span class="nt">&lt;Adults&gt;</span>2<span class="nt">&lt;/Adults&gt;</span>
-		<span class="nt">&lt;Children&gt;</span>0<span class="nt">&lt;/Children&gt;</span>
-		<span class="nt">&lt;Infants&gt;</span>0<span class="nt">&lt;/Infants&gt;</span>
-		<span class="nt">&lt;Code&gt;</span>DBL<span class="nt">&lt;/Code&gt;</span>
-	<span class="nt">&lt;/Room&gt;</span>
-	<span class="nt">&lt;ClientDetails&gt;</span>
-		<span class="nt">&lt;Title&gt;</span>MR<span class="nt">&lt;/Title&gt;</span>
-		<span class="nt">&lt;Initial&gt;</span>B<span class="nt">&lt;/Initial&gt;</span>
-		<span class="nt">&lt;Surname&gt;</span>Test<span class="nt">&lt;/Surname&gt;</span>
-		<span class="nt">&lt;Address&gt;</span>4<span class="nt">&lt;/Address&gt;</span>
-		<span class="nt">&lt;Address</span> <span class="na">a=</span><span class="s">"2"</span><span class="nt">&gt;</span>TEST<span class="nt">&lt;/Address&gt;</span>
-		<span class="nt">&lt;Town&gt;</span>TESTTOWN<span class="nt">&lt;/Town&gt;</span>
-		<span class="nt">&lt;County&gt;</span>TESTCOUNTY<span class="nt">&lt;/County&gt;</span>
-		<span class="nt">&lt;Postcode&gt;</span>CT223PP<span class="nt">&lt;/Postcode&gt;</span>
-		<span class="nt">&lt;Country&gt;</span>ENGLAND<span class="nt">&lt;/Country&gt;</span>
-		<span class="nt">&lt;EvePhone&gt;</span>01303200202<span class="nt">&lt;/EvePhone&gt;</span>
-		<span class="nt">&lt;Email&gt;</span>BEN.THOMPSON@HOLIDAYEXTRAS.COM<span class="nt">&lt;/Email&gt;</span>
-		<span class="nt">&lt;Waiver&gt;</span>Y<span class="nt">&lt;/Waiver&gt;</span>
-		<span class="nt">&lt;WaiverAmount&gt;</span>5.00<span class="nt">&lt;/WaiverAmount&gt;</span>
-	<span class="nt">&lt;/ClientDetails&gt;</span>
-	<span class="nt">&lt;Pricing&gt;</span>
-		<span class="nt">&lt;WaiverValue/&gt;</span>
-	<span class="nt">&lt;/Pricing&gt;</span>
-	<span class="nt">&lt;API_Header&gt;</span>
-		<span class="nt">&lt;Request&gt;</span>
-                ...
-		<span class="nt">&lt;/Request&gt;</span>
-	<span class="nt">&lt;/API_Header&gt;</span>
-<span class="nt">&lt;/API_Reply&gt;</span>
+<p>Below are worked examples of both the request and response for booking hotels.</p>
 
+<h2 id="uk-hotel-booking-request---room-only">UK Hotel Booking Request - Room Only</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/hotel/LHRMEA
 </code></pre>
 </div>
 
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>    <span class="nt">&lt;Request&gt;</span>
+      <span class="nt">&lt;ABTANumber&gt;</span>YourABTANumber<span class="nt">&lt;/ABTANumber&gt;</span>
+      <span class="nt">&lt;Password&gt;</span>YourPassword<span class="nt">&lt;/Password&gt;</span>
+      <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>        
+      <span class="nt">&lt;token&gt;</span>YourToken<span class="nt">&lt;/token&gt;</span>
+      <span class="nt">&lt;ArrivalDate&gt;</span>2017-12-01<span class="nt">&lt;/ArrivalDate&gt;</span>        
+      <span class="nt">&lt;Nights&gt;</span>1<span class="nt">&lt;/Nights&gt;</span>
+      <span class="nt">&lt;RoomCode&gt;</span>DBL<span class="nt">&lt;/RoomCode&gt;</span>
+      <span class="nt">&lt;ParkingDays&gt;</span>0<span class="nt">&lt;/ParkingDays&gt;</span>
+      <span class="nt">&lt;Adults&gt;</span>2<span class="nt">&lt;/Adults&gt;</span>
+      <span class="nt">&lt;Children&gt;</span>0<span class="nt">&lt;/Children&gt;</span>
+      <span class="nt">&lt;Title&gt;</span>Mr<span class="nt">&lt;/Title&gt;</span>
+      <span class="nt">&lt;Initial&gt;</span>T<span class="nt">&lt;/Initial&gt;</span>
+      <span class="nt">&lt;Surname&gt;</span>TEST<span class="nt">&lt;/Surname&gt;</span>
+      <span class="nt">&lt;Address</span> <span class="nt">&gt;</span>1 Test Street<span class="nt">&lt;/Address &gt;</span>
+      <span class="nt">&lt;Town&gt;</span>Testville<span class="nt">&lt;/Town&gt;</span>
+      <span class="nt">&lt;County&gt;</span>Testshire<span class="nt">&lt;/County&gt;</span>
+      <span class="nt">&lt;Postcode&gt;</span>TE1 STS<span class="nt">&lt;/Postcode&gt;</span>
+      <span class="nt">&lt;DayPhone&gt;</span>01234567890<span class="nt">&lt;/DayPhone&gt;</span>
+      <span class="nt">&lt;Email&gt;</span>test@test.com<span class="nt">&lt;/Email&gt;</span>
+      <span class="nt">&lt;DataProtection&gt;</span>N<span class="nt">&lt;/DataProtection&gt;</span>
+      <span class="nt">&lt;PriceCheckFlag&gt;</span>Y<span class="nt">&lt;/PriceCheckFlag&gt;</span>
+      <span class="nt">&lt;PriceCheckPrice&gt;</span>55.00<span class="nt">&lt;/PriceCheckPrice&gt;</span>
+      <span class="nt">&lt;v&gt;</span>1<span class="nt">&lt;/v&gt;</span>
+    <span class="nt">&lt;/Request&gt;</span>
+</code></pre>
+</div>
+
+<h2 id="uk-hotel-booking-response---room-only">UK Hotel Booking Response - Room Only</h2>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;API_Reply</span> <span class="na">Product=</span><span class="s">"HotelWithParking"</span> <span class="na">RequestCode=</span><span class="s">"5"</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Booking&gt;</span>
+        <span class="nt">&lt;BookingRef&gt;</span>YourBookingRef<span class="nt">&lt;/BookingRef&gt;</span>
+        <span class="nt">&lt;AgentComm&gt;</span>6.53<span class="nt">&lt;/AgentComm&gt;</span>
+        <span class="nt">&lt;VATonComm&gt;</span>0.00<span class="nt">&lt;/VATonComm&gt;</span>
+        <span class="nt">&lt;MoreInfoURL&gt;</span>/v1/booking/YourBookingRef<span class="nt">&lt;/MoreInfoURL&gt;</span>
+    <span class="nt">&lt;/Booking&gt;</span>
+    <span class="nt">&lt;Hotel/&gt;</span>
+    <span class="nt">&lt;Itinerary&gt;</span>
+        <span class="nt">&lt;TotalPrice&gt;</span>55.00<span class="nt">&lt;/TotalPrice&gt;</span>
+        <span class="nt">&lt;ArrivalDate&gt;</span>2017-12-01<span class="nt">&lt;/ArrivalDate&gt;</span>
+        <span class="nt">&lt;Nights&gt;</span>1<span class="nt">&lt;/Nights&gt;</span>
+        <span class="nt">&lt;BoardBasis&gt;</span>RO<span class="nt">&lt;/BoardBasis&gt;</span>
+        <span class="nt">&lt;NonSmoking&gt;</span>N<span class="nt">&lt;/NonSmoking&gt;</span>
+        <span class="nt">&lt;ReturnFlight/&gt;</span>
+        <span class="nt">&lt;TerminalCode/&gt;</span>
+        <span class="nt">&lt;Code&gt;</span>LHRMEA<span class="nt">&lt;/Code&gt;</span>
+        <span class="nt">&lt;Name&gt;</span>Mercure<span class="nt">&lt;/Name&gt;</span>
+        <span class="nt">&lt;ParkingDays&gt;</span>0<span class="nt">&lt;/ParkingDays&gt;</span>
+        <span class="nt">&lt;ParkingSpaces&gt;</span>0<span class="nt">&lt;/ParkingSpaces&gt;</span>
+    <span class="nt">&lt;/Itinerary&gt;</span>
+    <span class="nt">&lt;Room&gt;</span>
+        <span class="nt">&lt;Adults&gt;</span>2<span class="nt">&lt;/Adults&gt;</span>
+        <span class="nt">&lt;Children&gt;</span>0<span class="nt">&lt;/Children&gt;</span>
+        <span class="nt">&lt;Infants&gt;</span>0<span class="nt">&lt;/Infants&gt;</span>
+        <span class="nt">&lt;Code&gt;</span>DBL<span class="nt">&lt;/Code&gt;</span>
+    <span class="nt">&lt;/Room&gt;</span>
+    <span class="nt">&lt;CarDetails&gt;</span>
+        <span class="nt">&lt;Registration/&gt;</span>
+        <span class="nt">&lt;CarMake/&gt;</span>
+        <span class="nt">&lt;CarModel/&gt;</span>
+        <span class="nt">&lt;CarColour/&gt;</span>
+    <span class="nt">&lt;/CarDetails&gt;</span>
+    <span class="nt">&lt;ClientDetails&gt;</span>
+        <span class="nt">&lt;Title&gt;</span>MR<span class="nt">&lt;/Title&gt;</span>
+        <span class="nt">&lt;Initial&gt;</span>T<span class="nt">&lt;/Initial&gt;</span>
+        <span class="nt">&lt;Surname&gt;</span>TEST<span class="nt">&lt;/Surname&gt;</span>
+        <span class="nt">&lt;Email&gt;</span>test@test.com<span class="nt">&lt;/Email&gt;</span>
+        <span class="nt">&lt;Address/&gt;</span>
+        <span class="nt">&lt;Town/&gt;</span>
+        <span class="nt">&lt;County/&gt;</span>
+        <span class="nt">&lt;Postcode/&gt;</span>
+        <span class="nt">&lt;EvePhone/&gt;</span>
+    <span class="nt">&lt;/ClientDetails&gt;</span>
+    <span class="nt">&lt;API_Header&gt;</span>
+        <span class="nt">&lt;Request&gt;</span>
+            <span class="nt">&lt;ABTANumber&gt;</span>YourABTANumber<span class="nt">&lt;/ABTANumber&gt;</span>
+            <span class="nt">&lt;Password&gt;</span>YourPassword<span class="nt">&lt;/Password&gt;</span>
+            <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>
+            <span class="nt">&lt;token&gt;</span>YourToken<span class="nt">&lt;/token&gt;</span>
+            <span class="nt">&lt;ArrivalDate&gt;</span>2017-12-01<span class="nt">&lt;/ArrivalDate&gt;</span>
+            <span class="nt">&lt;Nights&gt;</span>1<span class="nt">&lt;/Nights&gt;</span>
+            <span class="nt">&lt;RoomCode&gt;</span>DBL<span class="nt">&lt;/RoomCode&gt;</span>
+            <span class="nt">&lt;ParkingDays&gt;</span>0<span class="nt">&lt;/ParkingDays&gt;</span>
+            <span class="nt">&lt;Adults&gt;</span>2<span class="nt">&lt;/Adults&gt;</span>
+            <span class="nt">&lt;Children&gt;</span>0<span class="nt">&lt;/Children&gt;</span>
+            <span class="nt">&lt;Title&gt;</span>Mr<span class="nt">&lt;/Title&gt;</span>
+            <span class="nt">&lt;Initial&gt;</span>T<span class="nt">&lt;/Initial&gt;</span>
+            <span class="nt">&lt;Surname&gt;</span>TEST<span class="nt">&lt;/Surname&gt;</span>
+            <span class="nt">&lt;Address</span> <span class="nt">&gt;</span>1 Test Street<span class="nt">&lt;/Address &gt;</span>
+            <span class="nt">&lt;Town&gt;</span>Testville<span class="nt">&lt;/Town&gt;</span>
+            <span class="nt">&lt;County&gt;</span>Testshire<span class="nt">&lt;/County&gt;</span>
+            <span class="nt">&lt;Postcode&gt;</span>TE1 STS<span class="nt">&lt;/Postcode&gt;</span>
+            <span class="nt">&lt;DayPhone&gt;</span>01234567890<span class="nt">&lt;/DayPhone&gt;</span>
+            <span class="nt">&lt;Email&gt;</span>test@test.com<span class="nt">&lt;/Email&gt;</span>
+            <span class="nt">&lt;DataProtection&gt;</span>N<span class="nt">&lt;/DataProtection&gt;</span>
+            <span class="nt">&lt;PriceCheckFlag&gt;</span>Y<span class="nt">&lt;/PriceCheckFlag&gt;</span>
+            <span class="nt">&lt;PriceCheckPrice&gt;</span>55.00<span class="nt">&lt;/PriceCheckPrice&gt;</span>
+            <span class="nt">&lt;v&gt;</span>1<span class="nt">&lt;/v&gt;</span>
+        <span class="nt">&lt;/Request&gt;</span>
+    <span class="nt">&lt;/API_Header&gt;</span>
+<span class="nt">&lt;/API_Reply&gt;</span>
+</code></pre>
+</div>
+
+<h2 id="european-hotel-booking-request">European Hotel Booking Request</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/hotel/MUCLAN
+</code></pre>
+</div>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>    <span class="nt">&lt;Request&gt;</span>
+      <span class="nt">&lt;ABTANumber&gt;</span>YourABTANumber<span class="nt">&lt;/ABTANumber&gt;</span>
+      <span class="nt">&lt;Password&gt;</span>YourPassword<span class="nt">&lt;/Password&gt;</span>
+      <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>        
+      <span class="nt">&lt;token&gt;</span>YourToken<span class="nt">&lt;/token&gt;</span>
+      <span class="nt">&lt;ArrivalDate&gt;</span>2017-12-01<span class="nt">&lt;/ArrivalDate&gt;</span>        
+      <span class="nt">&lt;Nights&gt;</span>1<span class="nt">&lt;/Nights&gt;</span>
+      <span class="nt">&lt;RoomCode&gt;</span>DZ<span class="nt">&lt;/RoomCode&gt;</span>
+      <span class="nt">&lt;ParkingDays&gt;</span>0<span class="nt">&lt;/ParkingDays&gt;</span>
+      <span class="nt">&lt;Adults&gt;</span>2<span class="nt">&lt;/Adults&gt;</span>
+      <span class="nt">&lt;Children&gt;</span>0<span class="nt">&lt;/Children&gt;</span>
+      <span class="nt">&lt;Title&gt;</span>Mr<span class="nt">&lt;/Title&gt;</span>
+      <span class="nt">&lt;Initial&gt;</span>T<span class="nt">&lt;/Initial&gt;</span>
+      <span class="nt">&lt;Surname&gt;</span>TEST<span class="nt">&lt;/Surname&gt;</span>
+      <span class="nt">&lt;Address</span> <span class="nt">&gt;</span>1 Test Street<span class="nt">&lt;/Address &gt;</span>
+      <span class="nt">&lt;Town&gt;</span>Testville<span class="nt">&lt;/Town&gt;</span>
+      <span class="nt">&lt;County&gt;</span>Testshire<span class="nt">&lt;/County&gt;</span>
+      <span class="nt">&lt;Postcode&gt;</span>TE1 STS<span class="nt">&lt;/Postcode&gt;</span>
+      <span class="nt">&lt;DayPhone&gt;</span>01234567890<span class="nt">&lt;/DayPhone&gt;</span>
+      <span class="nt">&lt;Email&gt;</span>test@test.com<span class="nt">&lt;/Email&gt;</span>
+      <span class="nt">&lt;DataProtection&gt;</span>N<span class="nt">&lt;/DataProtection&gt;</span>
+      <span class="nt">&lt;PriceCheckFlag&gt;</span>Y<span class="nt">&lt;/PriceCheckFlag&gt;</span>
+      <span class="nt">&lt;PriceCheckPrice&gt;</span>120.00<span class="nt">&lt;/PriceCheckPrice&gt;</span>
+      <span class="nt">&lt;v&gt;</span>1<span class="nt">&lt;/v&gt;</span>
+    <span class="nt">&lt;/Request&gt;</span>
+</code></pre>
+</div>
+
+<h2 id="european-hotel-booking-response">European Hotel Booking Response</h2>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;API_Reply</span> <span class="na">Product=</span><span class="s">"HotelWithParking"</span> <span class="na">RequestCode=</span><span class="s">"4"</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Booking&gt;</span>
+        <span class="nt">&lt;BookingRef&gt;</span>YourBookingRef<span class="nt">&lt;/BookingRef&gt;</span>
+        <span class="nt">&lt;MoreInfoURL&gt;</span>/v1/booking/YourBookingRef.de<span class="nt">&lt;/MoreInfoURL&gt;</span>
+    <span class="nt">&lt;/Booking&gt;</span>
+    <span class="nt">&lt;Hotel/&gt;</span>
+    <span class="nt">&lt;Itinerary&gt;</span>
+        <span class="nt">&lt;ArrivalDate&gt;</span>2017-12-01<span class="nt">&lt;/ArrivalDate&gt;</span>
+        <span class="nt">&lt;Nights&gt;</span>1<span class="nt">&lt;/Nights&gt;</span>
+        <span class="nt">&lt;BoardBasis&gt;</span>F<span class="nt">&lt;/BoardBasis&gt;</span>
+        <span class="nt">&lt;NonSmoking&gt;</span>N<span class="nt">&lt;/NonSmoking&gt;</span>
+        <span class="nt">&lt;ParkingDays&gt;</span>0<span class="nt">&lt;/ParkingDays&gt;</span>
+        <span class="nt">&lt;ParkingSpaces&gt;</span>0<span class="nt">&lt;/ParkingSpaces&gt;</span>
+        <span class="nt">&lt;Code&gt;</span>MUCLAN<span class="nt">&lt;/Code&gt;</span>
+        <span class="nt">&lt;Name&gt;</span>Schweigers Landgasthof<span class="nt">&lt;/Name&gt;</span>
+    <span class="nt">&lt;/Itinerary&gt;</span>
+    <span class="nt">&lt;Room&gt;</span>
+        <span class="nt">&lt;Adults&gt;</span>2<span class="nt">&lt;/Adults&gt;</span>
+        <span class="nt">&lt;Children&gt;</span>0<span class="nt">&lt;/Children&gt;</span>
+        <span class="nt">&lt;Infants&gt;</span>0<span class="nt">&lt;/Infants&gt;</span>
+        <span class="nt">&lt;Code&gt;</span>DZ<span class="nt">&lt;/Code&gt;</span>
+    <span class="nt">&lt;/Room&gt;</span>
+    <span class="nt">&lt;ClientDetails&gt;</span>
+        <span class="nt">&lt;Title&gt;</span>Herr<span class="nt">&lt;/Title&gt;</span>
+        <span class="nt">&lt;Initial&gt;</span>T<span class="nt">&lt;/Initial&gt;</span>
+        <span class="nt">&lt;Surname&gt;</span>TEST<span class="nt">&lt;/Surname&gt;</span>
+        <span class="nt">&lt;Email&gt;</span>TEST@TEST.COM<span class="nt">&lt;/Email&gt;</span>
+        <span class="nt">&lt;Town&gt;</span>TESTVILLE<span class="nt">&lt;/Town&gt;</span>
+        <span class="nt">&lt;Postcode&gt;</span>TE1 STS<span class="nt">&lt;/Postcode&gt;</span>
+        <span class="nt">&lt;DayPhone&gt;</span>01234567890<span class="nt">&lt;/DayPhone&gt;</span>
+        <span class="nt">&lt;Remarks/&gt;</span>
+        <span class="nt">&lt;Address0&gt;</span>1 Test Street<span class="nt">&lt;/Address0&gt;</span>
+        <span class="nt">&lt;Address1&gt;</span>TBC<span class="nt">&lt;/Address1&gt;</span>
+        <span class="nt">&lt;DataProtection&gt;</span>N<span class="nt">&lt;/DataProtection&gt;</span>
+        <span class="nt">&lt;County&gt;</span>TESTSHIRE<span class="nt">&lt;/County&gt;</span>
+    <span class="nt">&lt;/ClientDetails&gt;</span>
+    <span class="nt">&lt;Pricing&gt;</span>
+        <span class="nt">&lt;Price&gt;</span>120.00<span class="nt">&lt;/Price&gt;</span>
+    <span class="nt">&lt;/Pricing&gt;</span>
+    <span class="nt">&lt;API_Header&gt;</span>
+        <span class="nt">&lt;Request&gt;</span>
+            <span class="nt">&lt;ABTANumber&gt;</span>YourABTANumber<span class="nt">&lt;/ABTANumber&gt;</span>
+            <span class="nt">&lt;Password&gt;</span>YourPassword<span class="nt">&lt;/Password&gt;</span>
+            <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>
+            <span class="nt">&lt;token&gt;</span>YourToken<span class="nt">&lt;/token&gt;</span>
+            <span class="nt">&lt;ArrivalDate&gt;</span>2017-12-01<span class="nt">&lt;/ArrivalDate&gt;</span>
+            <span class="nt">&lt;Nights&gt;</span>1<span class="nt">&lt;/Nights&gt;</span>
+            <span class="nt">&lt;RoomCode&gt;</span>DBL<span class="nt">&lt;/RoomCode&gt;</span>
+            <span class="nt">&lt;ParkingDays&gt;</span>0<span class="nt">&lt;/ParkingDays&gt;</span>
+            <span class="nt">&lt;Adults&gt;</span>2<span class="nt">&lt;/Adults&gt;</span>
+            <span class="nt">&lt;Children&gt;</span>0<span class="nt">&lt;/Children&gt;</span>
+            <span class="nt">&lt;Title&gt;</span>Mr<span class="nt">&lt;/Title&gt;</span>
+            <span class="nt">&lt;Initial&gt;</span>T<span class="nt">&lt;/Initial&gt;</span>
+            <span class="nt">&lt;Surname&gt;</span>TEST<span class="nt">&lt;/Surname&gt;</span>
+            <span class="nt">&lt;Address0&gt;</span>1 Test Street<span class="nt">&lt;/Address0&gt;</span>
+            <span class="nt">&lt;Town&gt;</span>Testville<span class="nt">&lt;/Town&gt;</span>
+            <span class="nt">&lt;County&gt;</span>Testshire<span class="nt">&lt;/County&gt;</span>
+            <span class="nt">&lt;Postcode&gt;</span>TE1 STS<span class="nt">&lt;/Postcode&gt;</span>
+            <span class="nt">&lt;DayPhone&gt;</span>01234567890<span class="nt">&lt;/DayPhone&gt;</span>
+            <span class="nt">&lt;Email&gt;</span>test@test.com<span class="nt">&lt;/Email&gt;</span>
+            <span class="nt">&lt;DataProtection&gt;</span>N<span class="nt">&lt;/DataProtection&gt;</span>
+            <span class="nt">&lt;PriceCheckFlag&gt;</span>Y<span class="nt">&lt;/PriceCheckFlag&gt;</span>
+            <span class="nt">&lt;PriceCheckPrice&gt;</span>120.00<span class="nt">&lt;/PriceCheckPrice&gt;</span>
+            <span class="nt">&lt;System&gt;</span>ABG<span class="nt">&lt;/System&gt;</span>
+            <span class="nt">&lt;lang&gt;</span>de<span class="nt">&lt;/lang&gt;</span>
+            <span class="nt">&lt;v&gt;</span>1<span class="nt">&lt;/v&gt;</span>
+        <span class="nt">&lt;/Request&gt;</span>
+    <span class="nt">&lt;/API_Header&gt;</span>
+<span class="nt">&lt;/API_Reply&gt;</span>
+</code></pre>
+</div>
 
 </div>
 

@@ -29,175 +29,272 @@
         <div class="panel panel-primary">
           <div class="panel-heading"><div class="h1">Holiday Extras API</div></div>
             <div class="panel-body">
-  <h1 id="insurance-quote">Insurance quote</h1>
+  <h1 id="insurance-schemes-availability">Insurance Schemes Availability</h1>
 
-<h2 id="insurancepolicyfoo">/insurancepolicy/foo</h2>
+<p><a href="/hxapi/">API Docs</a> &gt; product:<a href="/hxapi/insurance/availability">Insurance</a></p>
 
-<p>Where <strong>foo</strong> is the <a href="index"> country code</a>.</p>
+<h2 id="insurance-schemes-availability-request">Insurance Schemes Availability Request</h2>
+
+<p>This endpoint will respond with a quotation for a policy to be issued under an insurance scheme.</p>
 
 <h3 id="method">Method</h3>
 
 <p>GET</p>
 
-<h3 id="parameters">Parameters</h3>
+<h3 id="endpoint">Endpoint</h3>
+
+<p>To request the list of insurance schemes available, the endpoint to use is (where “foo” is the region code):</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/insurancepolicy/foo
+</code></pre>
+</div>
+
+<p>For example, to request a quote for a policy covering Europe (low risk), the endpoint is:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/insurancepolicy/EUROPELOW
+</code></pre>
+</div>
+
+<p>To find the list of available regions, please refer to the section on <a href="countries">insurance countries</a>.</p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<p>NB: All parameter names are case sensitive.</p>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
+      <th>Data Type</th>
       <th>Format</th>
-      <th>Required</th>
+      <th>Mandatory?</th>
+      <th>Additional Information</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>token</td>
-      <td>String</td>
-      <td>Y</td>
-    </tr>
-    <tr>
-      <td>key</td>
-      <td>String</td>
-      <td>Y</td>
-    </tr>
-    <tr>
-      <td>birthDate</td>
-      <td>Array</td>
-      <td>Y*</td>
-    </tr>
-    <tr>
-      <td>StartDate</td>
-      <td>Date</td>
-      <td>Y</td>
-    </tr>
-    <tr>
-      <td>EndDate</td>
-      <td>Date</td>
-      <td>Y</td>
-    </tr>
-    <tr>
       <td>ABTANumber</td>
       <td>String</td>
-      <td>N</td>
+      <td>[A-Z0-9] 5 chars</td>
+      <td>Y</td>
+      <td>This is also known as an ‘agent code’. <br />This will be confirmed to you by your Account Manager during set up.</td>
     </tr>
     <tr>
       <td>Password</td>
       <td>String</td>
-      <td>N</td>
+      <td>[A-Z0-9] 5 chars</td>
+      <td>Y</td>
+      <td>Password required for retail agent requests - intermediaries do not require a password.<br />This will be confirmed to you by your Account Manager during set up.</td>
+    </tr>
+    <tr>
+      <td>key</td>
+      <td>String</td>
+      <td>[A-Z]</td>
+      <td>Y</td>
+      <td>This will be assigned to you by your Account Manager during set up.</td>
+    </tr>
+    <tr>
+      <td>token</td>
+      <td>String</td>
+      <td>[0-9] 9 chars</td>
+      <td>Y</td>
+      <td>Please see <a href="/hxapi/usertoken">user token endpoint</a> for details of how to generate a token.</td>
+    </tr>
+    <tr>
+      <td>StartDate</td>
+      <td>Date</td>
+      <td>YYYY-MM-DD</td>
+      <td>Y</td>
+      <td>Date customer wants policy to start (start date of trip if single trip, or up to 30 days from search date if annual trip)</td>
+    </tr>
+    <tr>
+      <td>EndDate</td>
+      <td>Date</td>
+      <td>YYYY-MM-DD</td>
+      <td>N*</td>
+      <td>Date customer wants policy to end (return date of trip if single trip). NB: If no end date is provided, system will assume you are requesting an annual policy.</td>
+    </tr>
+    <tr>
+      <td>birthDate[]</td>
+      <td>Date</td>
+      <td>YYYY-MM-DD</td>
+      <td>Y</td>
+      <td>Date of birth for customers. All customers requiring inclusion on this policy quote must provide their date of birth. You can add multiple people by ennumerating each date of birth in the format birthDate[0], birthDate[1], birthDate[2], and so on.</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="birthdate">birthDate[]</h3>
+<h2 id="insurance-schemes-availability-response">Insurance Schemes Availability Response</h2>
 
-<p>For convenience, ‘age[]’ is accepted as an alternative - it will generate dates of birth by assuming this day &amp; month and change the year.</p>
+<p>The insurance schemes availability response will return all the products that are available on the requested dates for that region. A summary of the request received can be found in the header field at the end of the response.</p>
 
-<h3 id="request-example-1">Request (example 1)</h3>
+<p>For a detailed explanation of the fields returned, please see below:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/insurancepolicy/EUROPE?ABTANumber=FOO&amp;EndDate=2010-10-20&amp;StartDate=2010-10-10&amp;key=foo&amp;birthDate[]=1985-05-05
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Additional Information</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Itinerary/Destination</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Itinerary/DestNum</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Itinerary/StartDate</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Itinerary/EndDate</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Itinerary/AnnualStart</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/SchemeCode</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/SchemeDes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/PolicyEnd</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/PolicyStart</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/Annual</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/SchemePrice</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/SchemeName</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/CancellationCover</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/CancellationXS</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/MedicalCover</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/MedicalXS</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/BaggageCover</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/BaggageXS</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/PolicyWording</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/KeyFacts</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/Wintersports</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/Insolvency</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Quote/destinationID</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>API_Header</td>
+      <td>The API returns every parameter and value you sent in the previous request.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="worked-examples">Worked Examples</h2>
+
+<p>Below are worked examples of both the request and response for insurance quote.</p>
+
+<h3 id="insurance-schemes-availability-request-1">Insurance Schemes Availability Request</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/insurancepolicy/EUROPELOW?ABTANumber=YourABTANumber&amp;Password=YourPassword&amp;key=YourKey&amp;token=YourToken&amp;StartDate=2017-12-01&amp;birthDate[0]=1982-06-26&amp;birthDate[1]=1986-11-19&amp;EndDate=2017-12-08
 </code></pre>
 </div>
 
-<h3 id="reply-example-1">Reply (example 1)</h3>
+<h3 id="insurance-schemes-availability-response-1">Insurance Schemes Availability Response</h3>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;API_Reply</span> <span class="na">Product=</span><span class="s">"Quote"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;Itinerary&gt;</span>
-<span class="nt">&lt;Destination&gt;</span>Europe<span class="nt">&lt;/Destination&gt;</span>
-<span class="nt">&lt;DestNum&gt;</span>2<span class="nt">&lt;/DestNum&gt;</span>
-<span class="nt">&lt;StartDate&gt;</span>2010-10-10<span class="nt">&lt;/StartDate&gt;</span>
-<span class="nt">&lt;EndDate&gt;</span>2010-10-20<span class="nt">&lt;/EndDate&gt;</span>
-<span class="nt">&lt;AnnualStart&gt;</span>21SEP10<span class="nt">&lt;/AnnualStart&gt;</span>
-<span class="nt">&lt;/Itinerary&gt;</span>
-<span class="nt">&lt;Quote&gt;</span>
-<span class="nt">&lt;SchemeCode&gt;</span>9<span class="nt">&lt;/SchemeCode&gt;</span>
-<span class="nt">&lt;SchemeDes/&gt;</span>
-<span class="nt">&lt;PolicyEnd&gt;</span>2010-10-10<span class="nt">&lt;/PolicyEnd&gt;</span>
-<span class="nt">&lt;PolicyStart&gt;</span>2010-10-20<span class="nt">&lt;/PolicyStart&gt;</span>
-<span class="nt">&lt;Annual&gt;</span>N<span class="nt">&lt;/Annual&gt;</span>
-<span class="nt">&lt;SchemePrice&gt;</span>12.00<span class="nt">&lt;/SchemePrice&gt;</span>
-<span class="nt">&lt;SchemeName&gt;</span>Super Saver<span class="nt">&lt;/SchemeName&gt;</span>
-<span class="nt">&lt;CancellationCover&gt;</span>500<span class="nt">&lt;/CancellationCover&gt;</span>
-<span class="nt">&lt;MedicalCover&gt;</span>1000000<span class="nt">&lt;/MedicalCover&gt;</span>
-<span class="nt">&lt;BaggageCover&gt;</span>1000<span class="nt">&lt;/BaggageCover&gt;</span>
-<span class="nt">&lt;PolicyWording&gt;</span>
-http://secure.holidayextras.co.uk/images/groups/insurancemagenta/policy_wording/Direct - PW.pdf
-<span class="nt">&lt;/PolicyWording&gt;</span>
-<span class="nt">&lt;KeyFacts&gt;</span>
-http://secure.holidayextras.co.uk/images/groups/insurancemagenta/policy_wording/Direct - KF.pdf
-<span class="nt">&lt;/KeyFacts&gt;</span>
-<span class="nt">&lt;Wintersports&gt;</span>Y<span class="nt">&lt;/Wintersports&gt;</span>
-<span class="nt">&lt;/Quote&gt;</span>
-<span class="nt">&lt;Quote&gt;</span>
-<span class="nt">&lt;SchemeCode&gt;</span>10<span class="nt">&lt;/SchemeCode&gt;</span>
-<span class="nt">&lt;SchemeDes/&gt;</span>
-<span class="nt">&lt;PolicyEnd&gt;</span>2010-10-10<span class="nt">&lt;/PolicyEnd&gt;</span>
-<span class="nt">&lt;PolicyStart&gt;</span>2010-10-20<span class="nt">&lt;/PolicyStart&gt;</span>
-<span class="nt">&lt;Annual&gt;</span>N<span class="nt">&lt;/Annual&gt;</span>
-<span class="nt">&lt;SchemePrice&gt;</span>15.00<span class="nt">&lt;/SchemePrice&gt;</span>
-<span class="nt">&lt;SchemeName&gt;</span>Saver<span class="nt">&lt;/SchemeName&gt;</span>
-<span class="nt">&lt;CancellationCover&gt;</span>1000<span class="nt">&lt;/CancellationCover&gt;</span>
-<span class="nt">&lt;MedicalCover&gt;</span>2000000<span class="nt">&lt;/MedicalCover&gt;</span>
-<span class="nt">&lt;BaggageCover&gt;</span>1000<span class="nt">&lt;/BaggageCover&gt;</span>
-<span class="nt">&lt;PolicyWording&gt;</span>
-http://secure.holidayextras.co.uk/images/groups/insurancemagenta/policy_wording/Direct - PW.pdf
-<span class="nt">&lt;/PolicyWording&gt;</span>
-<span class="nt">&lt;KeyFacts&gt;</span>
-http://secure.holidayextras.co.uk/images/groups/insurancemagenta/policy_wording/Direct - KF.pdf
-<span class="nt">&lt;/KeyFacts&gt;</span>
-<span class="nt">&lt;Wintersports&gt;</span>Y<span class="nt">&lt;/Wintersports&gt;</span>
-<span class="nt">&lt;/Quote&gt;</span>
-<span class="nt">&lt;Quote&gt;</span>
-<span class="nt">&lt;SchemeCode&gt;</span>11<span class="nt">&lt;/SchemeCode&gt;</span>
-<span class="nt">&lt;SchemeDes/&gt;</span>
-<span class="nt">&lt;PolicyEnd&gt;</span>2010-10-10<span class="nt">&lt;/PolicyEnd&gt;</span>
-<span class="nt">&lt;PolicyStart&gt;</span>2010-10-20<span class="nt">&lt;/PolicyStart&gt;</span>
-<span class="nt">&lt;Annual&gt;</span>N<span class="nt">&lt;/Annual&gt;</span>
-<span class="nt">&lt;SchemePrice&gt;</span>17.00<span class="nt">&lt;/SchemePrice&gt;</span>
-<span class="nt">&lt;SchemeName&gt;</span>Classic<span class="nt">&lt;/SchemeName&gt;</span>
-<span class="nt">&lt;CancellationCover&gt;</span>5000<span class="nt">&lt;/CancellationCover&gt;</span>
-<span class="nt">&lt;MedicalCover&gt;</span>5000000<span class="nt">&lt;/MedicalCover&gt;</span>
-<span class="nt">&lt;BaggageCover&gt;</span>1500<span class="nt">&lt;/BaggageCover&gt;</span>
-<span class="nt">&lt;PolicyWording&gt;</span>
-http://secure.holidayextras.co.uk/images/groups/insurancemagenta/policy_wording/Direct - PW.pdf
-<span class="nt">&lt;/PolicyWording&gt;</span>
-<span class="nt">&lt;KeyFacts&gt;</span>
-http://secure.holidayextras.co.uk/images/groups/insurancemagenta/policy_wording/Direct - KF.pdf
-<span class="nt">&lt;/KeyFacts&gt;</span>
-<span class="nt">&lt;Wintersports&gt;</span>Y<span class="nt">&lt;/Wintersports&gt;</span>
-<span class="nt">&lt;/Quote&gt;</span>
-<span class="nt">&lt;Quote&gt;</span>
-<span class="nt">&lt;SchemeCode&gt;</span>12<span class="nt">&lt;/SchemeCode&gt;</span>
-<span class="nt">&lt;SchemeDes/&gt;</span>
-<span class="nt">&lt;PolicyEnd&gt;</span>2010-09-21<span class="nt">&lt;/PolicyEnd&gt;</span>
-<span class="nt">&lt;PolicyStart&gt;</span>2011-09-20<span class="nt">&lt;/PolicyStart&gt;</span>
-<span class="nt">&lt;Annual&gt;</span>Y<span class="nt">&lt;/Annual&gt;</span>
-<span class="nt">&lt;SchemePrice&gt;</span>40.00<span class="nt">&lt;/SchemePrice&gt;</span>
-<span class="nt">&lt;SchemeName&gt;</span>Multi<span class="nt">&lt;/SchemeName&gt;</span>
-<span class="nt">&lt;CancellationCover&gt;</span>3000<span class="nt">&lt;/CancellationCover&gt;</span>
-<span class="nt">&lt;MedicalCover&gt;</span>5000000<span class="nt">&lt;/MedicalCover&gt;</span>
-<span class="nt">&lt;BaggageCover&gt;</span>1500<span class="nt">&lt;/BaggageCover&gt;</span>
-<span class="nt">&lt;PolicyWording&gt;</span>
-http://secure.holidayextras.co.uk/images/groups/insurancemagenta/policy_wording/Direct - PW.pdf
-<span class="nt">&lt;/PolicyWording&gt;</span>
-<span class="nt">&lt;KeyFacts&gt;</span>
-http://secure.holidayextras.co.uk/images/groups/insurancemagenta/policy_wording/Direct - KF.pdf
-<span class="nt">&lt;/KeyFacts&gt;</span>
-<span class="nt">&lt;Wintersports&gt;</span>Y<span class="nt">&lt;/Wintersports&gt;</span>
-<span class="nt">&lt;/Quote&gt;</span>
-<span class="nt">&lt;API_Header&gt;</span>
-<span class="nt">&lt;Request&gt;</span>
-<span class="nt">&lt;ABTANumber&gt;</span>FOO<span class="nt">&lt;/ABTANumber&gt;</span>
-<span class="nt">&lt;EndDate&gt;</span>2010-10-20<span class="nt">&lt;/EndDate&gt;</span>
-<span class="nt">&lt;StartDate&gt;</span>2010-10-10<span class="nt">&lt;/StartDate&gt;</span>
-<span class="nt">&lt;key&gt;</span>foo<span class="nt">&lt;/key&gt;</span>
-<span class="nt">&lt;birthDate&gt;</span>1985-05-05<span class="nt">&lt;/birthDate&gt;</span>
-<span class="nt">&lt;v&gt;</span>1<span class="nt">&lt;/v&gt;</span>
-<span class="nt">&lt;/Request&gt;</span>
-<span class="nt">&lt;/API_Header&gt;</span>
+<p>NB: This is a shortened example compiled from a full insurance quote response.</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" ?&gt;</span>
+<span class="nt">&lt;API_Reply</span> <span class="na">Product=</span><span class="s">"Quote"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Itinerary&gt;</span>
+        <span class="nt">&lt;Destination&gt;</span>Europelow<span class="nt">&lt;/Destination&gt;</span>
+        <span class="nt">&lt;DestNum&gt;</span>6<span class="nt">&lt;/DestNum&gt;</span>
+        <span class="nt">&lt;StartDate&gt;</span>2017-12-01<span class="nt">&lt;/StartDate&gt;</span>
+        <span class="nt">&lt;EndDate&gt;</span>2017-12-08<span class="nt">&lt;/EndDate&gt;</span>
+        <span class="nt">&lt;AnnualStart&gt;</span>30AUG17<span class="nt">&lt;/AnnualStart&gt;</span>
+    <span class="nt">&lt;/Itinerary&gt;</span>
+    <span class="nt">&lt;Quote&gt;</span>
+        <span class="nt">&lt;SchemeCode&gt;</span>8673<span class="nt">&lt;/SchemeCode&gt;</span>
+        <span class="nt">&lt;SchemeDes&gt;&lt;/SchemeDes&gt;</span>
+        <span class="nt">&lt;PolicyEnd&gt;</span>2017-12-08<span class="nt">&lt;/PolicyEnd&gt;</span>
+        <span class="nt">&lt;PolicyStart&gt;</span>2017-12-01<span class="nt">&lt;/PolicyStart&gt;</span>
+        <span class="nt">&lt;Annual&gt;</span>N<span class="nt">&lt;/Annual&gt;</span>
+        <span class="nt">&lt;SchemePrice&gt;</span>18.26<span class="nt">&lt;/SchemePrice&gt;</span>
+        <span class="nt">&lt;SchemeName&gt;</span>OTA<span class="nt">&lt;/SchemeName&gt;</span>
+        <span class="nt">&lt;CancellationCover&gt;</span>500<span class="nt">&lt;/CancellationCover&gt;</span>
+        <span class="nt">&lt;CancellationXS&gt;</span>75<span class="nt">&lt;/CancellationXS&gt;</span>
+        <span class="nt">&lt;MedicalCover&gt;</span>5000000<span class="nt">&lt;/MedicalCover&gt;</span>
+        <span class="nt">&lt;MedicalXS&gt;</span>100<span class="nt">&lt;/MedicalXS&gt;</span>
+        <span class="nt">&lt;BaggageCover&gt;&lt;/BaggageCover&gt;</span>
+        <span class="nt">&lt;BaggageXS&gt;&lt;/BaggageXS&gt;</span>
+        <span class="nt">&lt;PolicyWording&gt;</span>http://secure.holidayextras.co.uk/images/groups/insurancemagenta/policy_wording/HXMainAgent0317(HX001).pdf<span class="nt">&lt;/PolicyWording&gt;</span>
+        <span class="nt">&lt;KeyFacts&gt;</span>http://secure.holidayextras.co.uk/images/groups/insurancemagenta/policy_wording/<span class="nt">&lt;/KeyFacts&gt;</span>
+        <span class="nt">&lt;Wintersports&gt;</span>Y<span class="nt">&lt;/Wintersports&gt;</span>
+        <span class="nt">&lt;Insolvency&gt;</span>N<span class="nt">&lt;/Insolvency&gt;</span>
+        <span class="nt">&lt;destinationID&gt;</span>13<span class="nt">&lt;/destinationID&gt;</span>
+    <span class="nt">&lt;/Quote&gt;</span>
+    <span class="nt">&lt;API_Header&gt;</span>
+        <span class="nt">&lt;Request&gt;</span>
+            <span class="nt">&lt;ABTANumber&gt;</span>ITEST<span class="nt">&lt;/ABTANumber&gt;</span>
+            <span class="nt">&lt;Password&gt;</span>INSXL<span class="nt">&lt;/Password&gt;</span>
+            <span class="nt">&lt;StartDate&gt;</span>2017-12-01<span class="nt">&lt;/StartDate&gt;</span>
+            <span class="nt">&lt;key&gt;</span>mytestkey<span class="nt">&lt;/key&gt;</span>
+            <span class="nt">&lt;birthDate&gt;</span>1982-06-26<span class="nt">&lt;/birthDate&gt;</span>
+            <span class="nt">&lt;birthDate&gt;</span>1986-11-19<span class="nt">&lt;/birthDate&gt;</span>
+            <span class="nt">&lt;EndDate&gt;</span>2017-12-08<span class="nt">&lt;/EndDate&gt;</span>
+            <span class="nt">&lt;v&gt;</span>1<span class="nt">&lt;/v&gt;</span>
+        <span class="nt">&lt;/Request&gt;</span>
+    <span class="nt">&lt;/API_Header&gt;</span>
 <span class="nt">&lt;/API_Reply&gt;</span>
 </code></pre>
 </div>
-
 
 </div>
 

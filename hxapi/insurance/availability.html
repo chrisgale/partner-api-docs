@@ -121,6 +121,27 @@
       <td>Y</td>
       <td>Date of birth for customers. All customers requiring inclusion on this policy quote must provide their date of birth. You can add multiple people by ennumerating each date of birth in the format birthDate[0], birthDate[1], birthDate[2], and so on.</td>
     </tr>
+    <tr>
+      <td>title[]</td>
+      <td>String</td>
+      <td>[A-Z] 4 chars</td>
+      <td>Y</td>
+      <td>Title for customers. All customers requiring inclusion on this policy quote must provide their title. You can add multiple people by ennumerating each title in the format title[0], title[1], title[2], and so on.</td>
+    </tr>
+    <tr>
+      <td>firstName[]</td>
+      <td>String</td>
+      <td>[A-Z] 15 chars</td>
+      <td>Y</td>
+      <td>First name for customers. All customers requiring inclusion on this policy quote must provide their first name. You can add multiple people by ennumerating each first name in the format firstName[0], firstName[1], firstName[2], and so on.</td>
+    </tr>
+    <tr>
+      <td>lastName[]</td>
+      <td>String</td>
+      <td>[A-Z] 15 chars</td>
+      <td>Y</td>
+      <td>Last name for customers. All customers requiring inclusion on this policy quote must provide their last name. You can add multiple people by ennumerating each last name in the format lastName[0], lastName[1], lastName[2], and so on.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -243,7 +264,7 @@
 
 <h3 id="insurance-schemes-availability-request-1">Insurance Schemes Availability Request</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/insurancepolicy/EUROPELOW?ABTANumber=YourABTANumber&amp;Password=YourPassword&amp;key=YourKey&amp;token=YourToken&amp;StartDate=2017-12-01&amp;birthDate[0]=1982-06-26&amp;birthDate[1]=1986-11-19&amp;EndDate=2017-12-08
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/insurancepolicy/EUROPELOW?ABTANumber=YourABTANumber&amp;Password=YourPassword&amp;key=YourKey&amp;token=YourToken&amp;StartDate=2017-12-01&amp;EndDate=2017-12-08&amp;birthDate[0]=1982-06-26&amp;title[0]=Mr&amp;firstName[0]=TEST&amp;lastName[0]=TEST
 </code></pre>
 </div>
 
@@ -282,13 +303,16 @@
     <span class="nt">&lt;/Quote&gt;</span>
     <span class="nt">&lt;API_Header&gt;</span>
         <span class="nt">&lt;Request&gt;</span>
-            <span class="nt">&lt;ABTANumber&gt;</span>ITEST<span class="nt">&lt;/ABTANumber&gt;</span>
-            <span class="nt">&lt;Password&gt;</span>INSXL<span class="nt">&lt;/Password&gt;</span>
+            <span class="nt">&lt;ABTANumber&gt;</span>YourABTANumber<span class="nt">&lt;/ABTANumber&gt;</span>
+            <span class="nt">&lt;Password&gt;</span>YourPassword<span class="nt">&lt;/Password&gt;</span>
+            <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>
+            <span class="nt">&lt;token&gt;</span>YourToken<span class="nt">&lt;/token&gt;</span>
             <span class="nt">&lt;StartDate&gt;</span>2017-12-01<span class="nt">&lt;/StartDate&gt;</span>
-            <span class="nt">&lt;key&gt;</span>mytestkey<span class="nt">&lt;/key&gt;</span>
-            <span class="nt">&lt;birthDate&gt;</span>1982-06-26<span class="nt">&lt;/birthDate&gt;</span>
-            <span class="nt">&lt;birthDate&gt;</span>1986-11-19<span class="nt">&lt;/birthDate&gt;</span>
             <span class="nt">&lt;EndDate&gt;</span>2017-12-08<span class="nt">&lt;/EndDate&gt;</span>
+            <span class="nt">&lt;birthDate&gt;</span>1982-06-26<span class="nt">&lt;/birthDate&gt;</span>
+            <span class="nt">&lt;title&gt;</span>Mr<span class="nt">&lt;/title&gt;</span>
+            <span class="nt">&lt;firstName&gt;</span>TEST<span class="nt">&lt;/firstName&gt;</span>
+            <span class="nt">&lt;lastName&gt;</span>TEST<span class="nt">&lt;/lastName&gt;</span>
             <span class="nt">&lt;v&gt;</span>1<span class="nt">&lt;/v&gt;</span>
         <span class="nt">&lt;/Request&gt;</span>
     <span class="nt">&lt;/API_Header&gt;</span>

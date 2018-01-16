@@ -29,142 +29,302 @@
         <div class="panel panel-primary">
           <div class="panel-heading"><div class="h1">Holiday Extras API</div></div>
             <div class="panel-body">
-  <h1 id="lounge-availability-at-airport">Lounge availability at airport</h1>
+  <h1 id="availability-at-lounge">Availability At Lounge</h1>
 
-<h2 id="loungefoo">/lounge/foo</h2>
-
-<p>where foo is the airport code</p>
-
-<p>e.g. https://api.holidayextras.co.uk/v1/lounge/LHR</p>
+<h2 id="lounge-availability-request">Lounge Availability Request</h2>
 
 <h3 id="method">Method</h3>
 
 <p>GET</p>
 
-<h3 id="parameters">Parameters</h3>
+<h3 id="endpoint">Endpoint</h3>
+
+<p>The endpoint to use is (where “foo” is the airport location code):</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/lounge/foo
+</code></pre>
+</div>
+
+<p>For example, for lounge availability at Gatwick the endpoint is:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/lounge/LGW
+</code></pre>
+</div>
+
+<p>To find the airport locations available for lounges, please refer to the <a href="/hxapi/locations">locations endpoint.</a></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<p>NB: All parameter names are case sensitive.</p>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
-      <th>Type</th>
+      <th>Data Type</th>
       <th>Format</th>
-      <th>Required</th>
+      <th>Mandatory?</th>
+      <th>Additional Information</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>ABTANumber</td>
       <td>String</td>
-      <td>[A-Z0-9]{5}</td>
+      <td>[A-Z0-9] 5 chars</td>
       <td>Y</td>
+      <td>This is also known as an ‘agent code’. <br />This will be confirmed to you by your Account Manager during set up.</td>
     </tr>
     <tr>
       <td>Password</td>
       <td>String</td>
-      <td>[A-Z0-9]{5}</td>
-      <td>N*</td>
+      <td>[A-Z0-9] 5 chars</td>
+      <td>Y*</td>
+      <td>Password required for retail agent requests - intermediaries do not require a password.<br />This will be confirmed to you by your Account Manager during set up.</td>
     </tr>
     <tr>
       <td>Initials</td>
       <td>String</td>
-      <td>[A-Z]{3}</td>
+      <td>[A-Z] 3 chars</td>
       <td>N</td>
+      <td>The initials of the Operator / Agent.</td>
+    </tr>
+    <tr>
+      <td>key</td>
+      <td>String</td>
+      <td>[A-Z]</td>
+      <td>Y</td>
+      <td>This will be assigned to you by your Account Manager during set up.</td>
+    </tr>
+    <tr>
+      <td>token</td>
+      <td>String</td>
+      <td>[0-9] 9 chars</td>
+      <td>Y</td>
+      <td>Please see <a href="/hxapi/usertoken">user token endpoint</a> for details of how to generate a token.</td>
     </tr>
     <tr>
       <td>ArrivalDate</td>
       <td>Date</td>
       <td>YYYY-MM-DD</td>
       <td>Y</td>
+      <td>Date customer enters the lounge.</td>
     </tr>
     <tr>
       <td>ArrivalTime</td>
       <td>Time</td>
-      <td>HHII</td>
+      <td>HHMM</td>
       <td>Y</td>
+      <td>Time customer enters the lounge.</td>
     </tr>
     <tr>
       <td>Adults</td>
       <td>Integer</td>
-      <td> </td>
+      <td>[0-9] 1 char</td>
       <td>Y</td>
+      <td>Number of adults requiring entry to the lounge.</td>
     </tr>
     <tr>
       <td>Children</td>
       <td>Integer</td>
-      <td> </td>
+      <td>[0-9] 1 char</td>
       <td>N</td>
+      <td>Number of children requiring entry to the lounge.</td>
     </tr>
     <tr>
-      <td>key</td>
+      <td>System</td>
       <td>String</td>
-      <td> </td>
-      <td>Y</td>
+      <td>[A-Z] 3 chars</td>
+      <td>Y*</td>
+      <td>For European products, you need to pass in the value of <code class="highlighter-rouge">System=ABG</code> (the default is <code class="highlighter-rouge">System=ABC</code>, which is UK products only).</td>
     </tr>
     <tr>
-      <td>token</td>
+      <td>lang</td>
       <td>String</td>
-      <td>[0-9]{9}</td>
-      <td>Y</td>
+      <td>[A-Z] 2 chars</td>
+      <td>Y*</td>
+      <td>Required for requests for European products. (Values available are <code class="highlighter-rouge">en</code>, <code class="highlighter-rouge">de</code>, <code class="highlighter-rouge">it</code>, <code class="highlighter-rouge">es</code>, <code class="highlighter-rouge">pt</code> and <code class="highlighter-rouge">nl</code>.)</td>
     </tr>
   </tbody>
 </table>
 
-<p>*Password field only required for agents. If sending, requests should be made over https.
-II = Minutes</p>
+<h2 id="lounge-availability-response">Lounge Availability Response</h2>
 
-<h3 id="request">Request</h3>
+<p>The lounge availability response will return the specific product requested, so long as it has availability on the specific dates and times. A summary of the request received can be found in the header field at the end of the response.</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/lounge/LHR?ABTANumber=WEB1<span class="err">&amp;</span>ArrivalDate=2016-10-03<span class="err">&amp;</span>ArrivalTime=1200<span class="err">&amp;</span>Adults=2<span class="err">&amp;</span>Children=1<span class="err">&amp;</span>key=mytestkey<span class="err">&amp;</span>token=123456789
+<p>For a detailed explanation of the fields returned, please see below:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Additional Information</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Lounge/Price</td>
+      <td>The price of product <em>without</em> any surcharges/fees added.</td>
+    </tr>
+    <tr>
+      <td>Lounge/NonDiscPrice</td>
+      <td>The non discounted price. Some agent codes apply a discount so we return this field to enable a comparison.</td>
+    </tr>
+    <tr>
+      <td>Lounge/Name</td>
+      <td>The name of the lounge.</td>
+    </tr>
+    <tr>
+      <td>Lounge/Code</td>
+      <td>The product code for the lounge, which must be used in the booking request.</td>
+    </tr>
+    <tr>
+      <td>Lounge/BookingURL</td>
+      <td>The URL to POST the booking request to for this particular product.</td>
+    </tr>
+    <tr>
+      <td>Lounge/MoreInfoURL</td>
+      <td>The link to more information about this product, sourced from the Product Library.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="worked-examples">Worked Examples</h2>
+
+<p>Below are worked examples of both the request and response for availability at an airport.</p>
+
+<h3 id="uk-products-availability-request">UK Products Availability Request</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/lounge/LHR?ABTANumber=YourABTANumber&amp;Password=YourPassword&amp;Initials=YourInitials&amp;key=YourKey&amp;token=YourToken&amp;ArrivalDate=2018-12-01&amp;ArrivalTime=1200&amp;Adults=2&amp;Children=0
 </code></pre>
 </div>
 
-<h3 id="response">Response</h3>
+<h3 id="uk-products-availability-response">UK Products Availability Response</h3>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" ?&gt;</span>
-<span class="nt">&lt;API_Reply</span> <span class="na">Product=</span><span class="s">"Lounge"</span> <span class="na">RequestCode=</span><span class="s">"1"</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;Lounge&gt;</span>
-    <span class="nt">&lt;Price&gt;</span>57.50<span class="nt">&lt;/Price&gt;</span>
-    <span class="nt">&lt;NonDiscPrice&gt;</span>57.50<span class="nt">&lt;/NonDiscPrice&gt;</span>
-    <span class="nt">&lt;Name&gt;</span>Holideck (Terminal 4)<span class="nt">&lt;/Name&gt;</span>
-    <span class="nt">&lt;Code&gt;</span>LHRKL4<span class="nt">&lt;/Code&gt;</span>
-    <span class="nt">&lt;BookingURL&gt;</span>/v1/lounge/LHRKL4<span class="nt">&lt;/BookingURL&gt;</span>
-    <span class="nt">&lt;MoreInfoURL&gt;</span>/v1/product/LHRKL4<span class="nt">&lt;/MoreInfoURL&gt;</span>
-  <span class="nt">&lt;/Lounge&gt;</span>
-  <span class="nt">&lt;Lounge&gt;</span>
-    <span class="nt">&lt;Price&gt;</span>59.85<span class="nt">&lt;/Price&gt;</span>
-    <span class="nt">&lt;NonDiscPrice&gt;</span>59.85<span class="nt">&lt;/NonDiscPrice&gt;</span>
-    <span class="nt">&lt;Name&gt;</span>Servisair Lounge (Terminal 1)<span class="nt">&lt;/Name&gt;</span>
-    <span class="nt">&lt;Code&gt;</span>LHRSA1<span class="nt">&lt;/Code&gt;</span>
-    <span class="nt">&lt;BookingURL&gt;</span>/v1/lounge/LHRSA1<span class="nt">&lt;/BookingURL&gt;</span>
-    <span class="nt">&lt;MoreInfoURL&gt;</span>/v1/product/LHRSA1<span class="nt">&lt;/MoreInfoURL&gt;</span>
-  <span class="nt">&lt;/Lounge&gt;</span>
-  <span class="nt">&lt;Lounge&gt;</span>
-    <span class="nt">&lt;Price&gt;</span>59.85<span class="nt">&lt;/Price&gt;</span>
-    <span class="nt">&lt;NonDiscPrice&gt;</span>59.85<span class="nt">&lt;/NonDiscPrice&gt;</span>
-    <span class="nt">&lt;Name&gt;</span>Servisair Lounge (Terminal 3)<span class="nt">&lt;/Name&gt;</span>
-    <span class="nt">&lt;Code&gt;</span>LHRSA3<span class="nt">&lt;/Code&gt;</span>
-    <span class="nt">&lt;BookingURL&gt;</span>/v1/lounge/LHRSA3<span class="nt">&lt;/BookingURL&gt;</span>
-    <span class="nt">&lt;MoreInfoURL&gt;</span>/v1/product/LHRSA3<span class="nt">&lt;/MoreInfoURL&gt;</span>
-  <span class="nt">&lt;/Lounge&gt;</span>
-  <span class="nt">&lt;Pricing&gt;</span>
-    <span class="nt">&lt;CCardSurchargePercent&gt;</span>2.00<span class="nt">&lt;/CCardSurchargePercent&gt;</span>
-    <span class="nt">&lt;CCardSurchargeMin&gt;</span>1.50<span class="nt">&lt;/CCardSurchargeMin&gt;</span>
-    <span class="nt">&lt;CCardSurchargeMax&gt;</span>4.00<span class="nt">&lt;/CCardSurchargeMax&gt;</span>
-  <span class="nt">&lt;/Pricing&gt;</span>
-  <span class="nt">&lt;API_Header&gt;</span>
-    <span class="nt">&lt;Request&gt;</span>
-      <span class="nt">&lt;ArrivalDate&gt;</span>2009-10-03<span class="nt">&lt;/ArrivalDate&gt;</span>
-      <span class="nt">&lt;ArrivalTime&gt;</span>1200<span class="nt">&lt;/ArrivalTime&gt;</span>
-      <span class="nt">&lt;Adults&gt;</span>2<span class="nt">&lt;/Adults&gt;</span>
-      <span class="nt">&lt;Children&gt;</span>1<span class="nt">&lt;/Children&gt;</span>
-      <span class="nt">&lt;key&gt;</span>mytestkey<span class="nt">&lt;/key&gt;</span>
-      <span class="nt">&lt;token&gt;</span>123456789<span class="nt">&lt;/token&gt;</span>
-      <span class="nt">&lt;v&gt;</span>1<span class="nt">&lt;/v&gt;</span>
-    <span class="nt">&lt;/Request&gt;</span>
-  <span class="nt">&lt;/API_Header&gt;</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;API_Reply</span> <span class="na">Product=</span><span class="s">"Lounge"</span> <span class="na">RequestCode=</span><span class="s">"1"</span> <span class="na">Result=</span><span class="s">"OK"</span> <span class="na">cached=</span><span class="s">"1"</span> <span class="na">expires=</span><span class="s">"2018-01-11 12:24:54"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Lounge&gt;</span>
+        <span class="nt">&lt;Name&gt;</span>Plaza Premium T5 lounge - 3 hours<span class="nt">&lt;/Name&gt;</span>
+        <span class="nt">&lt;Code&gt;</span>LHRPA5<span class="nt">&lt;/Code&gt;</span>
+        <span class="nt">&lt;BookingURL&gt;</span>/v1/lounge/HPLHRPA5<span class="nt">&lt;/BookingURL&gt;</span>
+        <span class="nt">&lt;MoreInfoURL&gt;</span>/v1/product/LHRPA5<span class="nt">&lt;/MoreInfoURL&gt;</span>
+        <span class="nt">&lt;NonDiscPrice&gt;</span>80.00<span class="nt">&lt;/NonDiscPrice&gt;</span>
+        <span class="nt">&lt;Price&gt;</span>80.00<span class="nt">&lt;/Price&gt;</span>
+        <span class="nt">&lt;terminal&gt;</span>5<span class="nt">&lt;/terminal&gt;</span>
+        <span class="nt">&lt;Filter&gt;</span>
+            <span class="nt">&lt;landside&gt;</span>0<span class="nt">&lt;/landside&gt;</span>
+        <span class="nt">&lt;/Filter&gt;</span>
+        <span class="nt">&lt;option_count&gt;</span>14<span class="nt">&lt;/option_count&gt;</span>
+    <span class="nt">&lt;/Lounge&gt;</span>
+    <span class="nt">&lt;Lounge&gt;</span>
+        <span class="nt">&lt;Name&gt;</span>No1 Lounge, Terminal 3, Heathrow<span class="nt">&lt;/Name&gt;</span>
+        <span class="nt">&lt;Code&gt;</span>LHRNN3<span class="nt">&lt;/Code&gt;</span>
+        <span class="nt">&lt;BookingURL&gt;</span>/v1/lounge/HPLHRNN3<span class="nt">&lt;/BookingURL&gt;</span>
+        <span class="nt">&lt;MoreInfoURL&gt;</span>/v1/product/LHRNN3<span class="nt">&lt;/MoreInfoURL&gt;</span>
+        <span class="nt">&lt;NonDiscPrice&gt;</span>64.00<span class="nt">&lt;/NonDiscPrice&gt;</span>
+        <span class="nt">&lt;Price&gt;</span>64.00<span class="nt">&lt;/Price&gt;</span>
+        <span class="nt">&lt;terminal&gt;</span>3<span class="nt">&lt;/terminal&gt;</span>
+        <span class="nt">&lt;Filter&gt;</span>
+            <span class="nt">&lt;landside&gt;</span>0<span class="nt">&lt;/landside&gt;</span>
+        <span class="nt">&lt;/Filter&gt;</span>
+        <span class="nt">&lt;option_count&gt;</span>14<span class="nt">&lt;/option_count&gt;</span>
+    <span class="nt">&lt;/Lounge&gt;</span>
+    <span class="nt">&lt;Lounge&gt;</span>
+        <span class="nt">&lt;Name&gt;</span>SkyTeam Lounge T4<span class="nt">&lt;/Name&gt;</span>
+        <span class="nt">&lt;Code&gt;</span>LHRSTE<span class="nt">&lt;/Code&gt;</span>
+        <span class="nt">&lt;BookingURL&gt;</span>/v1/lounge/HPLHRSTE<span class="nt">&lt;/BookingURL&gt;</span>
+        <span class="nt">&lt;MoreInfoURL&gt;</span>/v1/product/LHRSTE<span class="nt">&lt;/MoreInfoURL&gt;</span>
+        <span class="nt">&lt;NonDiscPrice&gt;</span>60.00<span class="nt">&lt;/NonDiscPrice&gt;</span>
+        <span class="nt">&lt;Price&gt;</span>60.00<span class="nt">&lt;/Price&gt;</span>
+        <span class="nt">&lt;terminal&gt;</span>4<span class="nt">&lt;/terminal&gt;</span>
+        <span class="nt">&lt;option_count&gt;</span>14<span class="nt">&lt;/option_count&gt;</span>
+    <span class="nt">&lt;/Lounge&gt;</span>
+    <span class="nt">&lt;Pricing&gt;</span>
+        <span class="nt">&lt;CCardSurchargePercent&gt;</span>2.00<span class="nt">&lt;/CCardSurchargePercent&gt;</span>
+        <span class="nt">&lt;CCardSurchargeMin&gt;</span>0.00<span class="nt">&lt;/CCardSurchargeMin&gt;</span>
+        <span class="nt">&lt;CCardSurchargeMax&gt;</span>4.00<span class="nt">&lt;/CCardSurchargeMax&gt;</span>
+        <span class="nt">&lt;DCardSurchargePercent&gt;</span>0.00<span class="nt">&lt;/DCardSurchargePercent&gt;</span>
+        <span class="nt">&lt;DCardSurchargeMin&gt;</span>0.00<span class="nt">&lt;/DCardSurchargeMin&gt;</span>
+        <span class="nt">&lt;DCardSurchargeMax&gt;</span>0.00<span class="nt">&lt;/DCardSurchargeMax&gt;</span>
+        <span class="nt">&lt;CancellationWaiver&gt;</span>
+            <span class="nt">&lt;Waiver&gt;</span>1.99<span class="nt">&lt;/Waiver&gt;</span>
+        <span class="nt">&lt;/CancellationWaiver&gt;</span>
+        <span class="nt">&lt;CancellationWaiver&gt;</span>
+            <span class="nt">&lt;Waiver&gt;</span>1.99<span class="nt">&lt;/Waiver&gt;</span>
+        <span class="nt">&lt;/CancellationWaiver&gt;</span>
+        <span class="nt">&lt;Rates&gt;</span>
+            <span class="nt">&lt;GBP&gt;</span>1<span class="nt">&lt;/GBP&gt;</span>
+            <span class="nt">&lt;EUR&gt;</span>1.1045<span class="nt">&lt;/EUR&gt;</span>
+            <span class="nt">&lt;USD&gt;</span>1.319<span class="nt">&lt;/USD&gt;</span>
+        <span class="nt">&lt;/Rates&gt;</span>
+    <span class="nt">&lt;/Pricing&gt;</span>
+    <span class="nt">&lt;SepaID/&gt;</span>
+    <span class="nt">&lt;API_Header&gt;</span>
+        <span class="nt">&lt;Request&gt;</span>
+            <span class="nt">&lt;ABTANumber&gt;</span>YourABTANumber<span class="nt">&lt;/ABTANumber&gt;</span>
+            <span class="nt">&lt;Password&gt;</span>YourPassword<span class="nt">&lt;/Password&gt;</span>
+            <span class="nt">&lt;Initials&gt;</span>YourInitials<span class="nt">&lt;/Initials&gt;</span>
+            <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>
+            <span class="nt">&lt;token&gt;</span>YourToken<span class="nt">&lt;/token&gt;</span>
+            <span class="nt">&lt;ArrivalDate&gt;</span>2018-12-01<span class="nt">&lt;/ArrivalDate&gt;</span>
+            <span class="nt">&lt;ArrivalTime&gt;</span>1200<span class="nt">&lt;/ArrivalTime&gt;</span>
+            <span class="nt">&lt;Adults&gt;</span>2<span class="nt">&lt;/Adults&gt;</span>
+            <span class="nt">&lt;Children&gt;</span>0<span class="nt">&lt;/Children&gt;</span>
+            <span class="nt">&lt;v&gt;</span>1<span class="nt">&lt;/v&gt;</span>
+        <span class="nt">&lt;/Request&gt;</span>
+    <span class="nt">&lt;/API_Header&gt;</span>
 <span class="nt">&lt;/API_Reply&gt;</span>
+</code></pre>
+</div>
 
+<h3 id="european-products-availability-request">European Products Availability Request</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/lounge/HAM?ABTANumber=YourABTANumber&amp;Password=YourPassword&amp;Initials=YourInitials&amp;key=YourKey&amp;token=YourToken&amp;ArrivalDate=2018-12-01&amp;ArrivalTime=1200&amp;Adults=2&amp;Children=0&amp;System=ABG&amp;lang=de
+</code></pre>
+</div>
+
+<h3 id="european-products-availability-response">European Products Availability Response</h3>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;API_Reply</span> <span class="na">Product=</span><span class="s">"Lounge"</span> <span class="na">RequestCode=</span><span class="s">"1"</span> <span class="na">Result=</span><span class="s">"OK"</span> <span class="na">cached=</span><span class="s">"1"</span> <span class="na">expires=</span><span class="s">"2018-01-11 12:30:25"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Lounge&gt;</span>
+        <span class="nt">&lt;Name&gt;</span>Hamburg Airport Lounge<span class="nt">&lt;/Name&gt;</span>
+        <span class="nt">&lt;Code&gt;</span>HAMLHL<span class="nt">&lt;/Code&gt;</span>
+        <span class="nt">&lt;BookingURL&gt;</span>/v1/lounge/FRHAMLHL<span class="nt">&lt;/BookingURL&gt;</span>
+        <span class="nt">&lt;MoreInfoURL&gt;</span>/v1/product/HAMLHL<span class="nt">&lt;/MoreInfoURL&gt;</span>
+        <span class="nt">&lt;NonDiscPrice&gt;</span>74.00<span class="nt">&lt;/NonDiscPrice&gt;</span>
+        <span class="nt">&lt;Price&gt;</span>74.00<span class="nt">&lt;/Price&gt;</span>
+        <span class="nt">&lt;terminal&gt;</span>Z<span class="nt">&lt;/terminal&gt;</span>
+        <span class="nt">&lt;option_count&gt;</span>1<span class="nt">&lt;/option_count&gt;</span>
+    <span class="nt">&lt;/Lounge&gt;</span>
+    <span class="nt">&lt;Pricing&gt;</span>
+        <span class="nt">&lt;CCardSurchargePercent&gt;</span>0.00<span class="nt">&lt;/CCardSurchargePercent&gt;</span>
+        <span class="nt">&lt;CCardSurchargeMin&gt;</span>0.00<span class="nt">&lt;/CCardSurchargeMin&gt;</span>
+        <span class="nt">&lt;CCardSurchargeMax&gt;</span>0.00<span class="nt">&lt;/CCardSurchargeMax&gt;</span>
+        <span class="nt">&lt;Rates&gt;</span>
+            <span class="nt">&lt;GBP&gt;</span>1<span class="nt">&lt;/GBP&gt;</span>
+            <span class="nt">&lt;EUR&gt;</span>1.1045<span class="nt">&lt;/EUR&gt;</span>
+            <span class="nt">&lt;USD&gt;</span>1.319<span class="nt">&lt;/USD&gt;</span>
+        <span class="nt">&lt;/Rates&gt;</span>
+    <span class="nt">&lt;/Pricing&gt;</span>
+    <span class="nt">&lt;SepaID/&gt;</span>
+    <span class="nt">&lt;API_Header&gt;</span>
+        <span class="nt">&lt;Request&gt;</span>
+            <span class="nt">&lt;ABTANumber&gt;</span>YourABTANumber<span class="nt">&lt;/ABTANumber&gt;</span>
+            <span class="nt">&lt;Password&gt;</span>YourPassword<span class="nt">&lt;/Password&gt;</span>
+            <span class="nt">&lt;Initials&gt;</span>YourInitials<span class="nt">&lt;/Initials&gt;</span>
+            <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>
+            <span class="nt">&lt;token&gt;</span>YourToken<span class="nt">&lt;/token&gt;</span>
+            <span class="nt">&lt;ArrivalDate&gt;</span>2018-12-01<span class="nt">&lt;/ArrivalDate&gt;</span>
+            <span class="nt">&lt;ArrivalTime&gt;</span>1200<span class="nt">&lt;/ArrivalTime&gt;</span>
+            <span class="nt">&lt;Adults&gt;</span>2<span class="nt">&lt;/Adults&gt;</span>
+            <span class="nt">&lt;Children&gt;</span>0<span class="nt">&lt;/Children&gt;</span>
+            <span class="nt">&lt;System&gt;</span>ABG<span class="nt">&lt;/System&gt;</span>
+            <span class="nt">&lt;lang&gt;</span>de<span class="nt">&lt;/lang&gt;</span>
+            <span class="nt">&lt;v&gt;</span>1<span class="nt">&lt;/v&gt;</span>
+        <span class="nt">&lt;/Request&gt;</span>
+    <span class="nt">&lt;/API_Header&gt;</span>
+<span class="nt">&lt;/API_Reply&gt;</span>
 </code></pre>
 </div>
 

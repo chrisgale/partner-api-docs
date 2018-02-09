@@ -33,9 +33,7 @@
 
 <p>This must be a POST, as you are making a booking. It must be made over HTTPS, you must enforce this.</p>
 
-<h2 id="carparkfoo">/carpark/foo</h2>
-
-<p>where foo is the carpark code</p>
+<h2 id="carparkcarparkcode">/carpark/CarParkCode</h2>
 
 <p>e.g. /carpark/FRA2</p>
 
@@ -173,7 +171,7 @@
 <p>You will need to turn this into a POST (Firefox / UrlParams / Get -&gt; Post) to make a booking, or use CURL.</p>
 
 <p>znt -&gt; api</p>
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/de-start/sandbox/v1/carpark/FRA8?StartCustomer=111111<span class="err">&amp;</span>ArrivalDate=2010-10-19<span class="err">&amp;</span>ArrivalTime=1200<span class="err">&amp;</span>DepartDate=2010-10-27<span class="err">&amp;</span>DepartTime=1400<span class="err">&amp;</span>Initial=T<span class="err">&amp;</span>Operator=BJT<span class="err">&amp;</span>NumberOfPax=2<span class="err">&amp;</span>BusinessUnit=222<span class="err">&amp;</span>Registration=CP54JOV<span class="err">&amp;</span>Surname=Thompson<span class="err">&amp;</span>Title=Mr<span class="err">&amp;</span>key=foo<span class="err">&amp;</span>token=123456789
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/de-start/sandbox/v1/carpark/FRA8?StartCustomer=111111<span class="err">&amp;</span>ArrivalDate=2010-10-19<span class="err">&amp;</span>ArrivalTime=1200<span class="err">&amp;</span>DepartDate=2010-10-27<span class="err">&amp;</span>DepartTime=1400<span class="err">&amp;</span>Initial=T<span class="err">&amp;</span>Operator=BJT<span class="err">&amp;</span>NumberOfPax=2<span class="err">&amp;</span>BusinessUnit=222<span class="err">&amp;</span>Registration=CP54JOV<span class="err">&amp;</span>Surname=Thompson<span class="err">&amp;</span>Title=Mr<span class="err">&amp;</span>key=YourKey<span class="err">&amp;</span>token=123456789
 </code></pre>
 </div>
 
@@ -253,7 +251,7 @@
       <span class="nt">&lt;StartCustomer&gt;</span>111111<span class="nt">&lt;/StartCustomer&gt;</span>
       <span class="nt">&lt;Surname&gt;</span>Thompson<span class="nt">&lt;/Surname&gt;</span>
       <span class="nt">&lt;Title&gt;</span>Mr<span class="nt">&lt;/Title&gt;</span>
-      <span class="nt">&lt;key&gt;</span>foo<span class="nt">&lt;/key&gt;</span>
+      <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>
       <span class="nt">&lt;token&gt;</span>123456789<span class="nt">&lt;/token&gt;</span>
       <span class="nt">&lt;debug&gt;</span>1<span class="nt">&lt;/debug&gt;</span>
       <span class="nt">&lt;system&gt;</span>de<span class="nt">&lt;/system&gt;</span>

@@ -31,9 +31,7 @@
             <div class="panel-body">
   <h1 id="cancel-booking">Cancel booking</h1>
 
-<h2 id="bookingfoo">/booking/foo</h2>
-
-<p>where foo is the Start booking reference</p>
+<h2 id="bookingyourbookingref">/booking/YourBookingRef</h2>
 
 <p>e.g. https://api.holidayextras.co.uk/de-start/v1/sandbox/booking/10051848</p>
 
@@ -99,12 +97,12 @@
 <h3 id="request">Request</h3>
 
 <p>Dry-run</p>
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/de-start/v1/sandbox/booking/10213896?StartCustomer=111111<span class="err">&amp;</span>BusinessUnit=222<span class="err">&amp;</span>Operator=BJT<span class="err">&amp;</span>key=mytestkey<span class="err">&amp;</span>ConfirmCancel=N<span class="err">&amp;</span>CancelRef=TestCnx
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/de-start/v1/sandbox/booking/10213896?StartCustomer=111111<span class="err">&amp;</span>BusinessUnit=222<span class="err">&amp;</span>Operator=BJT<span class="err">&amp;</span>key=YourKey<span class="err">&amp;</span>ConfirmCancel=N<span class="err">&amp;</span>CancelRef=TestCnx
 </code></pre>
 </div>
 
 <p>Confirmed cancel</p>
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/de-start/v1/sandbox/booking/10213896?StartCustomer=111111<span class="err">&amp;</span>BusinessUnit=222<span class="err">&amp;</span>Operator=BJT<span class="err">&amp;</span>key=mytestkey<span class="err">&amp;</span>CancelRef=HolidayCancelled<span class="err">&amp;</span>ConfirmCancel=Y
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/de-start/v1/sandbox/booking/10213896?StartCustomer=111111<span class="err">&amp;</span>BusinessUnit=222<span class="err">&amp;</span>Operator=BJT<span class="err">&amp;</span>key=YourKey<span class="err">&amp;</span>CancelRef=HolidayCancelled<span class="err">&amp;</span>ConfirmCancel=Y
 </code></pre>
 </div>
 
@@ -128,7 +126,7 @@
       <span class="nt">&lt;ConfirmCancel&gt;</span>N<span class="nt">&lt;/ConfirmCancel&gt;</span>
       <span class="nt">&lt;Operator&gt;</span>BJT<span class="nt">&lt;/Operator&gt;</span>
       <span class="nt">&lt;StartCustomer&gt;</span>111111<span class="nt">&lt;/StartCustomer&gt;</span>
-      <span class="nt">&lt;key&gt;</span>foo<span class="nt">&lt;/key&gt;</span>
+      <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>
       <span class="nt">&lt;token&gt;</span>123456789<span class="nt">&lt;/token&gt;</span>
       <span class="nt">&lt;CancelRef&gt;</span>testcanx<span class="nt">&lt;/CancelRef&gt;</span>
       <span class="nt">&lt;system&gt;</span>de<span class="nt">&lt;/system&gt;</span>
@@ -159,7 +157,7 @@
       <span class="nt">&lt;ConfirmCancel&gt;</span>Y<span class="nt">&lt;/ConfirmCancel&gt;</span>
       <span class="nt">&lt;Operator&gt;</span>BJT<span class="nt">&lt;/Operator&gt;</span>
       <span class="nt">&lt;StartCustomer&gt;</span>123456<span class="nt">&lt;/StartCustomer&gt;</span>
-      <span class="nt">&lt;key&gt;</span>foo<span class="nt">&lt;/key&gt;</span>
+      <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>
       <span class="nt">&lt;token&gt;</span>123456789<span class="nt">&lt;/token&gt;</span>
       <span class="nt">&lt;system&gt;</span>de<span class="nt">&lt;/system&gt;</span>
       <span class="nt">&lt;System&gt;</span>ABG<span class="nt">&lt;/System&gt;</span>

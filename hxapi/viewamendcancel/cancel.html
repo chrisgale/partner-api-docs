@@ -29,351 +29,324 @@
         <div class="panel panel-primary">
           <div class="panel-heading"><div class="h1">Holiday Extras API</div></div>
             <div class="panel-body">
-  <h1 id="cancel">Cancel</h1>
+  <h1 id="cancel-booking">Cancel Booking</h1>
 
-<h2 id="bookingfoo">/booking/foo</h2>
+<p><a href="/hxapi/">API Docs</a> &gt; product:<a href="/hxapi/viewamendcancel/cancel">cancel</a></p>
 
-<p>where foo is the booking reference</p>
+<h2 id="cancel-booking-request">Cancel Booking Request</h2>
 
-<p>e.g. https://api.holidayextras.co.uk/v1/booking/ABCDE</p>
+<p>Cancelling a booking is a two-stage process:</p>
 
-<p>Cancelling a booking is a two step process. You must first request the details of the booking via a GET, present them to the customer to confirm. You can then cancel the booking via POST.</p>
-
-<h2 id="preliminary-cancellation-request">Preliminary cancellation request</h2>
+<ol>
+  <li>Check if the booking is cancellable, and any charges for doing so, using the GET method outlined below;</li>
+  <li>Cancel the booking using the POST method outlined below.</li>
+</ol>
 
 <h3 id="method">Method</h3>
 
-<p>GET</p>
+<p>GET / POST</p>
 
-<h3 id="parameters">Parameters</h3>
+<h3 id="endpoint">Endpoint</h3>
+
+<p>The endpoint to use is (where <code class="highlighter-rouge">YourBookingRef</code> is the Holiday Extras booking reference):</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/booking/YourBookingRef
+</code></pre>
+</div>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<h4 id="step-1-check-if-booking-is-cancellable-get">Step 1: Check if booking is cancellable (GET)</h4>
+
+<p>NB: All parameter names are case sensitive.</p>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
-      <th>Type</th>
+      <th>Data Type</th>
       <th>Format</th>
-      <th>Required</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>CreditCardLast4</td>
-      <td>Int</td>
-      <td>[0-9]{4}</td>
-      <td>N*</td>
-    </tr>
-    <tr>
-      <td>key</td>
-      <td>String</td>
-      <td> </td>
-      <td>Y</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>This is a general request, is is therefore not product specific. So a booking of any type, i,e parking, hotel, lounge can be cancelled using the booking reference and the same request parameters it does not need to vary by product.</p>
-
-<h3 id="request">Request</h3>
-
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/booking/ABCDE?CreditCardLast4=1111<span class="err">&amp;</span>key=mytestkey
-</code></pre>
-</div>
-
-<h3 id="reply">Reply</h3>
-
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code>
-<span class="cp">&lt;?xml version="1.0" ?&gt;</span>
-<span class="nt">&lt;API_Reply</span> <span class="na">System=</span><span class="s">"ABC"</span> <span class="na">Version=</span><span class="s">"1.0"</span> <span class="na">Product=</span><span class="s">"Cancel"</span> <span class="na">Customer=</span><span class="s">"A"</span> <span class="na">Session=</span><span class="s">"999999999"</span> <span class="na">RequestCode=</span><span class="s">"9"</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;Booking&gt;</span>
-    <span class="nt">&lt;BookingRef&gt;</span>ABCDE<span class="nt">&lt;/BookingRef&gt;</span>
-  <span class="nt">&lt;/Booking&gt;</span>
-  <span class="nt">&lt;Cancel&gt;</span>
-    <span class="nt">&lt;CancelFee&gt;</span>0.00<span class="nt">&lt;/CancelFee&gt;</span>
-    <span class="nt">&lt;CancelInfo&gt;</span>~61There is no charge for cancelling this booking<span class="nt">&lt;/CancelInfo&gt;</span>
-  <span class="nt">&lt;/Cancel&gt;</span>
-  <span class="nt">&lt;API_Header&gt;</span>
-    <span class="nt">&lt;Request&gt;</span>
-      <span class="nt">&lt;key&gt;</span>mytestkey<span class="nt">&lt;/key&gt;</span>
-      <span class="nt">&lt;CreditCardLast4&gt;</span>1111<span class="nt">&lt;/CreditCardLast4&gt;</span>
-    <span class="nt">&lt;/Request&gt;</span>
-  <span class="nt">&lt;/API_Header&gt;</span>
-<span class="nt">&lt;/API_Reply&gt;</span>
-</code></pre>
-</div>
-
-<p>At this point, the booking has not been cancelled. This first request just checks that the booking can be cancelled and shows whether or not there is a fee for cancelling. Please do not be tempted to skip this step, the customer should be informed if they are not going to be refunded the full amount.</p>
-
-<h2 id="preliminary-cancellation-request-agents-only">Preliminary cancellation request (Agents Only)</h2>
-
-<h3 id="method-1">Method</h3>
-
-<p>GET</p>
-
-<h3 id="parameters-1">Parameters</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Format</th>
-      <th>Required</th>
+      <th>Mandatory?</th>
+      <th>Additional Information</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>ABTANumber</td>
       <td>String</td>
-      <td> </td>
+      <td>[A-Z0-9] 5 chars</td>
       <td>Y</td>
+      <td>This is also known as an ‘agent code’. <br />This will be confirmed to you by your Account Manager during set up.</td>
     </tr>
     <tr>
       <td>Password</td>
       <td>String</td>
-      <td> </td>
-      <td>Y</td>
+      <td>[A-Z0-9] 5 chars</td>
+      <td>N*</td>
+      <td>Password required for retail agent requests - intermediaries do not require a password.<br />This will be confirmed to you by your Account Manager during set up.</td>
     </tr>
     <tr>
-      <td>ConfirmCancel</td>
+      <td>Initials</td>
       <td>String</td>
+      <td>[A-Z] 3 chars</td>
       <td>N</td>
-      <td>Y</td>
-    </tr>
-    <tr>
-      <td>CancelRef</td>
-      <td>String</td>
-      <td>Initials or Voucher ref</td>
-      <td>Y</td>
+      <td>The initials of the Operator / Agent.</td>
     </tr>
     <tr>
       <td>key</td>
       <td>String</td>
-      <td> </td>
+      <td>[A-Z]</td>
       <td>Y</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="request-1">Request</h3>
-
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/booking/ABCDE?ABTANumber=youragentcode<span class="err">&amp;</span>Password=yourpassword<span class="err">&amp;</span>ConfirmCancel=N<span class="err">&amp;</span>CancelRef=voucher/initial<span class="err">&amp;</span>key=foo
-</code></pre>
-</div>
-
-<p>For European products please add System=ABG</p>
-
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/booking/ABCDE?ABTANumber=youragentcode<span class="err">&amp;</span>Password=yourpassword<span class="err">&amp;</span>ConfirmCancel=N<span class="err">&amp;</span>key=foo<span class="err">&amp;</span>System=ABG
-</code></pre>
-</div>
-
-<h3 id="reply-1">Reply</h3>
-
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code>
-<span class="cp">&lt;?xml version="1.0" ?&gt;</span>
-<span class="nt">&lt;API_Reply</span> <span class="na">System=</span><span class="s">"ABC"</span> <span class="na">Version=</span><span class="s">"1.0"</span> <span class="na">Product=</span><span class="s">"Cancel"</span> <span class="na">Customer=</span><span class="s">"A"</span> <span class="na">Session=</span><span class="s">"999999999"</span> <span class="na">RequestCode=</span><span class="s">"9"</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;Booking&gt;</span>
-    <span class="nt">&lt;BookingRef&gt;</span>ABCDE<span class="nt">&lt;/BookingRef&gt;</span>
-  <span class="nt">&lt;/Booking&gt;</span>
-  <span class="nt">&lt;Cancel&gt;</span>
-    <span class="nt">&lt;CancelFee&gt;</span>0.00<span class="nt">&lt;/CancelFee&gt;</span>
-    <span class="nt">&lt;CancelInfo&gt;</span>There is no charge for cancelling this booking<span class="nt">&lt;/CancelInfo&gt;</span>
-    <span class="nt">&lt;RefundAmount&gt;</span>52.24<span class="nt">&lt;/RefundAmount&gt;</span>
-  <span class="nt">&lt;/Cancel&gt;</span>
-  <span class="nt">&lt;API_Header&gt;</span>
-    <span class="nt">&lt;Request&gt;</span>
-      <span class="nt">&lt;ABTANumber&gt;</span>youragentcode<span class="nt">&lt;/ABTANumber&gt;</span>
-      <span class="nt">&lt;Password&gt;</span>yourpassword<span class="nt">&lt;/Password&gt;</span>
-      <span class="nt">&lt;ConfirmCancel&gt;</span>N<span class="nt">&lt;/ConfirmCancel&gt;</span>
-      <span class="nt">&lt;key&gt;</span>foo<span class="nt">&lt;/key&gt;</span>
-      <span class="nt">&lt;v&gt;</span>1<span class="nt">&lt;/v&gt;</span>
-    <span class="nt">&lt;/Request&gt;</span>
-  <span class="nt">&lt;/API_Header&gt;</span>
-<span class="nt">&lt;/API_Reply&gt;</span>
-</code></pre>
-</div>
-
-<p>At this point, the booking has not been cancelled. This first request just checks that the booking can be cancelled and shows whether or not there is a fee for cancelling. Please do not be tempted to skip this step, the customer should be informed if they are not going to be refunded the full amount.</p>
-
-<h2 id="confirm-cancellation-request">Confirm cancellation request</h2>
-
-<h3 id="method-2">Method</h3>
-
-<p>Post</p>
-
-<h3 id="parameters-2">Parameters</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Format</th>
-      <th>Required</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>CreditCardLast4</td>
-      <td>Int</td>
-      <td>[0-9]{4}</td>
-      <td>N*</td>
+      <td>This will be assigned to you by your Account Manager during set up.</td>
     </tr>
     <tr>
-      <td>key</td>
+      <td>token</td>
       <td>String</td>
-      <td> </td>
+      <td>[0-9] 9 chars</td>
       <td>Y</td>
+      <td>This is the same token used in the availability request.</td>
+    </tr>
+    <tr>
+      <td>System</td>
+      <td>String</td>
+      <td>[A-Z] 3 chars</td>
+      <td>Y*</td>
+      <td>For European products, you need to pass in the value of <code class="highlighter-rouge">System=ABG</code> (the default is <code class="highlighter-rouge">System=ABC</code>, which is UK products only).</td>
     </tr>
     <tr>
       <td>ConfirmCancel</td>
       <td>String</td>
-      <td>Y/N</td>
+      <td>1 chars</td>
       <td>Y</td>
+      <td>Set this to <code class="highlighter-rouge">N</code> for this initial step.</td>
+    </tr>
+    <tr>
+      <td>CancelRef</td>
+      <td>String</td>
+      <td>[A-Z] 10 chars</td>
+      <td>Y</td>
+      <td>The reference for the cancellation, e.g. agent’s initials.</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="request-2">Request</h3>
+<h4 id="step-2-cancel-booking-post">Step 2: Cancel booking (POST)</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/booking/ABCDE
-
-POST /booking/ABCDE HTTP/1.1
-Host: api.holidayextras.co.uk
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.0.1) Gecko/2008070206 Firefox/3.0.1
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-Accept-Language: en-us,en;q=0.5
-Accept-Encoding: gzip,deflate
-Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
-Keep-Alive: 300
-Connection: keep-alive
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 34
-
-CreditCardLast4=5383&amp;key=mytestkey&amp;ConfirmCancel=Y
-</code></pre>
-</div>
-
-<h3 id="response">Response</h3>
-
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" ?&gt;</span>
-<span class="nt">&lt;API_Reply</span> <span class="na">System=</span><span class="s">"ABC"</span> <span class="na">Version=</span><span class="s">"1.0"</span> <span class="na">Product=</span><span class="s">"Cancel"</span> <span class="na">Customer=</span><span class="s">"A"</span> <span class="na">Session=</span><span class="s">"999999999"</span> <span class="na">RequestCode=</span><span class="s">"9"</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;Booking&gt;</span>
-    <span class="nt">&lt;BookingRef&gt;</span>RV5ZB<span class="nt">&lt;/BookingRef&gt;</span>
-  <span class="nt">&lt;/Booking&gt;</span>
-  <span class="nt">&lt;Cancel&gt;</span>
-    <span class="nt">&lt;CancelFee&gt;</span>0.00<span class="nt">&lt;/CancelFee&gt;</span>
-    <span class="nt">&lt;CancelRef&gt;</span>NZ805<span class="nt">&lt;/CancelRef&gt;</span>
-    <span class="nt">&lt;CancelInfo&gt;</span>Please be aware your booking will be reinstated if your booking confirmation voucher is used<span class="nt">&lt;/CancelInfo&gt;</span>
-  <span class="nt">&lt;/Cancel&gt;</span>
-  <span class="nt">&lt;API_Header&gt;</span>
-    <span class="nt">&lt;Request&gt;</span>
-      <span class="nt">&lt;CreditCardLast4&gt;</span>5383<span class="nt">&lt;/CreditCardLast4&gt;</span>
-      <span class="nt">&lt;key&gt;</span>mytestkey<span class="nt">&lt;/key&gt;</span>
-      <span class="nt">&lt;ConfirmCancel&gt;</span>Y<span class="nt">&lt;/ConfirmCancel&gt;</span>
-    <span class="nt">&lt;/Request&gt;</span>
-  <span class="nt">&lt;/API_Header&gt;</span>
-<span class="nt">&lt;/API_Reply&gt;</span>
-
-</code></pre>
-</div>
-
-<h2 id="confirm-cancellation-request-agents-only">Confirm cancellation request (Agents Only)</h2>
-
-<h3 id="method-3">Method</h3>
-
-<p>Post</p>
-
-<h3 id="parameters-3">Parameters</h3>
+<p>NB: All parameter names are case sensitive.</p>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
-      <th>Type</th>
+      <th>Data Type</th>
       <th>Format</th>
-      <th>Required</th>
+      <th>Mandatory?</th>
+      <th>Additional Information</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>ABTANumber</td>
       <td>String</td>
-      <td> </td>
+      <td>[A-Z0-9] 5 chars</td>
       <td>Y</td>
+      <td>This is also known as an ‘agent code’. <br />This will be confirmed to you by your Account Manager during set up.</td>
     </tr>
     <tr>
       <td>Password</td>
       <td>String</td>
-      <td> </td>
-      <td>Y</td>
+      <td>[A-Z0-9] 5 chars</td>
+      <td>N*</td>
+      <td>Password required for retail agent requests - intermediaries do not require a password.<br />This will be confirmed to you by your Account Manager during set up.</td>
     </tr>
     <tr>
-      <td>ConfirmCancel</td>
+      <td>Initials</td>
       <td>String</td>
-      <td>Y/N</td>
-      <td>Y</td>
-    </tr>
-    <tr>
-      <td>CancelRef</td>
-      <td>String</td>
-      <td> </td>
-      <td>Y</td>
+      <td>[A-Z] 3 chars</td>
+      <td>N</td>
+      <td>The initials of the Operator / Agent.</td>
     </tr>
     <tr>
       <td>key</td>
       <td>String</td>
-      <td> </td>
+      <td>[A-Z]</td>
       <td>Y</td>
+      <td>This will be assigned to you by your Account Manager during set up.</td>
+    </tr>
+    <tr>
+      <td>token</td>
+      <td>String</td>
+      <td>[0-9] 9 chars</td>
+      <td>Y</td>
+      <td>This is the same token used in the availability request.</td>
+    </tr>
+    <tr>
+      <td>System</td>
+      <td>String</td>
+      <td>[A-Z] 3 chars</td>
+      <td>Y*</td>
+      <td>For European products, you need to pass in the value of <code class="highlighter-rouge">System=ABG</code> (the default is <code class="highlighter-rouge">System=ABC</code>, which is UK products only).</td>
+    </tr>
+    <tr>
+      <td>ConfirmCancel</td>
+      <td>String</td>
+      <td>1 chars</td>
+      <td>Y</td>
+      <td>Set this to <code class="highlighter-rouge">Y</code> for the cancellation step.</td>
+    </tr>
+    <tr>
+      <td>CancelRef</td>
+      <td>String</td>
+      <td>[A-Z] 10 chars</td>
+      <td>Y</td>
+      <td>The reference for the cancellation, e.g. agent’s initials.</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="request-3">Request</h3>
+<h2 id="cancel-booking-response">Cancel Booking Response</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/booking/ABCDE
+<p>The cancel booking response will confirm that a booking has been cancelled in our system.</p>
 
-POST /booking/ABCDE HTTP/1.1
-Host: api.holidayextras.co.uk
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.0.1) Gecko/2008070206 Firefox/3.0.1
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-Accept-Language: en-us,en;q=0.5
-Accept-Encoding: gzip,deflate
-Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
-Keep-Alive: 300
-Connection: keep-alive
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 34
+<p>For a detailed explanation of the fields returned, please see below:</p>
 
-ABTANumber=youragentcode&amp;Password=yourpassword&amp;key=foo&amp;ConfirmCancel=Y&amp;CancelRef=Foo
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Additional Information</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Booking/BookingRef</td>
+      <td>This is the reference for this booking. It must be referred to in all communication with us concerning this booking. <br />NB: Our booking references are 5 char alphanumeric (including 1/I and 0/O/Q).</td>
+    </tr>
+    <tr>
+      <td>Cancel/RefundAmount</td>
+      <td>This shows the amount to be refunded to the customer.</td>
+    </tr>
+    <tr>
+      <td>API_Header/Request</td>
+      <td>A list of parameters that were sent in the booking request.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="credit-card-fees">Credit Card Fees</h3>
+
+<p>As of 12th January 2018 we no longer charge credit card fees, in line with the Payment Services Directive (PSD2). This applies to both UK and EU products.</p>
+
+<h2 id="worked-examples">Worked examples</h2>
+
+<p>Below are worked examples of both the request and response for cancelling a booking.</p>
+
+<h3 id="cancel-booking-request---step-1">Cancel Booking Request - Step 1</h3>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/booking/YourBookingRef?ABTANumber=YourABTANumber<span class="err">&amp;</span>Password=YourPassword<span class="err">&amp;</span>key=YourKey<span class="err">&amp;</span>token=YourToken<span class="err">&amp;</span>ConfirmCancel=N<span class="err">&amp;</span>CancelRef=YourCancelRef
 </code></pre>
 </div>
 
-<h3 id="response-1">Response</h3>
+<h3 id="cancel-booking-response---step-1">Cancel Booking Response - Step 1</h3>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" ?&gt;</span>
-<span class="nt">&lt;API_Reply</span> <span class="na">System=</span><span class="s">"ABC"</span> <span class="na">Version=</span><span class="s">"1.0"</span> <span class="na">Product=</span><span class="s">"Cancel"</span> <span class="na">Customer=</span><span class="s">"A"</span> <span class="na">Session=</span><span class="s">"999999999"</span> <span class="na">RequestCode=</span><span class="s">"9"</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;Booking&gt;</span>
-    <span class="nt">&lt;BookingRef&gt;</span>ABCDE<span class="nt">&lt;/BookingRef&gt;</span>
-  <span class="nt">&lt;/Booking&gt;</span>
-  <span class="nt">&lt;Cancel&gt;</span>
-    <span class="nt">&lt;CancelFee&gt;</span>0.00<span class="nt">&lt;/CancelFee&gt;</span>
-    <span class="nt">&lt;CancelRef&gt;</span>12345<span class="nt">&lt;/CancelRef&gt;</span>
-    <span class="nt">&lt;CancelInfo&gt;</span>Please retrieve your client<span class="ni">&amp;#39;</span>s copy of voucher as booking will be reinstated if used<span class="nt">&lt;/CancelInfo&gt;</span>
-    <span class="nt">&lt;RefundAmount&gt;</span>52.24<span class="nt">&lt;/RefundAmount&gt;</span>
-  <span class="nt">&lt;/Cancel&gt;</span>
-  <span class="nt">&lt;API_Header&gt;</span>
-    <span class="nt">&lt;Request&gt;</span>
-      <span class="nt">&lt;ABTANumber&gt;</span>youragentcode<span class="nt">&lt;/ABTANumber&gt;</span>
-      <span class="nt">&lt;Password&gt;</span>yourpassword<span class="nt">&lt;/Password&gt;</span>
-      <span class="nt">&lt;key&gt;</span>foo<span class="nt">&lt;/key&gt;</span>
-      <span class="nt">&lt;ConfirmCancel&gt;</span>Y<span class="nt">&lt;/ConfirmCancel&gt;</span>
-      <span class="nt">&lt;CancelRef&gt;</span>Foo<span class="nt">&lt;/CancelRef&gt;</span>
-      <span class="nt">&lt;v&gt;</span>1<span class="nt">&lt;/v&gt;</span>
-    <span class="nt">&lt;/Request&gt;</span>
-  <span class="nt">&lt;/API_Header&gt;</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;API_Reply</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Booking&gt;</span>
+        <span class="nt">&lt;BookingRef&gt;</span>YourBookingRef<span class="nt">&lt;/BookingRef&gt;</span>
+    <span class="nt">&lt;/Booking&gt;</span>
+    <span class="nt">&lt;Cancel&gt;</span>
+        <span class="nt">&lt;CancelFee&gt;</span>0.00<span class="nt">&lt;/CancelFee&gt;</span>
+        <span class="nt">&lt;CancelRef/&gt;</span>
+        <span class="nt">&lt;CancelInfo&gt;</span>There is no charge for cancelling this booking<span class="nt">&lt;/CancelInfo&gt;</span>
+        <span class="nt">&lt;RefundAmount&gt;</span>35.92<span class="nt">&lt;/RefundAmount&gt;</span>
+    <span class="nt">&lt;/Cancel&gt;</span>
+    <span class="nt">&lt;API_Header&gt;</span>
+        <span class="nt">&lt;Request&gt;</span>
+            <span class="nt">&lt;ABTANumber&gt;</span>YourABTANumber<span class="nt">&lt;/ABTANumber&gt;</span>
+            <span class="nt">&lt;Password&gt;</span>YourPassword<span class="nt">&lt;/Password&gt;</span>
+            <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>
+            <span class="nt">&lt;token&gt;</span>YourToken<span class="nt">&lt;/token&gt;</span>
+            <span class="nt">&lt;ConfirmCancel&gt;</span>N<span class="nt">&lt;/ConfirmCancel&gt;</span>
+            <span class="nt">&lt;CancelRef&gt;</span>YourCancelRef<span class="nt">&lt;/CancelRef&gt;</span>
+            <span class="nt">&lt;v&gt;</span>1<span class="nt">&lt;/v&gt;</span>
+        <span class="nt">&lt;/Request&gt;</span>
+    <span class="nt">&lt;/API_Header&gt;</span>
 <span class="nt">&lt;/API_Reply&gt;</span>
+</code></pre>
+</div>
 
+<h3 id="cancel-booking-request---step-2">Cancel Booking Request - Step 2</h3>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/booking/YourBookingRef
+</code></pre>
+</div>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>    <span class="nt">&lt;Request&gt;</span>
+        <span class="nt">&lt;ABTANumber&gt;</span>YourABTA<span class="nt">&lt;/ABTANumber&gt;</span>
+        <span class="nt">&lt;Password&gt;</span>YourPassword<span class="nt">&lt;/Password&gt;</span>
+        <span class="nt">&lt;Initials&gt;</span>YourInitials<span class="nt">&lt;/Initials&gt;</span>
+        <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>
+        <span class="nt">&lt;token&gt;</span>YourToken<span class="nt">&lt;/token&gt;</span>
+        <span class="nt">&lt;ConfirmCancel&gt;</span>Y<span class="nt">&lt;/ConfirmCancel&gt;</span>
+        <span class="nt">&lt;CancelRef&gt;</span>YourCancelRef<span class="nt">&lt;/CancelRef&gt;</span>
+    <span class="nt">&lt;/Request&gt;</span>
+</code></pre>
+</div>
+
+<h3 id="cancel-booking-response---step-2">Cancel Booking Response - Step 2</h3>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;API_Reply</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Booking&gt;</span>
+        <span class="nt">&lt;BookingRef&gt;</span>YourBookingRef<span class="nt">&lt;/BookingRef&gt;</span>
+    <span class="nt">&lt;/Booking&gt;</span>
+    <span class="nt">&lt;Cancel&gt;</span>
+        <span class="nt">&lt;CancelFee&gt;</span>0.00<span class="nt">&lt;/CancelFee&gt;</span>
+        <span class="nt">&lt;CancelRef&gt;</span>06684<span class="nt">&lt;/CancelRef&gt;</span>
+        <span class="nt">&lt;CancelInfo&gt;</span>Please retrieve your client's copy of voucher as booking will be reinstated if used<span class="nt">&lt;/CancelInfo&gt;</span>
+        <span class="nt">&lt;RefundAmount&gt;</span>35.92<span class="nt">&lt;/RefundAmount&gt;</span>
+    <span class="nt">&lt;/Cancel&gt;</span>
+    <span class="nt">&lt;API_Header&gt;</span>
+        <span class="nt">&lt;Request&gt;</span>
+            <span class="nt">&lt;ABTANumber&gt;</span>YourABTANumber<span class="nt">&lt;/ABTANumber&gt;</span>
+            <span class="nt">&lt;Password&gt;</span>YourPassword<span class="nt">&lt;/Password&gt;</span>
+            <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>
+            <span class="nt">&lt;token&gt;</span>YourToken<span class="nt">&lt;/token&gt;</span>
+            <span class="nt">&lt;ConfirmCancel&gt;</span>Y<span class="nt">&lt;/ConfirmCancel&gt;</span>
+            <span class="nt">&lt;CancelRef&gt;</span>YourCancelRef<span class="nt">&lt;/CancelRef&gt;</span>
+            <span class="nt">&lt;v&gt;</span>1<span class="nt">&lt;/v&gt;</span>
+        <span class="nt">&lt;/Request&gt;</span>
+    <span class="nt">&lt;/API_Header&gt;</span>
+<span class="nt">&lt;/API_Reply&gt;</span>
+</code></pre>
+</div>
+
+<h2 id="cancelling-bookings-made-with-a-credit-or-debit-card">Cancelling bookings made with a credit or debit card</h2>
+
+<p>A small number of agents in Europe pass through payment details in our API (for historic reasons). The method for cancelling these products differs slightly in that an extra parameter is required to authenticate against the booking. The extra parameter is identified below.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Data Type</td>
+      <td>Format</td>
+      <td>Mandatory?</td>
+      <td>Additional Information</td>
+    </tr>
+    <tr>
+      <td>CreditCardLast4</td>
+      <td>Integer</td>
+      <td>[0-9] 4 chars</td>
+      <td>Y</td>
+      <td>These are the last 4 digits on the card that the customer used to make payment.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The cancellation request must be POSTed against the following endpoint:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://payment.holidayextras.co.uk/legacy/
 </code></pre>
 </div>
 

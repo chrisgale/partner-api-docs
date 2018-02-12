@@ -29,39 +29,51 @@
         <div class="panel panel-primary">
           <div class="panel-heading"><div class="h1">Holiday Extras API</div></div>
             <div class="panel-body">
-  <h1 id="view--amend--cancel">View / Amend / Cancel</h1>
+  <h1 id="manage-a-booking">Manage A Booking</h1>
 
-<p>Whether the customer intends to cancel or amend the booking, we recommend you always perform a view request first. That way you will be able to present the user with all relevant information about the booking.</p>
+<p><a href="/hxapi/">API Docs</a> &gt; product:<a href="index">viewamendcancel</a></p>
+
+<h2 id="manage-a-booking-endpoints">Manage A Booking Endpoints</h2>
+
+<p>Here are the endpoints for managing a booking:</p>
 
 <table>
   <tbody>
     <tr>
       <td>View booking</td>
-      <td><a href="view">https://api.holidayextras.co.uk/v1/booking/foo</a></td>
+      <td><a href="view">https://api.holidayextras.co.uk/v1/booking/YourBookingRef</a></td>
       <td>GET</td>
     </tr>
     <tr>
       <td>Amend booking - Parking</td>
-      <td><a href="amend">https://api.holidayextras.co.uk/v1/booking/foo</a></td>
-      <td>GET &amp; POST</td>
+      <td>To be added soon (amend no reprice)</td>
+      <td>POST</td>
     </tr>
     <tr>
       <td>Amend booking - Hotels</td>
-      <td><a href="amendhotels">https://api.holidayextras.co.uk/v1/booking/foo</a></td>
-      <td>GET &amp; POST</td>
-    </tr>
-    <tr>
-      <td>Amend booking (Parking and Hotels) - Personal Details only - no reprice</td>
-      <td><a href="amendnoreprice">https://api.holidayextras.co.uk/v1/booking/foo</a></td>
-      <td>GET &amp; POST</td>
+      <td>To be added soon](amend reprice)</td>
+      <td>POST</td>
     </tr>
     <tr>
       <td>Cancel booking</td>
-      <td><a href="cancel">https://api.holidayextras.co.uk/v1/booking/foo</a></td>
-      <td>GET &amp; POST</td>
+      <td><a href="cancel">https://api.holidayextras.co.uk/v1/booking/YourBookingRef</a></td>
+      <td>POST</td>
     </tr>
   </tbody>
 </table>
+
+<h2 id="manage-a-booking-top-tips">Manage A Booking Top Tips</h2>
+
+<p>The three methods provided will enable your customers via your integration to manage their own booking online.</p>
+
+<h3 id="amending-a-booking">Amending a booking</h3>
+
+<p>We allow both simple and complex amends:</p>
+
+<ul>
+  <li>A <strong><em>simple amend</em></strong> is where the booking details are updated, without affecting the price. This is also known as an “amend no re-price”. For example, adding a car registration number to a parking booking.</li>
+  <li>A <strong><em>complex amend</em></strong> is where the booking details are updated and this does affect the price. This is also known as an “amend re-price”. For example, changing the date of a booking.</li>
+</ul>
 
 </div>
 

@@ -31,7 +31,7 @@
             <div class="panel-body">
   <h1 id="payment-gateway-pay">Payment Gateway: Pay</h1>
 
-<p><a href="/payment-gateway/">API Docs</a> &gt; <a href="pay">Payment Gateway</a></p>
+<p><a href="/">API Docs</a> &gt; <a href="/payment-gateway/">Payment Gateway</a> &gt; <a href="pay">Pay</a></p>
 
 <h2 id="payment-request">Payment Request</h2>
 
@@ -45,7 +45,7 @@
 
 <p>To make a payment, the endpoint to use is:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/pay
+<div class="highlighter-rouge"><pre class="highlight"><code>https://payment-gateway.holidayextras.co.uk/pay
 </code></pre>
 </div>
 
@@ -70,11 +70,11 @@
       <td>This should always be <code class="highlighter-rouge">application/json</code></td>
     </tr>
     <tr>
-      <td>auth</td>
+      <td>Authorization</td>
       <td>String</td>
-      <td><code class="highlighter-rouge">username:password</code></td>
+      <td><code class="highlighter-rouge">Basic dXNlcm5hbWU6cGFzc3dvcmQ=</code></td>
       <td>Y</td>
-      <td>This will be created and provided to you, and is required with every request.</td>
+      <td>Base64 encoded string for the <code class="highlighter-rouge">username:password</code> credentials which will be created and provided to you. This header is required with every request.</td>
     </tr>
     <tr>
       <td>Accept</td>
@@ -172,12 +172,12 @@
 
 <h3 id="payment-request-1">Payment Request</h3>
 
-<p><strong>POST</strong>  <code class="highlighter-rouge">https://api.holidayextras.co.uk/v1/pay</code></p>
+<p><strong>POST</strong>  <code class="highlighter-rouge">https://payment-gateway.holidayextras.co.uk/pay</code></p>
 
 <p><strong>HEADERS</strong> <br />
 <code class="highlighter-rouge">Content-Type: application/json</code> <br />
 <code class="highlighter-rouge">Accept: application/vnd.holidayextras.v1+json</code> <br />
-<code class="highlighter-rouge">auth: testUser:testPassword</code></p>
+<code class="highlighter-rouge">Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=</code></p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel"</span><span class="p">,</span><span class="w">
@@ -196,7 +196,7 @@
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.34</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"testPaymentId"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
@@ -205,7 +205,7 @@
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.34</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failed"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FAIL"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failed to make payment"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>

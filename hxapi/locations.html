@@ -29,136 +29,223 @@
         <div class="panel panel-primary">
           <div class="panel-heading"><div class="h1">Holiday Extras API</div></div>
             <div class="panel-body">
-  <h1 id="location">Location</h1>
+  <h2 id="locations-request">Locations Request</h2>
 
-<h2 id="method">Method</h2>
+<p>All available locations can be requested by specific product type, e.g. car parking.</p>
+
+<h3 id="method">Method</h3>
 
 <p>GET</p>
 
-<h2 id="parameters">Parameters</h2>
+<h3 id="endpoint">Endpoint</h3>
+
+<p>The endpoint to use is:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/location
+</code></pre>
+</div>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<p>NB: All parameter names are case sensitive.</p>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Data Type</th>
-      <th>Required</th>
+      <th>Format</th>
+      <th>Mandatory?</th>
+      <th>Additional Information</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>key</td>
-      <td>Number</td>
+      <td>String</td>
+      <td>[A-Z]</td>
       <td>Y</td>
+      <td>This will be assigned to you by your Account Manager during set up.</td>
     </tr>
     <tr>
-      <td>type*</td>
-      <td>Number</td>
-      <td>N</td>
+      <td>token</td>
+      <td>String</td>
+      <td>[0-9] 9 chars</td>
+      <td>Y</td>
+      <td>Please see <a href="/hxapi/usertoken">user token endpoint</a> for details of how to generate a token.</td>
     </tr>
   </tbody>
 </table>
 
-<ul>
-  <li>
-    <p>type - if you only require locations for a specific product, specify the product type as follows:</p>
-  </li>
-  <li>
-    <p>&amp;type=1 - parking</p>
-  </li>
-  <li>
-    <p>&amp;type=2 - hotels (with and without parking)</p>
-  </li>
-  <li>
-    <p>&amp;type=3 - lounges</p>
-  </li>
-</ul>
+<p>Product and market specific parameters:</p>
 
-<p>For European products please select</p>
+<table>
+  <thead>
+    <tr>
+      <th>Market</th>
+      <th>Product</th>
+      <th>Parameters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>UK</td>
+      <td>Parking</td>
+      <td>type=1</td>
+    </tr>
+    <tr>
+      <td>UK</td>
+      <td>Hotels</td>
+      <td>type=2</td>
+    </tr>
+    <tr>
+      <td>UK</td>
+      <td>Lounges</td>
+      <td>type=3</td>
+    </tr>
+    <tr>
+      <td>EU</td>
+      <td>Parking</td>
+      <td>type=carpark&amp;system=de</td>
+    </tr>
+    <tr>
+      <td>EU</td>
+      <td>Hotels</td>
+      <td>type=hotel&amp;system=de</td>
+    </tr>
+    <tr>
+      <td>EU</td>
+      <td>Lounges</td>
+      <td>type=lounge&amp;system=de</td>
+    </tr>
+  </tbody>
+</table>
 
-<ul>
-  <li>
-    <p>&amp;type=10 - parking</p>
-  </li>
-  <li>
-    <p>&amp;type=8  -  hotels</p>
-  </li>
-</ul>
+<h2 id="hotel-availability-response">Hotel Availability Response</h2>
 
-<h2 id="request">Request</h2>
+<p>For a detailed explanation of the fields returned, please see below:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/sandbox/v1/location?key=mytestkey
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Additional Information</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Code</td>
+      <td>Location code to be used in the product specific request.</td>
+    </tr>
+    <tr>
+      <td>Name</td>
+      <td>Location name.</td>
+    </tr>
+    <tr>
+      <td>MoreInfoURL</td>
+      <td>Link to the location entry in product library - this URL can be called to retrieve content relating to that location.</td>
+    </tr>
+    <tr>
+      <td>Type</td>
+      <td>Type of location.</td>
+    </tr>
+    <tr>
+      <td>API_Header/Request</td>
+      <td>The API returns every parameter and value you sent in the previous request.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="worked-examples">Worked Examples</h2>
+
+<p>Below are worked examples of both the requests and responses for locations.</p>
+
+<h3 id="uk-parking-location-request">UK Parking Location Request</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/location?key=YourKey&amp;token=YourToken&amp;type=1
 </code></pre>
 </div>
 
-<h2 id="reply">Reply</h2>
+<h3 id="uk-parking-location-response">UK Parking Location Response</h3>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" ?&gt;</span>
-<span class="nt">&lt;API_Reply&gt;</span>
-  <span class="nt">&lt;Product&gt;</span>
-    <span class="nt">&lt;Code&gt;</span>ABZ<span class="nt">&lt;/Code&gt;</span>
-    <span class="nt">&lt;Name&gt;</span>Aberdeen<span class="nt">&lt;/Name&gt;</span>
-    <span class="nt">&lt;MoreInfoURL&gt;</span>/sandbox/v1/product/ABZ<span class="nt">&lt;/MoreInfoURL&gt;</span>
-    <span class="nt">&lt;Type&gt;</span>airport<span class="nt">&lt;/Type&gt;</span>
-  <span class="nt">&lt;/Product&gt;</span>
-  <span class="nt">&lt;Product&gt;</span>
-    <span class="nt">&lt;Code&gt;</span>BFS<span class="nt">&lt;/Code&gt;</span>
-    <span class="nt">&lt;Name&gt;</span>Belfast<span class="nt">&lt;/Name&gt;</span>
-    <span class="nt">&lt;MoreInfoURL&gt;</span>/sandbox/v1/product/BFS<span class="nt">&lt;/MoreInfoURL&gt;</span>
-    <span class="nt">&lt;Type&gt;</span>airport<span class="nt">&lt;/Type&gt;</span>
-  <span class="nt">&lt;/Product&gt;</span>
-  <span class="nt">&lt;Product&gt;</span>
-    <span class="nt">&lt;Code&gt;</span>BHX<span class="nt">&lt;/Code&gt;</span>
-    <span class="nt">&lt;Name&gt;</span>Birmingham<span class="nt">&lt;/Name&gt;</span>
-    <span class="nt">&lt;MoreInfoURL&gt;</span>/sandbox/v1/product/BHX<span class="nt">&lt;/MoreInfoURL&gt;</span>
-    <span class="nt">&lt;Type&gt;</span>airport<span class="nt">&lt;/Type&gt;</span>
-  <span class="nt">&lt;/Product&gt;</span>
-  .
-  .
-  .
-  <span class="nt">&lt;API_Header&gt;</span>
-    <span class="nt">&lt;Request&gt;</span>
-      <span class="nt">&lt;key&gt;</span>mytestkey<span class="nt">&lt;/key&gt;</span>
-      <span class="nt">&lt;v&gt;</span>1<span class="nt">&lt;/v&gt;</span>
-    <span class="nt">&lt;/Request&gt;</span>
-  <span class="nt">&lt;/API_Header&gt;</span>
+<p>NB: This is a shortened example compiled from a full UK parking location response.</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;API_Reply</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Product&gt;</span>
+        <span class="nt">&lt;Code&gt;</span>ABZ<span class="nt">&lt;/Code&gt;</span>
+        <span class="nt">&lt;Name&gt;</span>Aberdeen<span class="nt">&lt;/Name&gt;</span>
+        <span class="nt">&lt;MoreInfoURL&gt;</span>/v1/product/ABZ<span class="nt">&lt;/MoreInfoURL&gt;</span>
+        <span class="nt">&lt;Type&gt;</span>airport<span class="nt">&lt;/Type&gt;</span>
+    <span class="nt">&lt;/Product&gt;</span>
+    <span class="nt">&lt;Product&gt;</span>
+        <span class="nt">&lt;Code&gt;</span>BFS<span class="nt">&lt;/Code&gt;</span>
+        <span class="nt">&lt;Name&gt;</span>Belfast International<span class="nt">&lt;/Name&gt;</span>
+        <span class="nt">&lt;MoreInfoURL&gt;</span>/v1/product/BFS<span class="nt">&lt;/MoreInfoURL&gt;</span>
+        <span class="nt">&lt;Type&gt;</span>airport<span class="nt">&lt;/Type&gt;</span>
+    <span class="nt">&lt;/Product&gt;</span>
+    <span class="nt">&lt;Product&gt;</span>
+        <span class="nt">&lt;Code&gt;</span>BHD<span class="nt">&lt;/Code&gt;</span>
+        <span class="nt">&lt;Name&gt;</span>Belfast City (George Best)<span class="nt">&lt;/Name&gt;</span>
+        <span class="nt">&lt;MoreInfoURL&gt;</span>/v1/product/BHD<span class="nt">&lt;/MoreInfoURL&gt;</span>
+        <span class="nt">&lt;Type&gt;</span>airport<span class="nt">&lt;/Type&gt;</span>
+    <span class="nt">&lt;/Product&gt;</span>
+ <span class="nt">&lt;API_Header&gt;</span>
+        <span class="nt">&lt;Request&gt;</span>
+            <span class="nt">&lt;ABTANumber&gt;</span>YourABTANumber<span class="nt">&lt;/ABTANumber&gt;</span>
+            <span class="nt">&lt;Password&gt;</span>YourPassword<span class="nt">&lt;/Password&gt;</span>
+            <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>
+            <span class="nt">&lt;token&gt;</span>YourToken<span class="nt">&lt;/token&gt;</span>
+            <span class="nt">&lt;type&gt;</span>1<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;key&gt;</span>mytestkey<span class="nt">&lt;/key&gt;</span>
+            <span class="nt">&lt;v&gt;</span>1<span class="nt">&lt;/v&gt;</span>
+        <span class="nt">&lt;/Request&gt;</span>
+    <span class="nt">&lt;/API_Header&gt;</span>
 <span class="nt">&lt;/API_Reply&gt;</span>
 </code></pre>
 </div>
 
-<p>One you have this information you can then get a list of all sites at this location if required, example show below:</p>
+<h3 id="eu-hotel-location-request">EU Hotel Location Request</h3>
 
-<h2 id="request-1">Request</h2>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/sandbox/v1/product/ABZ?key=mytestkey
+<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/location?key=YourKey&amp;token=YourToken&amp;type=hotel&amp;system=de
 </code></pre>
 </div>
 
-<p>For hotels we also have an option to list all of the hotel product codes, listing the location, hotel name, address and star rating</p>
+<h3 id="eu-hotel-location-response">EU Hotel Location Response</h3>
 
-<h2 id="request-2">Request</h2>
+<p>NB: This is a shortened example compiled from a full EU hotel location response.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>http://www.hxstats.co.uk/hotel-list.php
-</code></pre>
-</div>
-
-<p>For European products please find an example of a request for all available airports</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/location?key=mytestkey&amp;type=carpark&amp;system=de&amp;lang=de
-</code></pre>
-</div>
-
-<p>and in addition with specific information</p>
-
-<p>Hotels</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/sandbox/v1/product/FRA?key=mytestkey&amp;fields=latitude,longitude,address&amp;System=ABG&amp;type=8
-</code></pre>
-</div>
-
-<p>Parking</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/sandbox/v1/product/FRA?key=mytestkey&amp;fields=latitude,longitude,address&amp;System=ABG&amp;type=10
-</code></pre>
-</div>
+<p>```xml
+<?xml version="1.0"?></p>
+<API_Reply Result="OK">
+    <Product>
+        <code>AMS</code>
+        <Name>Amsterdam (Schiphol)</Name>
+        <MoreInfoURL>/v1/product/AMS</MoreInfoURL>
+        <Type>german_airport</Type>
+    </Product>
+    <Product>
+        <code>BER</code>
+        <Name>Berlin Brandenburg</Name>
+        <MoreInfoURL>/v1/product/BER</MoreInfoURL>
+        <Type>german_airport</Type>
+    </Product>
+    <Product>
+        <code>BGY</code>
+        <Name>Bergamo</Name>
+        <MoreInfoURL>/v1/product/BGY</MoreInfoURL>
+        <Type>german_airport</Type>
+    </Product>
+ <API_Header>
+        <Request>
+            <key>YourKey</key>
+            <token>YourToken</token>
+            <type>hotel</type>
+            <system>de</system>
+            <v>1</v>
+        </Request>
+    </API_Header>
+</API_Reply>
 
 </div>
 

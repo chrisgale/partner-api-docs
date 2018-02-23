@@ -93,13 +93,16 @@
 <span class="c">&lt;!-- Configure the script --&gt;</span>
 <span class="nt">&lt;script&gt;</span>
 <span class="nb">window</span><span class="p">.</span><span class="nx">hxPayment</span><span class="p">.</span><span class="nx">configure</span><span class="p">({</span>
-  <span class="na">paymentFailed</span><span class="p">:</span> <span class="kc">false</span> <span class="c1">// you will need to dynamically provide the value for this</span>
+  <span class="na">paymentFailed</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">// you will need to dynamically provide the value for this</span>
+  <span class="na">defaultToPayframe</span><span class="p">:</span> <span class="kc">true</span> <span class="c1">// you will need to set this only in your local test environment when integrating the payment script</span>
 <span class="p">})</span>
 <span class="nt">&lt;/script&gt;</span>
 </code></pre>
 </div>
 
 <p><strong>NOTE:</strong> When you’re integrating the payment script you will need to use its staging version located at https://payment-gateway-staging.holidayextras.co.uk/payment.staging.1.0.0.min.js</p>
+
+<p>The <code class="highlighter-rouge">defaultToPayframe</code> option is provided for making the integration process easier as it removes the additional security step we have in our contact centre. The solution we have requires additional telephony software that we use which is not provided with this API. Not having the telephony solution when integrating the payment script would make it impossible to complete the integration, so this option just disables that step (only in the staging environment).</p>
 
 <p>The placeholder div is used by the payment script to put the appropriate DOM elements it needs in order to get the customer card details.</p>
 

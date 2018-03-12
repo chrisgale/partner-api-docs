@@ -29,92 +29,215 @@
         <div class="panel panel-primary">
           <div class="panel-heading"><div class="h1">Holiday Extras API</div></div>
             <div class="panel-body">
-  <h1 id="cancel-booking">Cancel booking</h1>
+  <h1 id="cancel-booking---de-start-method">Cancel Booking - DE Start Method</h1>
 
-<h2 id="bookingyourbookingref">/booking/YourBookingRef</h2>
+<h2 id="cancel-booking-request">Cancel Booking Request</h2>
 
-<p>e.g. https://api.holidayextras.co.uk/de-start/v1/sandbox/booking/10051848</p>
+<p>Cancelling a booking is a two-stage process:</p>
+
+<ol>
+  <li>Check if the booking is cancellable, and any charges for doing so, using the GET method outlined below;</li>
+  <li>Cancel the booking using the POST method outlined below.</li>
+</ol>
 
 <h3 id="method">Method</h3>
 
-<p>Post</p>
+<p>GET / POST</p>
 
-<h3 id="different-requests">Different requests</h3>
+<h3 id="endpoint">Endpoint</h3>
 
-<p>The cancel has 2 modes which differ only in the value of the ConfirmCancel parameter. You should first send ConfirmCancel=N. This dry-run will advise on any cancellation charges. Once the customer has agreed these with the agent, you should send the same request but with ConfirmCancel set to Y.</p>
+<p>The endpoint to use is (where <code class="highlighter-rouge">YourBookingRef</code> is the Holiday Extras booking reference):</p>
 
-<h3 id="parameters">Parameters</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>https://payment.holidayextras.co.uk/legacy/booking/YourBookingRef
+</code></pre>
+</div>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<h4 id="step-1-check-if-booking-is-cancellable-get">Step 1: Check if booking is cancellable (GET)</h4>
+
+<p>NB: All parameter names are case sensitive.</p>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
-      <th>Type</th>
+      <th>Data Type</th>
       <th>Format</th>
-      <th>Required</th>
+      <th>Mandatory?</th>
+      <th>Additional Information</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>StartCustomer</td>
       <td>String</td>
-      <td>[0-9]{6}</td>
+      <td>[0-9] 6 chars</td>
       <td>Y</td>
+      <td>This will be assigned to you by your Account Manager during set up.</td>
     </tr>
     <tr>
       <td>BusinessUnit</td>
       <td>String</td>
-      <td>[0-9]{3}</td>
+      <td>0-9] 3 chars</td>
       <td>Y</td>
+      <td>This will be assigned to you by your Account Manager during set up.</td>
     </tr>
     <tr>
       <td>Operator</td>
       <td>String</td>
-      <td>[A-Z]{3}</td>
+      <td>[A-Z] 3 chars</td>
       <td>Y</td>
-    </tr>
-    <tr>
-      <td>ConfirmCancel</td>
-      <td>String</td>
-      <td>[Y,N]</td>
-      <td>Y</td>
+      <td>This always defaults to <code class="highlighter-rouge">BJT</code>.</td>
     </tr>
     <tr>
       <td>key</td>
       <td>String</td>
-      <td> </td>
+      <td>[A-Z]</td>
       <td>Y</td>
+      <td>This will be assigned to you by your Account Manager during set up.</td>
     </tr>
     <tr>
       <td>token</td>
       <td>String</td>
-      <td>[0-9]{9}</td>
+      <td>[0-9] 9 chars</td>
       <td>Y</td>
+      <td>This is the same token used in the availability request.</td>
+    </tr>
+    <tr>
+      <td>ConfirmCancel</td>
+      <td>String</td>
+      <td>1 chars</td>
+      <td>Y</td>
+      <td>Set this to <code class="highlighter-rouge">N</code> for this initial step.</td>
+    </tr>
+    <tr>
+      <td>CancelRef</td>
+      <td>String</td>
+      <td>[A-Z] 10 chars</td>
+      <td>Y</td>
+      <td>The reference for the cancellation, e.g. agent’s initials.</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="request">Request</h3>
+<h4 id="step-2-cancel-booking-post">Step 2: Cancel booking (POST)</h4>
 
-<p>Dry-run</p>
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/de-start/v1/sandbox/booking/10213896?StartCustomer=111111<span class="err">&amp;</span>BusinessUnit=222<span class="err">&amp;</span>Operator=BJT<span class="err">&amp;</span>key=YourKey<span class="err">&amp;</span>ConfirmCancel=N<span class="err">&amp;</span>CancelRef=TestCnx
+<p>NB: All parameter names are case sensitive.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Data Type</th>
+      <th>Format</th>
+      <th>Mandatory?</th>
+      <th>Additional Information</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>StartCustomer</td>
+      <td>String</td>
+      <td>[0-9] 6 chars</td>
+      <td>Y</td>
+      <td>This will be assigned to you by your Account Manager during set up.</td>
+    </tr>
+    <tr>
+      <td>BusinessUnit</td>
+      <td>String</td>
+      <td>0-9] 3 chars</td>
+      <td>Y</td>
+      <td>This will be assigned to you by your Account Manager during set up.</td>
+    </tr>
+    <tr>
+      <td>Operator</td>
+      <td>String</td>
+      <td>[A-Z] 3 chars</td>
+      <td>Y</td>
+      <td>This always defaults to <code class="highlighter-rouge">BJT</code>.</td>
+    </tr>
+    <tr>
+      <td>key</td>
+      <td>String</td>
+      <td>[A-Z]</td>
+      <td>Y</td>
+      <td>This will be assigned to you by your Account Manager during set up.</td>
+    </tr>
+    <tr>
+      <td>token</td>
+      <td>String</td>
+      <td>[0-9] 9 chars</td>
+      <td>Y</td>
+      <td>This is the same token used in the availability request.</td>
+    </tr>
+    <tr>
+      <td>ConfirmCancel</td>
+      <td>String</td>
+      <td>1 chars</td>
+      <td>Y</td>
+      <td>Set this to <code class="highlighter-rouge">N</code> for this initial step.</td>
+    </tr>
+    <tr>
+      <td>CancelRef</td>
+      <td>String</td>
+      <td>[A-Z] 10 chars</td>
+      <td>Y</td>
+      <td>The reference for the cancellation, e.g. agent’s initials.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="cancel-booking-response---de-start-method">Cancel Booking Response - DE-Start Method</h2>
+
+<p>The cancel booking response will confirm that a booking has been cancelled in our system.</p>
+
+<p>For a detailed explanation of the fields returned, please see below:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Additional Information</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Booking/BookingRef</td>
+      <td>This is the reference for this booking. It must be referred to in all communication with us concerning this booking. <br />NB: Our booking references are 5 char alphanumeric (including 1/I and 0/O/Q).</td>
+    </tr>
+    <tr>
+      <td>Cancel/RefundAmount</td>
+      <td>This shows the amount to be refunded to the customer.</td>
+    </tr>
+    <tr>
+      <td>API_Header/Request</td>
+      <td>A list of parameters that were sent in the booking request.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="credit-card-fees">Credit Card Fees</h3>
+
+<p>As of 12th January 2018 we no longer charge credit card fees, in line with the Payment Services Directive (PSD2). This applies to both UK and EU products.</p>
+
+<h2 id="worked-examples">Worked examples</h2>
+
+<p>Below are worked examples of both the request and response for cancelling a booking.</p>
+
+<h3 id="cancel-booking-request---step-1">Cancel Booking Request - Step 1</h3>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://payment.holidayextras.co.uk/legacy/booking/YourBookingRef?BusinessUnit=YourBusinessUnit<span class="err">&amp;</span>ConfirmCancel=N<span class="err">&amp;</span>Operator=BJT<span class="err">&amp;</span>SStartCustomer=YourStartCustomer<span class="err">&amp;</span>key=YourKey<span class="err">&amp;</span>token=YourToken<span class="err">&amp;</span>CancelRef=YourCancelRef
 </code></pre>
 </div>
 
-<p>Confirmed cancel</p>
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/de-start/v1/sandbox/booking/10213896?StartCustomer=111111<span class="err">&amp;</span>BusinessUnit=222<span class="err">&amp;</span>Operator=BJT<span class="err">&amp;</span>key=YourKey<span class="err">&amp;</span>CancelRef=HolidayCancelled<span class="err">&amp;</span>ConfirmCancel=Y
-</code></pre>
-</div>
+<h3 id="cancel-booking-response---step-1">Cancel Booking Response - Step 1</h3>
 
-<h3 id="response">Response</h3>
-
-<p>Dry-run</p>
 <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" ?&gt;</span>
-
 <span class="nt">&lt;API_Reply</span> <span class="na">System=</span><span class="s">"ABG"</span> <span class="na">Version=</span><span class="s">"1.0"</span> <span class="na">Product=</span><span class="s">"Cancel"</span> <span class="na">Customer=</span><span class="s">"A"</span> <span class="na">Session=</span><span class="s">"123456789"</span> <span class="na">RequestCode=</span><span class="s">"9"</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;Booking&gt;</span>
-    <span class="nt">&lt;BookingRef&gt;</span>DZN32<span class="nt">&lt;/BookingRef&gt;</span>
-    <span class="nt">&lt;StartRef&gt;</span>10213897<span class="nt">&lt;/StartRef&gt;</span>
+    <span class="nt">&lt;BookingRef&gt;</span>YourBookingRef<span class="nt">&lt;/BookingRef&gt;</span>
+    <span class="nt">&lt;StartRef&gt;</span>YourStartRef<span class="nt">&lt;/StartRef&gt;</span>
   <span class="nt">&lt;/Booking&gt;</span>
   <span class="nt">&lt;Cancel&gt;</span>
     <span class="nt">&lt;CancelFee&gt;</span>0.00<span class="nt">&lt;/CancelFee&gt;</span>
@@ -122,13 +245,13 @@
   <span class="nt">&lt;/Cancel&gt;</span>
   <span class="nt">&lt;API_Header&gt;</span>
     <span class="nt">&lt;Request&gt;</span>
-      <span class="nt">&lt;BusinessUnit&gt;</span>222<span class="nt">&lt;/BusinessUnit&gt;</span>
+      <span class="nt">&lt;BusinessUnit&gt;</span>YourBusinessUnit<span class="nt">&lt;/BusinessUnit&gt;</span>
       <span class="nt">&lt;ConfirmCancel&gt;</span>N<span class="nt">&lt;/ConfirmCancel&gt;</span>
       <span class="nt">&lt;Operator&gt;</span>BJT<span class="nt">&lt;/Operator&gt;</span>
-      <span class="nt">&lt;StartCustomer&gt;</span>111111<span class="nt">&lt;/StartCustomer&gt;</span>
+      <span class="nt">&lt;StartCustomer&gt;</span>YourStartCustomer<span class="nt">&lt;/StartCustomer&gt;</span>
       <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>
-      <span class="nt">&lt;token&gt;</span>123456789<span class="nt">&lt;/token&gt;</span>
-      <span class="nt">&lt;CancelRef&gt;</span>testcanx<span class="nt">&lt;/CancelRef&gt;</span>
+      <span class="nt">&lt;token&gt;</span>YourToken<span class="nt">&lt;/token&gt;</span>
+      <span class="nt">&lt;CancelRef&gt;</span>YourCancelRef<span class="nt">&lt;/CancelRef&gt;</span>
       <span class="nt">&lt;system&gt;</span>de<span class="nt">&lt;/system&gt;</span>
       <span class="nt">&lt;System&gt;</span>ABG<span class="nt">&lt;/System&gt;</span>
     <span class="nt">&lt;/Request&gt;</span>
@@ -137,28 +260,46 @@
 </code></pre>
 </div>
 
-<p>Confirmed cancel</p>
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" ?&gt;</span>
+<h3 id="cancel-booking-request---step-2">Cancel Booking Request - Step 2</h3>
 
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://payment.holidayextras.co.uk/legacy/booking/YourBookingRef
+</code></pre>
+</div>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>    <span class="nt">&lt;Request&gt;</span>
+        <span class="nt">&lt;BusinessUnit&gt;</span>YourBusinessUnit<span class="nt">&lt;/BusinessUnit&gt;</span>
+        <span class="nt">&lt;ConfirmCancel&gt;</span>Y<span class="nt">&lt;/ConfirmCancel&gt;</span>
+        <span class="nt">&lt;Operator&gt;</span>BJT<span class="nt">&lt;/Operator&gt;</span>
+        <span class="nt">&lt;StartCustomer&gt;</span>YourStartCustomer<span class="nt">&lt;/StartCustomer&gt;</span>
+        <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>
+        <span class="nt">&lt;token&gt;</span>YourToken<span class="nt">&lt;/token&gt;</span>
+        <span class="nt">&lt;CancelRef&gt;</span>YourCancelRef<span class="nt">&lt;/CancelRef&gt;</span>
+    <span class="nt">&lt;/Request&gt;</span>
+</code></pre>
+</div>
+
+<h3 id="cancel-booking-response---step-2">Cancel Booking Response - Step 2</h3>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" ?&gt;</span>
 <span class="nt">&lt;API_Reply</span> <span class="na">System=</span><span class="s">"ABG"</span> <span class="na">Version=</span><span class="s">"1.0"</span> <span class="na">Product=</span><span class="s">"Cancel"</span> <span class="na">Customer=</span><span class="s">"A"</span> <span class="na">Session=</span><span class="s">"123456789"</span> <span class="na">RequestCode=</span><span class="s">"9"</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;Booking&gt;</span>
-    <span class="nt">&lt;BookingRef&gt;</span>DZN31<span class="nt">&lt;/BookingRef&gt;</span>
-    <span class="nt">&lt;StartRef&gt;</span>10213896<span class="nt">&lt;/StartRef&gt;</span>
+    <span class="nt">&lt;BookingRef&gt;</span>YourBookingRef<span class="nt">&lt;/BookingRef&gt;</span>
+    <span class="nt">&lt;StartRef&gt;</span>YourStartRef<span class="nt">&lt;/StartRef&gt;</span>
   <span class="nt">&lt;/Booking&gt;</span>
   <span class="nt">&lt;Cancel&gt;</span>
     <span class="nt">&lt;CancelFee&gt;</span>0.00<span class="nt">&lt;/CancelFee&gt;</span>
-    <span class="nt">&lt;CancelRef&gt;</span>70619<span class="nt">&lt;/CancelRef&gt;</span>
+    <span class="nt">&lt;CancelRef&gt;</span>YourCancelRef<span class="nt">&lt;/CancelRef&gt;</span>
     <span class="nt">&lt;CancelInfo&gt;</span>Bitten Sie um R<span class="ni">&amp;#252;</span>ckgabe des Kundenvouchers, da er seine G<span class="ni">&amp;#252;</span>ltigkeit nicht verliert<span class="nt">&lt;/CancelInfo&gt;</span>
   <span class="nt">&lt;/Cancel&gt;</span>
   <span class="nt">&lt;API_Header&gt;</span>
     <span class="nt">&lt;Request&gt;</span>
-      <span class="nt">&lt;BusinessUnit&gt;</span>222<span class="nt">&lt;/BusinessUnit&gt;</span>
-      <span class="nt">&lt;CancelRef&gt;</span>TestCnx<span class="nt">&lt;/CancelRef&gt;</span>
+      <span class="nt">&lt;BusinessUnit&gt;</span>YourBusinessUnit<span class="nt">&lt;/BusinessUnit&gt;</span>
+      <span class="nt">&lt;CancelRef&gt;</span>YourCancelRef<span class="nt">&lt;/CancelRef&gt;</span>
       <span class="nt">&lt;ConfirmCancel&gt;</span>Y<span class="nt">&lt;/ConfirmCancel&gt;</span>
       <span class="nt">&lt;Operator&gt;</span>BJT<span class="nt">&lt;/Operator&gt;</span>
-      <span class="nt">&lt;StartCustomer&gt;</span>123456<span class="nt">&lt;/StartCustomer&gt;</span>
+      <span class="nt">&lt;StartCustomer&gt;</span>YourStartCustomer<span class="nt">&lt;/StartCustomer&gt;</span>
       <span class="nt">&lt;key&gt;</span>YourKey<span class="nt">&lt;/key&gt;</span>
-      <span class="nt">&lt;token&gt;</span>123456789<span class="nt">&lt;/token&gt;</span>
+      <span class="nt">&lt;token&gt;</span>YourToken<span class="nt">&lt;/token&gt;</span>
       <span class="nt">&lt;system&gt;</span>de<span class="nt">&lt;/system&gt;</span>
       <span class="nt">&lt;System&gt;</span>ABG<span class="nt">&lt;/System&gt;</span>
     <span class="nt">&lt;/Request&gt;</span>

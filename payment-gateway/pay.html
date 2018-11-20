@@ -45,9 +45,8 @@
 
 <p>To make a payment, the endpoint to use is:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>https://payment-gateway.holidayextras.co.uk/pay
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://payment-gateway.holidayextras.co.uk/pay
+</code></pre></div></div>
 
 <h3 id="request-headers">Request Headers</h3>
 
@@ -179,37 +178,34 @@
 <code class="highlighter-rouge">Accept: application/vnd.holidayextras.v1+json</code> <br />
 <code class="highlighter-rouge">Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"paymentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"testPaymentId"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4111111111111111"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"paymentReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"testPaymentRef"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "channel": "channel",
+  "paymentId": "testPaymentId",
+  "token": "4111111111111111",
+  "paymentReference": "testPaymentRef",
+  "amount": "1234"
+}
+</code></pre></div></div>
 
 <h3 id="payment-response-1">Payment Response</h3>
 
 <h4 id="successful-payment">Successful payment</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.34</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"testPaymentId"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+    "amount": 12.34,
+    "id": "testPaymentId",
+    "status": "SUCCESS"
+}
+</code></pre></div></div>
 
 <h4 id="failed-payment">Failed payment</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.34</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FAIL"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failed to make payment"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+    "amount": 12.34,
+    "status": "FAIL",
+    "error": "Failed to make payment"
+}
+</code></pre></div></div>
 
 </div>
 

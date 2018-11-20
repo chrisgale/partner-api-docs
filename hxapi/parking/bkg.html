@@ -43,15 +43,13 @@
 
 <p>The endpoint to use is:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/carpark/CarParkCode
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/carpark/CarParkCode
+</code></pre></div></div>
 
 <p>For example, for <em>Maple Manor Meet and Greet at London Gatwick North terminal</em> the endpoint is:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/carpark/LGW4
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/carpark/LGW4
+</code></pre></div></div>
 
 <h3 id="request-parameters">Request Parameters</h3>
 
@@ -245,9 +243,8 @@
 <p>It is important that the customer has access to the Terms and Conditions at the time of placing their booking and after. We highly recommend that these are made clear to the customer <em>before</em> booking.</p>
 
 <p>For European products, please use the following link:</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>http://www.holidayextras.de/images/de-hx/pdf/agb.pdf
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://www.holidayextras.de/images/de-hx/pdf/agb.pdf
+</code></pre></div></div>
 
 <p>If you require translations of Terms and Conditions into other languages, you can simply change <code class="highlighter-rouge">/de-hx/</code> (German) into <code class="highlighter-rouge">nl-hx</code> (Dutch), <code class="highlighter-rouge">it-hex</code> (Italian), <code class="highlighter-rouge">pt-hx</code> (Portuguese), <code class="highlighter-rouge">fr-hx</code> (French), <code class="highlighter-rouge">es-hx</code> (Spanish) or <code class="highlighter-rouge">en-hx</code> (English).</p>
 
@@ -312,11 +309,10 @@
 
 <h3 id="uk-products-booking-request">UK Products Booking Request</h3>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/carpark/LGW4
-</code></pre>
-</div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://api.holidayextras.co.uk/carpark/LGW4
+</code></pre></div></div>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code>    <span class="nt">&lt;Request&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;Request&gt;</span>
         <span class="nt">&lt;ABTANumber&gt;</span>YourABTA<span class="nt">&lt;/ABTANumber&gt;</span>
         <span class="nt">&lt;Password&gt;</span>YourPassword<span class="nt">&lt;/Password&gt;</span>
         <span class="nt">&lt;Initials&gt;</span>YourInitials<span class="nt">&lt;/Initials&gt;</span>
@@ -348,12 +344,11 @@
         <span class="nt">&lt;ReturnTerminal&gt;</span>N<span class="nt">&lt;/ReturnTerminal&gt;</span>
         <span class="nt">&lt;MobileNum&gt;</span>01234567890<span class="nt">&lt;/MobileNum&gt;</span>
     <span class="nt">&lt;/Request&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="uk-products-booking-response">UK Products Booking Response</h3>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;API_Reply</span> <span class="na">Product=</span><span class="s">"CarPark"</span> <span class="na">RequestCode=</span><span class="s">"5"</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;Booking&gt;</span>
         <span class="nt">&lt;BookingRef&gt;</span>YourBookingRef<span class="nt">&lt;/BookingRef&gt;</span>
@@ -430,16 +425,14 @@
         <span class="nt">&lt;/Request&gt;</span>
     <span class="nt">&lt;/API_Header&gt;</span>
 <span class="nt">&lt;/API_Reply&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="european-products-booking-request">European Products Booking Request</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/carpark/MU01
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://api.holidayextras.co.uk/carpark/MU01
+</code></pre></div></div>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;Request&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;Request&gt;</span>
             <span class="nt">&lt;ABTANumber&gt;</span>YourABTANumber<span class="nt">&lt;/ABTANumber&gt;</span>
             <span class="nt">&lt;Password&gt;</span>YourPassword<span class="nt">&lt;/Password&gt;</span>
             <span class="nt">&lt;Initials&gt;</span>YourInitials<span class="nt">&lt;/Initials&gt;</span>
@@ -465,8 +458,7 @@
             <span class="nt">&lt;InFltNo&gt;</span>EZY8985<span class="nt">&lt;/InFltNo&gt;</span>
             <span class="nt">&lt;InFltTime&gt;</span>1130<span class="nt">&lt;/InFltTime&gt;</span>
         <span class="nt">&lt;/Request&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The <code class="highlighter-rouge">PdfUrl</code> field contains a URL that can be used to retrieve a PDF copy of
 the confirmation email. Note that you will need to append the fields
@@ -476,7 +468,7 @@ the confirmation email. Note that you will need to append the fields
 
 <h3 id="european-products-booking-response">European Products Booking Response</h3>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;API_Reply</span> <span class="na">Product=</span><span class="s">"CarPark"</span> <span class="na">RequestCode=</span><span class="s">"4"</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;Booking&gt;</span>
         <span class="nt">&lt;BookingRef&gt;</span>YourBookingRef<span class="nt">&lt;/BookingRef&gt;</span>
@@ -546,8 +538,7 @@ the confirmation email. Note that you will need to append the fields
         <span class="nt">&lt;/Request&gt;</span>
     <span class="nt">&lt;/API_Header&gt;</span>
 <span class="nt">&lt;/API_Reply&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The <code class="highlighter-rouge">PdfUrl</code> field contains a URL that can be used to retrieve a PDF copy of
 the confirmation email. Note that you will need to append the fields

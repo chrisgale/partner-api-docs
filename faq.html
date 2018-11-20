@@ -73,13 +73,12 @@ Expiry - 05/17</p>
 
 <p>Intermediaries must calculate the credit card surcharge using the logic below.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>x = ((TotalPrice + CanxWaiver) / 100 ) * CCardSurchargePercent
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x = ((TotalPrice + CanxWaiver) / 100 ) * CCardSurchargePercent
 if( x &lt; CCardSurchargeMin)
   x = CCardSurchargeMin
 else if x &gt; CCardSurchargeMax
   x = CCardSurchargeMax
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="the-prices-returned-are-they-net-or-with-markup-already-added">The prices returned, are they net or with markup already added?</h2>
 
@@ -90,12 +89,11 @@ else if x &gt; CCardSurchargeMax
 <p>The cost of the Credit Card surcharge applies to the price of parking + cancellation waiver (if taken).</p>
 
 <p>So in the reply for a booking request you may see something like this:</p>
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;AmountPaid&gt;</span>43.56<span class="nt">&lt;/AmountPaid&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;AmountPaid&gt;</span>43.56<span class="nt">&lt;/AmountPaid&gt;</span>
 <span class="nt">&lt;TotalPrice&gt;</span>42.06<span class="nt">&lt;/TotalPrice&gt;</span>
 <span class="nt">&lt;CCSurchargeAmount&gt;</span>1.50<span class="nt">&lt;/CCSurchargeAmount&gt;</span>
 <span class="nt">&lt;CanxWaiver&gt;</span>0.50<span class="nt">&lt;/CanxWaiver&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>You may expect <code class="highlighter-rouge">&lt;AmountPaid&gt;</code> to total £44.06 (because 42.06 + 1.50 + 0.50 = 44.06). This is not an error, the <code class="highlighter-rouge">&lt;CanxWaiver&gt;</code> amount has already been added to the parking price of £41.56 to create <code class="highlighter-rouge">&lt;TotalPrice&gt;</code>, and the credit card surcharge is then applied to that value, giving <code class="highlighter-rouge">&lt;AmountPaid&gt;</code>.</p>
 

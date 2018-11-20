@@ -323,13 +323,12 @@
 <h3 id="requests">Requests</h3>
 
 <p>znt -&gt; api</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/de-start/sandbox/v1/booking/10524994/?BookingRef=FBKM6&amp;BusinessUnit=001&amp;CarDropoffTime=1200&amp;CarPickupTime=1300&amp;Confirmation=Y&amp;County=testcountyaenderung&amp;Email=test.email&amp;Initial=T&amp;Operator=BJT&amp;Remarks=test&amp;Surname=Testnameaenderung&amp;Title=Herr&amp;TraveltainmentCustomer=111111&amp;holidayextras.com=&amp;key=YourKey
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://api.holidayextras.co.uk/de-start/sandbox/v1/booking/10524994/?BookingRef=FBKM6&amp;BusinessUnit=001&amp;CarDropoffTime=1200&amp;CarPickupTime=1300&amp;Confirmation=Y&amp;County=testcountyaenderung&amp;Email=test.email&amp;Initial=T&amp;Operator=BJT&amp;Remarks=test&amp;Surname=Testnameaenderung&amp;Title=Herr&amp;TraveltainmentCustomer=111111&amp;holidayextras.com=&amp;key=YourKey
+</code></pre></div></div>
 
 <p>api -&gt; chauntry</p>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;API_Request</span> <span class="na">System=</span><span class="s">"ABG"</span> <span class="na">Version=</span><span class="s">"1.0"</span> <span class="na">Product=</span><span class="s">"General"</span> <span class="na">Customer=</span><span class="s">"A"</span> <span class="na">RequestCode=</span><span class="s">"24"</span> <span class="na">Session=</span><span class="s">"999999999"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;API_Request</span> <span class="na">System=</span><span class="s">"ABG"</span> <span class="na">Version=</span><span class="s">"1.0"</span> <span class="na">Product=</span><span class="s">"General"</span> <span class="na">Customer=</span><span class="s">"A"</span> <span class="na">RequestCode=</span><span class="s">"24"</span> <span class="na">Session=</span><span class="s">"999999999"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;Agent&gt;</span>
         <span class="nt">&lt;TraveltainmentCustomer&gt;</span>111111<span class="nt">&lt;/TraveltainmentCustomer&gt;</span>
         <span class="nt">&lt;BusinessUnit&gt;</span>001<span class="nt">&lt;/BusinessUnit&gt;</span>
@@ -393,12 +392,11 @@
         <span class="nt">&lt;InvEmail&gt;</span>test.email<span class="nt">&lt;/InvEmail&gt;</span>
     <span class="nt">&lt;/ClientDetails&gt;</span>
 <span class="nt">&lt;/API_Request&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>chauntry -&gt; api</p>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;API_Reply</span> <span class="na">System=</span><span class="s">"ABG"</span> <span class="na">Version=</span><span class="s">"1.0"</span> <span class="na">Product=</span><span class="s">"General"</span> <span class="na">Customer=</span><span class="s">"A"</span> <span class="na">Session=</span><span class="s">"999999999"</span> <span class="na">RequestCode=</span><span class="s">"24"</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;API_Reply</span> <span class="na">System=</span><span class="s">"ABG"</span> <span class="na">Version=</span><span class="s">"1.0"</span> <span class="na">Product=</span><span class="s">"General"</span> <span class="na">Customer=</span><span class="s">"A"</span> <span class="na">Session=</span><span class="s">"999999999"</span> <span class="na">RequestCode=</span><span class="s">"24"</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;AGENT&gt;</span>
         <span class="nt">&lt;TRAVELTAINMENTCUSTOMER&gt;</span>111111<span class="nt">&lt;/TRAVELTAINMENTCUSTOMER&gt;</span>
         <span class="nt">&lt;BUSINESSUNIT&gt;</span>001<span class="nt">&lt;/BUSINESSUNIT&gt;</span>
@@ -483,14 +481,13 @@
         <span class="nt">&lt;/Request&gt;</span>
     <span class="nt">&lt;/API_Header&gt;</span>
 <span class="nt">&lt;/API_Reply&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>api -&gt; znt</p>
 
 <p>Note this is the same as request chauntry -&gt; api</p>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;API_Reply</span> <span class="na">System=</span><span class="s">"ABG"</span> <span class="na">Version=</span><span class="s">"1.0"</span> <span class="na">Product=</span><span class="s">"General"</span> <span class="na">Customer=</span><span class="s">"A"</span> <span class="na">Session=</span><span class="s">"999999999"</span> <span class="na">RequestCode=</span><span class="s">"24"</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;API_Reply</span> <span class="na">System=</span><span class="s">"ABG"</span> <span class="na">Version=</span><span class="s">"1.0"</span> <span class="na">Product=</span><span class="s">"General"</span> <span class="na">Customer=</span><span class="s">"A"</span> <span class="na">Session=</span><span class="s">"999999999"</span> <span class="na">RequestCode=</span><span class="s">"24"</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;AGENT&gt;</span>
         <span class="nt">&lt;TRAVELTAINMENTCUSTOMER&gt;</span>111111<span class="nt">&lt;/TRAVELTAINMENTCUSTOMER&gt;</span>
         <span class="nt">&lt;BUSINESSUNIT&gt;</span>001<span class="nt">&lt;/BUSINESSUNIT&gt;</span>
@@ -575,8 +572,7 @@
         <span class="nt">&lt;/Request&gt;</span>
     <span class="nt">&lt;/API_Header&gt;</span>
 <span class="nt">&lt;/API_Reply&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="request-fields-explained">Request Fields Explained</h3>
 

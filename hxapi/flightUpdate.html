@@ -45,9 +45,8 @@
 
 <p>The endpoint to use is:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/flightUpdate
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/flightUpdate
+</code></pre></div></div>
 
 <h3 id="request-parameters">Request Parameters</h3>
 
@@ -174,26 +173,25 @@
 
 <p>The above below shows two booking being sent, which each booking object as an element of the array:</p>
 
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"hx_booking_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HX123"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"partner_booking_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AB123"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customer1@hx.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"arrival"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-04T12:12:12Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"depart"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-04T12:12:12Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+    </span><span class="s2">"hx_booking_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HX123"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"partner_booking_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AB123"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customer1@hx.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"arrival"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-04T12:12:12Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"depart"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-04T12:12:12Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"hx_booking_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HX124"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"partner_booking_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AB124"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customer2@hx.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"arrival"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-04T12:12:12+0100"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"depart"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-04T12:12:12+0100"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+    </span><span class="s2">"hx_booking_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HX124"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"partner_booking_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AB124"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customer2@hx.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"arrival"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-04T12:12:12+0100"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"depart"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-04T12:12:12+0100"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <h2 id="partner-notification">Partner Notification</h2>
 
@@ -201,20 +199,19 @@
 
 <p>The body of this POST request will contain well formed JSON in the following format:</p>
 
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"partner_booking_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AB123"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="w">
+    </span><span class="s2">"partner_booking_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AB123"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"partner_booking_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AB124"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERR"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"booking not found"</span><span class="w">
+    </span><span class="s2">"partner_booking_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AB124"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERR"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"booking not found"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <p>The example above shows two bookings that have been processed, the first update has succeeded, but the second has failed.</p>
 

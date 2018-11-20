@@ -33,45 +33,41 @@
 
 <p><a href="/hxapi/">API Docs</a> &gt; product:<a href="/hxapi/carhire">Car Hire</a> &gt; endpoint:<a href="locations">locations</a></p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>GET: /carHire/locations
-</code></pre>
-</div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET: /carHire/locations
+</code></pre></div></div>
 
 <h2 id="request">Request</h2>
 
 <p>The following GET parameters are mandatory:</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="s2">"key"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
-<span class="s2">"Query"</span><span class="err">:</span> <span class="s2">"London"</span>
-</code></pre>
-</div>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"key"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="s2">"Query"</span><span class="p">:</span> <span class="s2">"London"</span>
+</code></pre></div></div>
 
 <p>Query searches against name and/or country_name.</p>
 
 <p>Example request:</p>
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/sandbox/carHire/locations.js?key=1<span class="err">&amp;</span>Query=London
-</code></pre>
-</div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/sandbox/carHire/locations.js?key=1<span class="err">&amp;</span>Query=London
+</code></pre></div></div>
 
 <h2 id="response">Response</h2>
 
 <p>Car Hire returns a list of locations, including a location code, name and country. The location code can be used as part of an Availability request when searching for Pickup or Dropoff locations.</p>
 
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"API_Reply"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"Locations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"API_Reply"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"Locations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FL965"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amsterdam (Schipol) Airport"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netherlands"</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FL965"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amsterdam (Schipol) Airport"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netherlands"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="err">...</span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 </div>
 

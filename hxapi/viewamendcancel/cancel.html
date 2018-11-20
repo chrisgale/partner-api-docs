@@ -50,9 +50,8 @@
 
 <p>The endpoint to use is (where <code class="highlighter-rouge">YourBookingRef</code> is the Holiday Extras booking reference):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/booking/YourBookingRef
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/booking/YourBookingRef
+</code></pre></div></div>
 
 <h3 id="request-parameters">Request Parameters</h3>
 
@@ -243,13 +242,12 @@
 
 <h3 id="cancel-booking-request---step-1">Cancel Booking Request - Step 1</h3>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/booking/YourBookingRef?ABTANumber=YourABTANumber<span class="err">&amp;</span>Password=YourPassword<span class="err">&amp;</span>key=YourKey<span class="err">&amp;</span>token=YourToken<span class="err">&amp;</span>ConfirmCancel=N<span class="err">&amp;</span>CancelRef=YourCancelRef
-</code></pre>
-</div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/booking/YourBookingRef?ABTANumber=YourABTANumber<span class="err">&amp;</span>Password=YourPassword<span class="err">&amp;</span>key=YourKey<span class="err">&amp;</span>token=YourToken<span class="err">&amp;</span>ConfirmCancel=N<span class="err">&amp;</span>CancelRef=YourCancelRef
+</code></pre></div></div>
 
 <h3 id="cancel-booking-response---step-1">Cancel Booking Response - Step 1</h3>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;API_Reply</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;Booking&gt;</span>
         <span class="nt">&lt;BookingRef&gt;</span>YourBookingRef<span class="nt">&lt;/BookingRef&gt;</span>
@@ -272,16 +270,14 @@
         <span class="nt">&lt;/Request&gt;</span>
     <span class="nt">&lt;/API_Header&gt;</span>
 <span class="nt">&lt;/API_Reply&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="cancel-booking-request---step-2">Cancel Booking Request - Step 2</h3>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/booking/YourBookingRef
-</code></pre>
-</div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://api.holidayextras.co.uk/v1/booking/YourBookingRef
+</code></pre></div></div>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code>    <span class="nt">&lt;Request&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;Request&gt;</span>
         <span class="nt">&lt;ABTANumber&gt;</span>YourABTA<span class="nt">&lt;/ABTANumber&gt;</span>
         <span class="nt">&lt;Password&gt;</span>YourPassword<span class="nt">&lt;/Password&gt;</span>
         <span class="nt">&lt;Initials&gt;</span>YourInitials<span class="nt">&lt;/Initials&gt;</span>
@@ -290,12 +286,11 @@
         <span class="nt">&lt;ConfirmCancel&gt;</span>Y<span class="nt">&lt;/ConfirmCancel&gt;</span>
         <span class="nt">&lt;CancelRef&gt;</span>YourCancelRef<span class="nt">&lt;/CancelRef&gt;</span>
     <span class="nt">&lt;/Request&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="cancel-booking-response---step-2">Cancel Booking Response - Step 2</h3>
 
-<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;API_Reply</span> <span class="na">Result=</span><span class="s">"OK"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;Booking&gt;</span>
         <span class="nt">&lt;BookingRef&gt;</span>YourBookingRef<span class="nt">&lt;/BookingRef&gt;</span>
@@ -318,8 +313,7 @@
         <span class="nt">&lt;/Request&gt;</span>
     <span class="nt">&lt;/API_Header&gt;</span>
 <span class="nt">&lt;/API_Reply&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="cancelling-bookings-made-with-a-credit-or-debit-card">Cancelling bookings made with a credit or debit card</h2>
 
@@ -346,9 +340,8 @@
 
 <p>The cancellation request must be POSTed against the following endpoint:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>https://payment.holidayextras.co.uk/legacy/
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://payment.holidayextras.co.uk/legacy/
+</code></pre></div></div>
 
 </div>
 

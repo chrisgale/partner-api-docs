@@ -139,7 +139,7 @@
     <tr>
       <td>Title</td>
       <td>String</td>
-      <td>[0-9] 4 chars</td>
+      <td>[A-Z] 4 chars</td>
       <td>Y</td>
       <td>Title of lead passenger</td>
     </tr>
@@ -153,49 +153,49 @@
     <tr>
       <td>Surname</td>
       <td>String</td>
-      <td>[0-9] 20 chars</td>
+      <td>[A-Z] 20 chars</td>
       <td>Y</td>
       <td>Surname of lead passenger</td>
     </tr>
     <tr>
       <td>Address[]</td>
       <td>String</td>
-      <td>[0-9] 20 chars</td>
+      <td>[A-Z0-9] 25 chars</td>
       <td>Y</td>
       <td>First line of address (house name / number and road) of lead passenger <br />If you require more than 1 address line, then you can replicate this field and increment the number in square brackets, i.e. “Address[1]” for address line 2, and so on.<br />NB: This field can be set to NA</td>
     </tr>
     <tr>
       <td>Town</td>
       <td>String</td>
-      <td>[0-9] 4 chars</td>
+      <td>[A-Z] 20 chars</td>
       <td>Y</td>
       <td>Town of address <br />NB: This field can be set to NA</td>
     </tr>
     <tr>
       <td>County</td>
       <td>String</td>
-      <td>[0-9] 4 chars</td>
+      <td>[A-Z] 20 chars</td>
       <td>Y</td>
       <td>County of address <br />NB: This field can be set to NA</td>
     </tr>
     <tr>
       <td>PostCode</td>
       <td>String</td>
-      <td>[0-9] 4 chars</td>
+      <td>[A-Z0-9] 10 chars</td>
       <td>Y</td>
       <td>Post code of address <br />NB: This field can be set to NA</td>
     </tr>
     <tr>
       <td>Email</td>
       <td>String</td>
-      <td>[0-9] 4 chars</td>
+      <td>[A-Z0-9] 50 chars</td>
       <td>Y</td>
       <td>Email of lead passenger</td>
     </tr>
     <tr>
       <td>MobileNum</td>
       <td>String</td>
-      <td>[0-9] 15 char</td>
+      <td>[0-9] 20 char</td>
       <td>Y</td>
       <td>Mobile phone number of lead passenger.</td>
     </tr>
@@ -209,7 +209,7 @@
     <tr>
       <td>PriceCheckPrice</td>
       <td>Float</td>
-      <td>[0-9]</td>
+      <td>[0-9] 8 chars</td>
       <td>Y</td>
       <td>Price of the product, received from the availability request or price check.</td>
     </tr>

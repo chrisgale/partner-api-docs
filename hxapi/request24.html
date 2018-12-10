@@ -74,61 +74,61 @@
     <tr>
       <td>BookingRef</td>
       <td>String</td>
-      <td>N §{5,12}</td>
+      <td>[A-Z0-9] {5,12}</td>
       <td>Y</td>
     </tr>
     <tr>
       <td>ReturnFlight</td>
       <td> </td>
-      <td> </td>
+      <td>[A-Z0-9] {10}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>Remarks</td>
       <td>String</td>
-      <td> </td>
+      <td>[A-Z0-9] {60}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>Registration</td>
       <td>String</td>
-      <td>N §</td>
+      <td>[A-Z0-9] {10}</td>
       <td>Y</td>
     </tr>
     <tr>
       <td>Pax</td>
       <td>Number</td>
-      <td>N</td>
+      <td>[0-9] {2}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>CarMake</td>
       <td>String</td>
-      <td>N §</td>
+      <td>[A-Z0-9] {10}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>CarModel</td>
       <td>String</td>
-      <td>N §</td>
+      <td>[A-Z0-9] {10}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>CarColour</td>
       <td>String</td>
-      <td>N §</td>
+      <td>[A-Z0-9] {10}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>OutFltNo</td>
       <td>String</td>
-      <td>N §</td>
+      <td>[A-Z0-9] {10}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>InFltNo</td>
       <td>String</td>
-      <td>N §</td>
+      <td>[A-Z0-9] {10}</td>
       <td>N</td>
     </tr>
     <tr>
@@ -146,43 +146,43 @@
     <tr>
       <td>OutTerminal</td>
       <td> </td>
-      <td> </td>
+      <td>[A-Z0-9] {4}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>RetTerminal</td>
       <td> </td>
-      <td> </td>
+      <td>[A-Z0-9] {4}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>ShipName</td>
       <td> </td>
-      <td> </td>
+      <td>[A-Z0-9] {20}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>PierName</td>
       <td> </td>
-      <td> </td>
+      <td>[A-Z0-9] {20}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>ChildSeat</td>
       <td>Boolean</td>
-      <td> </td>
+      <td>[Y/N]</td>
       <td>N</td>
     </tr>
     <tr>
       <td>AddlServices</td>
       <td>Boolean</td>
-      <td> </td>
+      <td>[Y/N]</td>
       <td>N</td>
     </tr>
     <tr>
       <td>MobileNum</td>
       <td> </td>
-      <td> </td>
+      <td>[A-Z0-9] {15}</td>
       <td>N</td>
     </tr>
     <tr>
@@ -200,55 +200,55 @@
     <tr>
       <td>Title</td>
       <td>String</td>
-      <td>[A-Z]</td>
+      <td>[A-Z] {4}</td>
       <td>Y</td>
     </tr>
     <tr>
       <td>Initial</td>
       <td>String</td>
-      <td>[A-Z]{1}</td>
+      <td>[A-Z] {1}</td>
       <td>Y</td>
     </tr>
     <tr>
       <td>Surname</td>
       <td>String</td>
-      <td>[A-Z]</td>
+      <td>[A-Z] {15}</td>
       <td>Y</td>
     </tr>
     <tr>
       <td>Address</td>
       <td>Striing</td>
-      <td>N §</td>
+      <td>[A-Z0-9] {25}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>Town</td>
       <td>String</td>
-      <td>N §</td>
+      <td>[A-Z0-9] {20}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>County</td>
       <td>String</td>
-      <td>N §</td>
+      <td>[A-Z0-9] {20}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>PostCode</td>
       <td>String</td>
-      <td>N §</td>
+      <td>[A-Z0-9] {10}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>DayPhone</td>
       <td> </td>
-      <td> </td>
+      <td>[A-Z0-9] {20}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>EvePhone</td>
       <td> </td>
-      <td> </td>
+      <td>[A-Z0-9] {20}</td>
       <td>N</td>
     </tr>
     <tr>
@@ -260,61 +260,109 @@
     <tr>
       <td>DataProtection</td>
       <td>Boolean</td>
-      <td>true/false</td>
+      <td>[Y/N]</td>
       <td>N</td>
     </tr>
     <tr>
       <td>Email</td>
       <td>String</td>
-      <td>N §</td>
+      <td>[A-Z0-9] {50}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>InvoiceReqd</td>
       <td>Boolean</td>
-      <td>true/false</td>
+      <td>[Y/N]</td>
       <td>N</td>
     </tr>
     <tr>
       <td>TaxType</td>
-      <td> </td>
-      <td> </td>
+      <td>String</td>
+      <td>[A-Z0-9] {2}</td>
       <td>N</td>
     </tr>
     <tr>
       <td>TaxLocation</td>
-      <td> </td>
-      <td> </td>
-      <td>N</td>
-    </tr>
-    <tr>
-      <td>lang</td>
-      <td> </td>
-      <td> </td>
-      <td>N</td>
-    </tr>
-    <tr>
-      <td>HouseNumber</td>
-      <td> </td>
-      <td> </td>
-      <td>N</td>
-    </tr>
-    <tr>
-      <td>Country</td>
       <td>String</td>
-      <td>N §</td>
+      <td>[A-Z0-9] {3}</td>
       <td>N</td>
     </tr>
     <tr>
-      <td>Company</td>
+      <td>InvLanguage</td>
       <td>String</td>
-      <td>N §</td>
+      <td>[A-Z0-9] {2}</td>
       <td>N</td>
     </tr>
     <tr>
-      <td>CustomerVAT</td>
-      <td> </td>
-      <td> </td>
+      <td>InvHouseNo</td>
+      <td>Integer</td>
+      <td>[0-9] {4}</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>InvCountry</td>
+      <td>String</td>
+      <td>[A-Z0-9] {20}</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>InvStreet</td>
+      <td>String</td>
+      <td>[A-Z0-9] {20}</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>InvTown</td>
+      <td>String</td>
+      <td>[A-Z0-9] {20}</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>InvPostcode</td>
+      <td>String</td>
+      <td>[A-Z0-9] {10}</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>InvCompany</td>
+      <td>String</td>
+      <td>[A-Z0-9] {40}</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>CustVATNo</td>
+      <td>String</td>
+      <td>[A-Z0-9] {10}</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>SupplierVATId</td>
+      <td>String</td>
+      <td>[A-Z0-9] {15}</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>InvTitle</td>
+      <td>String</td>
+      <td>[A-Z0-9] {4}</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>InvFirstName</td>
+      <td>String</td>
+      <td>[A-Z0-9] {20}</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>InvSurname</td>
+      <td>String</td>
+      <td>[A-Z0-9] {15}</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <td>InvEmail</td>
+      <td>String</td>
+      <td>[A-Z0-9] {50}</td>
       <td>N</td>
     </tr>
   </tbody>
